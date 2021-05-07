@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint:eslint": "yarn eslint --ext .tsx,.ts pages/",
     "editorconfig": "editorconfig-checker"
   },
   "dependencies": {
@@ -15,7 +16,12 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.5",
+    "@typescript-eslint/eslint-plugin": "^4.22.1",
+    "@typescript-eslint/parser": "^4.22.1",
     "editorconfig-checker": "^4.0.2",
+    "eslint": "^7.25.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.23.2",
     "typescript": "^4.2.4"
   }
 }
