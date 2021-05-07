@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "editorconfig": "editorconfig-checker"
   },
   "dependencies": {
     "next": "10.2.0",
@@ -14,6 +15,7 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.5",
+    "editorconfig-checker": "^4.0.2",
     "typescript": "^4.2.4"
   }
 }
