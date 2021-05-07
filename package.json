@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "lint:eslint": "yarn eslint --ext .tsx,.ts pages/",
     "editorconfig": "editorconfig-checker"
   },
   "dependencies": {
