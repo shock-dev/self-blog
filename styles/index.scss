@@ -8,6 +8,7 @@ html {
   box-sizing: inherit;
   padding: 0;
   margin: 0;
+  outline: none;
 }
 
 body {
@@ -15,7 +16,8 @@ body {
   min-width: 320px;
   overflow-x: hidden;
   font-family: Roboto, sans-serif;
-  background-color: #CACACA;
+  background-color: #f3f3f3;
+  color: #4A4A4A;
 }
 
 h1,
@@ -43,6 +45,10 @@ a {
 
 img {
   max-width: 100%;
+}
+
+button {
+  cursor: pointer;
 }
 
 .container {

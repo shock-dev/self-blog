@@ -2,6 +2,7 @@ import React from 'react';
 import AuthLayout from '../layouts/AuthLayout';
 import AuthForm from '../components/AuthForm';
 import AuthField from '../components/AuthField';
+import Button from '../components/Button';
 
 export default function Login() {
   return (
@@ -22,6 +23,9 @@ export default function Login() {
           message="Error message"
           icon="lock"
         />
+        <Button>
+          Login
+        </Button>
       </AuthForm>
     </AuthLayout>
   );
