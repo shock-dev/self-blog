@@ -1,4 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🙍‍♂ Self blog
+
+<p align="center">
+  <img src="https://github.com/shock-dev/self-blog/actions/workflows/editorconfig.yml/badge.svg">
+  <img src="https://github.com/shock-dev/self-blog/actions/workflows/eslint.yml/badge.svg">
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg">
+</p>
 
 ## Getting Started
 
