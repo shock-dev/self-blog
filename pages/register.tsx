@@ -10,9 +10,16 @@ export default function Login() {
   return (
     <AuthLayout>
       <Head>
-        <title>Login</title>
+        <title>Registration</title>
       </Head>
-      <AuthForm title="Login">
+      <AuthForm title="Register">
+        <AuthField
+          title="Email"
+          placeholder="Type your email address"
+          error={false}
+          message="Error message"
+          icon="email"
+        />
         <AuthField
           title="Username"
           placeholder="Type your username"
@@ -28,12 +35,20 @@ export default function Login() {
           message="Error message"
           icon="lock"
         />
+        <AuthField
+          title="Password"
+          type="password"
+          placeholder="Type your password"
+          error={false}
+          message="Error message"
+          icon="confirm"
+        />
         <Button>
-          Login
+          Sign up
         </Button>
         <FormFooter
-          text="Or sing up using"
-          to={{ url: '/register', title: 'Sign up' }}
+          text="do you already have an account?"
+          to={{ url: '/login', title: 'Login' }}
         />
       </AuthForm>
     </AuthLayout>
