@@ -1,14 +1,18 @@
 import React from 'react';
 import AuthLayout from '../../layouts/AuthLayout';
 import AuthForm from '../../components/AuthForm';
-import styles from './Login.module.scss';
+import AuthField from '../../components/AuthField';
 
 export default function Login() {
   return (
     <AuthLayout>
-      <AuthForm>
-        <h2 className={styles.title}>Login</h2>
-        <input type="text" />
+      <AuthForm title="Login">
+        <AuthField
+          title="Username"
+          placeholder="Type your username"
+          error={true}
+          message="Error message"
+        />
       </AuthForm>
     </AuthLayout>
   );
