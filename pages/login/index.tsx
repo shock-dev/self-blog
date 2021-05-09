@@ -10,8 +10,17 @@ export default function Login() {
         <AuthField
           title="Username"
           placeholder="Type your username"
-          error={true}
+          error={false}
           message="Error message"
+          icon="user"
+        />
+        <AuthField
+          title="Password"
+          type="password"
+          placeholder="Type your password"
+          error={false}
+          message="Error message"
+          icon="lock"
         />
       </AuthForm>
     </AuthLayout>
