@@ -3,6 +3,7 @@ import AuthLayout from '../layouts/AuthLayout';
 import AuthForm from '../components/AuthForm';
 import AuthField from '../components/AuthField';
 import Button from '../components/Button';
+import FormFooter from '../components/FormFooter';
 
 export default function Login() {
   return (
@@ -26,6 +27,10 @@ export default function Login() {
         <Button>
           Login
         </Button>
+        <FormFooter
+          text="Or sing up using"
+          to={{ url: '/register', title: 'Sign up' }}
+        />
       </AuthForm>
     </AuthLayout>
   );
