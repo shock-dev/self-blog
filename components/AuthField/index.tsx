@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import cn from 'classnames';
 import styles from './AuthField.module.scss';
 
@@ -8,6 +8,7 @@ interface AuthFieldProps {
   type?: string
   error: boolean
   message: string
+  icon: string
 }
 
 export default function AuthField({
@@ -15,22 +16,45 @@ export default function AuthField({
   placeholder,
   type = 'text',
   error,
-  message
+  message,
+  icon
 }: AuthFieldProps) {
+  const [inputType, setInputType] = useState(type);
+
+  const onEyeHandler = () => {
+    const nextType = type === inputType ? 'text' : 'password';
+    setInputType(nextType);
+  };
+
   return (
-    <div className={cn(styles.field, { error })}>
+    <div className={styles.wrapper}>
       <label>
-        <p className={styles.field__title}>
+        <p className={styles.title}>
           {title}
         </p>
-        <input
-          className={styles.field__input}
-          type={type}
-          placeholder={placeholder}
-        />
+        <div className={styles.input_wrapper}>
+          <svg className={cn(styles.svg, { [styles.svg_error]: error })}>
+            <use href={`images/[form].svg#${icon}`} />
+          </svg>
+          <input
+            className={cn(styles.input, { [styles.input_error]: error })}
+            type={inputType}
+            placeholder={placeholder}
+          />
+          {type === 'password' && (
+            <button
+              className={styles.eye_btn}
+              onClick={onEyeHandler}
+            >
+              <svg className={styles.eye_svg}>
+                <use href="images/[form].svg#eye" />
+              </svg>
+            </button>
+          )}
+        </div>
       </label>
       {error && (
-        <p className={styles.field__error}>
+        <p className={styles.message}>
           {message}
         </p>
       )}
