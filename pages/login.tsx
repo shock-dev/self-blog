@@ -1,7 +1,7 @@
 import React from 'react';
-import AuthLayout from '../../layouts/AuthLayout';
-import AuthForm from '../../components/AuthForm';
-import AuthField from '../../components/AuthField';
+import AuthLayout from '../layouts/AuthLayout';
+import AuthForm from '../components/AuthForm';
+import AuthField from '../components/AuthField';
 
 export default function Login() {
   return (
