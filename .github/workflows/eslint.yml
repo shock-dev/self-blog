@@ -1,4 +1,4 @@
-name: Editorconfig
+name: ESLint
 
 on:
   push:
