@@ -1,0 +1,22 @@
+.button {
+  background-color: #83FFA6;
+  padding: 10px 0;
+  border-radius: 25px;
+  width: 100%;
+  border: 0;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  font-weight: 700;
+  transition: background-color .2s ;
+
+  &:hover {
+    background-color: #68e58b;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
