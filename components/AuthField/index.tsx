@@ -34,9 +34,6 @@ export default function AuthField({
           {title}
         </p>
         <div className={styles.input_wrapper}>
-          <svg className={cn(styles.svg, { [styles.svg_error]: error })}>
-            <use href={`images/[form].svg#${icon}`} />
-          </svg>
           <input
             className={cn(styles.input, { [styles.input_error]: error })}
             type={type}
@@ -46,6 +43,9 @@ export default function AuthField({
             name={name}
             onBlur={onBlur}
           />
+          <svg className={cn(styles.svg, { [styles.svg_error]: error })}>
+            <use href={`images/[form].svg#${icon}`} />
+          </svg>
         </div>
       </label>
       {error && (

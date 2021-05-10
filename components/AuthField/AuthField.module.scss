@@ -31,6 +31,14 @@
     color: #BEBEBE;
   }
 
+  &:not(.input_error):focus {
+    border-bottom: 1px solid black;
+  }
+
+  &:not(.input_error):focus ~ .svg {
+    fill: black;
+  }
+
 }
 
 .input_error {
