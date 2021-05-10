@@ -3,10 +3,10 @@ import Head from 'next/head';
 import { useFormik } from 'formik';
 import validationSchema from '../validation/auth/login';
 import AuthLayout from '../layouts/AuthLayout';
-import AuthForm from '../components/AuthForm';
-import AuthField from '../components/AuthField';
+import Form from '../components/Form';
+import Field from '../components/Form/Field';
 import Button from '../components/Button';
-import FormFooter from '../components/FormFooter';
+import Footer from '../components/Form/Footer';
 
 interface FormInputs {
   username: string
@@ -37,11 +37,11 @@ export default function Login() {
       <Head>
         <title>Login</title>
       </Head>
-      <AuthForm
+      <Form
         title="Login"
         onSubmit={handleSubmit}
       >
-        <AuthField
+        <Field
           title="Username"
           placeholder="Type your username"
           icon="user"
@@ -52,7 +52,7 @@ export default function Login() {
           error={touched.username && !!errors.username}
           message={errors.username}
         />
-        <AuthField
+        <Field
           title="Password"
           type="password"
           placeholder="Type your password"
@@ -67,11 +67,11 @@ export default function Login() {
         <Button type="submit">
           Login
         </Button>
-        <FormFooter
+        <Footer
           text="Or sing up using"
           to={{ url: '/register', title: 'Sign up' }}
         />
-      </AuthForm>
+      </Form>
     </AuthLayout>
   );
 }

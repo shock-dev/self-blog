@@ -3,10 +3,10 @@ import Head from 'next/head';
 import { useFormik } from 'formik';
 import validationSchema from '../validation/auth/register';
 import AuthLayout from '../layouts/AuthLayout';
-import AuthForm from '../components/AuthForm';
-import AuthField from '../components/AuthField';
+import Form from '../components/Form';
+import Field from '../components/Form/Field';
 import Button from '../components/Button';
-import FormFooter from '../components/FormFooter';
+import Footer from '../components/Form/Footer';
 
 interface FormInputs {
   email: string
@@ -41,11 +41,11 @@ export default function Register() {
       <Head>
         <title>Registration</title>
       </Head>
-      <AuthForm
+      <Form
         title="Register"
         onSubmit={handleSubmit}
       >
-        <AuthField
+        <Field
           title="Email"
           placeholder="Type your email address"
           icon="email"
@@ -56,7 +56,7 @@ export default function Register() {
           error={touched.email && !!errors.email}
           message={errors.email}
         />
-        <AuthField
+        <Field
           title="Username"
           placeholder="Type your username"
           icon="user"
@@ -67,7 +67,7 @@ export default function Register() {
           error={touched.username && !!errors.username}
           message={errors.username}
         />
-        <AuthField
+        <Field
           title="Password"
           type="password"
           placeholder="Type your password"
@@ -79,7 +79,7 @@ export default function Register() {
           error={touched.password && !!errors.password}
           message={errors.password}
         />
-        <AuthField
+        <Field
           title="Confirm password"
           type="password"
           placeholder="Repeat your password"
@@ -94,11 +94,11 @@ export default function Register() {
         <Button type="submit">
           Sign up
         </Button>
-        <FormFooter
+        <Footer
           text="do you already have an account?"
           to={{ url: '/login', title: 'Login' }}
         />
-      </AuthForm>
+      </Form>
     </AuthLayout>
   );
 }

@@ -1,17 +1,17 @@
 import React from 'react';
-import styles from './AuthForm.module.scss';
+import styles from './Form.module.scss';
 
-interface AuthFormProps {
+interface FormProps {
   title: string
   onSubmit: () => any
   children: React.ReactNode
 }
 
-export default function AuthForm({
+export default function Form({
   title,
   onSubmit,
   children
-}: AuthFormProps) {
+}: FormProps) {
   return (
     <form
       onSubmit={onSubmit}
