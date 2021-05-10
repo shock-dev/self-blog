@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import cn from 'classnames';
-import styles from './AuthField.module.scss';
+import styles from './Field.module.scss';
 
-interface AuthFieldProps {
+interface FieldProps {
   title: string
   placeholder: string
   type?: string
@@ -15,7 +15,7 @@ interface AuthFieldProps {
   onBlur: (e: ChangeEvent<any>) => void
 }
 
-export default function AuthField({
+export default function Field({
   title,
   placeholder,
   type = 'text',
@@ -26,7 +26,7 @@ export default function AuthField({
   name,
   onChange,
   onBlur
-}: AuthFieldProps) {
+}: FieldProps) {
   return (
     <div className={styles.wrapper}>
       <label>

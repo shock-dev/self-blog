@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
-import styles from './FormFooter.module.scss';
+import styles from './Footer.module.scss';
 
-interface FormFooterProps {
+interface FooterProps {
   text: string
   to: {
     url: string
@@ -10,10 +10,10 @@ interface FormFooterProps {
   }
 }
 
-export default function FormFooter({
+export default function Footer({
   text,
   to: { url, title }
-}: FormFooterProps) {
+}: FooterProps) {
   return (
     <div className={styles.wrapper}>
       <p className={styles.text}>
