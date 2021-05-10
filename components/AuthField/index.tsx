@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import cn from 'classnames';
 import styles from './AuthField.module.scss';
 
@@ -9,6 +9,10 @@ interface AuthFieldProps {
   error: boolean
   message: string
   icon: string
+  value: string
+  name: string
+  onChange: (e: ChangeEvent<any>) => void
+  onBlur: (e: ChangeEvent<any>) => void
 }
 
 export default function AuthField({
@@ -17,15 +21,12 @@ export default function AuthField({
   type = 'text',
   error,
   message,
-  icon
+  icon,
+  value,
+  name,
+  onChange,
+  onBlur
 }: AuthFieldProps) {
-  const [inputType, setInputType] = useState(type);
-
-  const onEyeHandler = () => {
-    const nextType = type === inputType ? 'text' : 'password';
-    setInputType(nextType);
-  };
-
   return (
     <div className={styles.wrapper}>
       <label>
@@ -38,19 +39,13 @@ export default function AuthField({
           </svg>
           <input
             className={cn(styles.input, { [styles.input_error]: error })}
-            type={inputType}
+            type={type}
             placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+            name={name}
+            onBlur={onBlur}
           />
-          {type === 'password' && (
-            <button
-              className={styles.eye_btn}
-              onClick={onEyeHandler}
-            >
-              <svg className={styles.eye_svg}>
-                <use href="images/[form].svg#eye" />
-              </svg>
-            </button>
-          )}
         </div>
       </label>
       {error && (
