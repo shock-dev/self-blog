@@ -1,3 +1,7 @@
+@import "styles/vars";
+
+$gray: #b1b1b1;
+
 .wrapper {
   position: relative;
   padding-bottom: 18px;
@@ -8,7 +12,7 @@
   font-weight: bold;
   font-size: 12px;
   line-height: 14px;
-  color: #6D6D6D;
+  color: $text-color;
   margin-bottom: 4px;
 }
 
@@ -21,14 +25,14 @@
   height: 36px;
   padding: 0 40px;
   border: none;
-  border-bottom: 1px solid #CACACA;
+  border-bottom: 1px solid $gray;
   font-size: 12px;
   line-height: 14px;
   font-family: Roboto, sans-serif;
-  color: #4A4A4A;
+  color: $text-color;
 
   &::placeholder {
-    color: #BEBEBE;
+    color: $gray;
   }
 
   &:not(.input_error):focus {
@@ -61,7 +65,7 @@
   left: 8px;
   top: 50%;
   transform: translateY(-50%);
-  fill: #CACACA;
+  fill: $gray;
 }
 
 .svg_error {

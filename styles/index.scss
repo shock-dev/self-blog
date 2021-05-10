@@ -1,4 +1,5 @@
 @import "fonts";
+@import "vars";
 
 html {
   box-sizing: border-box;
@@ -17,7 +18,9 @@ body {
   overflow-x: hidden;
   font-family: Roboto, sans-serif;
   background-color: #f3f3f3;
-  color: #4A4A4A;
+  color: $text-color;
+  font-size: 14px;
+  line-height: 18px;
 }
 
 h1,
