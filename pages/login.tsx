@@ -64,7 +64,7 @@ export default function Login() {
           error={touched.password && !!errors.password}
           message={errors.password}
         />
-        <Button type="submit" onClick={handleSubmit}>
+        <Button type="submit">
           Login
         </Button>
         <FormFooter
