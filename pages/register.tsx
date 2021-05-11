@@ -36,7 +36,10 @@ export default function Register() {
   });
 
   return (
-    <MainLayout title="Registration">
+    <MainLayout
+      title="Registration"
+      center
+    >
       <Form
         title="Register"
         onSubmit={handleSubmit}

@@ -32,7 +32,10 @@ export default function Login() {
   });
 
   return (
-    <MainLayout title="Login">
+    <MainLayout
+      title="Login"
+      center
+    >
       <Form
         title="Login"
         onSubmit={handleSubmit}
