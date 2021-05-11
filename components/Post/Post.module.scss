@@ -1,0 +1,29 @@
+.post {
+  display: block;
+  background-color: #fff;
+  padding: 25px 40px;
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
+
+.title {
+  font-weight: 700;
+  display: block;
+  font-size: 22px;
+  line-height: 26px;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.desc {
+  font-size: 16px;
+  line-height: 22px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow-y: hidden;
+}
