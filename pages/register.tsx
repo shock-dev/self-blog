@@ -1,8 +1,7 @@
 import React from 'react';
-import Head from 'next/head';
 import { useFormik } from 'formik';
 import validationSchema from '../validation/auth/register';
-import AuthLayout from '../layouts/AuthLayout';
+import MainLayout from '../layouts/MainLayout';
 import Form from '../components/Form';
 import Field from '../components/Form/Field';
 import Button from '../components/Button';
@@ -37,10 +36,10 @@ export default function Register() {
   });
 
   return (
-    <AuthLayout>
-      <Head>
-        <title>Registration</title>
-      </Head>
+    <MainLayout
+      title="Registration"
+      center
+    >
       <Form
         title="Register"
         onSubmit={handleSubmit}
@@ -99,6 +98,6 @@ export default function Register() {
           to={{ url: '/login', title: 'Login' }}
         />
       </Form>
-    </AuthLayout>
+    </MainLayout>
   );
 }
