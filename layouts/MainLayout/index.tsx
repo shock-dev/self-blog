@@ -2,17 +2,17 @@ import React from 'react';
 import cn from 'classnames';
 import Head from 'next/head';
 import Header from '../../components/Header';
-import styles from './AuthLayout.module.scss';
+import styles from './MainLayout.module.scss';
 
-interface AuthLayoutProps {
+interface MainLayoutProps {
   title: string
   children: React.ReactNode
 }
 
-export default function AuthLayout({
+export default function MainLayout({
   title,
   children
-}: AuthLayoutProps) {
+}: MainLayoutProps) {
   return (
     <>
       <Head>
