@@ -1,5 +1,4 @@
 import React from 'react';
-import Head from 'next/head';
 import { useFormik } from 'formik';
 import validationSchema from '../validation/auth/register';
 import AuthLayout from '../layouts/AuthLayout';
@@ -37,10 +36,7 @@ export default function Register() {
   });
 
   return (
-    <AuthLayout>
-      <Head>
-        <title>Registration</title>
-      </Head>
+    <AuthLayout title="Registration">
       <Form
         title="Register"
         onSubmit={handleSubmit}
