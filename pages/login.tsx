@@ -6,13 +6,16 @@ import Form from '../components/Form';
 import Field from '../components/Form/Field';
 import Button from '../components/Button';
 import Footer from '../components/Form/Footer';
+import { useDispatch } from 'react-redux';
+import { login } from '../store/auth/actions';
 
-interface FormInputs {
-  username: string
+export interface LoginFormInputs {
+  email: string
   password: string
 }
 
 export default function Login() {
+  const dispatch = useDispatch();
   const {
     handleSubmit,
     handleChange,
@@ -20,14 +23,14 @@ export default function Login() {
     errors,
     touched,
     handleBlur
-  } = useFormik<FormInputs>({
+  } = useFormik<LoginFormInputs>({
     initialValues: {
-      username: '',
+      email: '',
       password: ''
     },
     validationSchema,
     onSubmit: (data) => {
-      console.log(data);
+      dispatch(login(data));
     }
   });
 
@@ -41,15 +44,15 @@ export default function Login() {
         onSubmit={handleSubmit}
       >
         <Field
-          title="Username"
-          placeholder="Type your username"
-          icon="user"
-          name="username"
-          value={values.username}
+          title="Email"
+          placeholder="Type your email"
+          icon="email"
+          name="email"
+          value={values.email}
           onChange={handleChange}
           onBlur={handleBlur}
-          error={touched.username && !!errors.username}
-          message={errors.username}
+          error={touched.email && !!errors.email}
+          message={errors.email}
         />
         <Field
           title="Password"
