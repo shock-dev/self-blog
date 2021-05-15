@@ -1,5 +1,7 @@
 import { PostsState } from './posts/types';
+import { AuthState } from './auth/types';
 
 export interface RootState {
-  posts: PostsState
+  posts: PostsState,
+  user: AuthState
 }
