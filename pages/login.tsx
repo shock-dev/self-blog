@@ -7,7 +7,7 @@ import Field from '../components/Form/Field';
 import Button from '../components/Button';
 import Footer from '../components/Form/Footer';
 import { useDispatch } from 'react-redux';
-import { login } from '../store/auth/actions';
+import { fetchLogin, fetchUserInfo } from '../store/auth/actions';
 
 export interface LoginFormInputs {
   email: string
@@ -29,8 +29,9 @@ export default function Login() {
       password: ''
     },
     validationSchema,
-    onSubmit: (data) => {
-      dispatch(login(data));
+    onSubmit: async (data) => {
+      await dispatch(fetchLogin(data));
+      await dispatch(fetchUserInfo());
     }
   });
 
