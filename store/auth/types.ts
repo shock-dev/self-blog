@@ -12,7 +12,7 @@ export interface AuthState {
 
 export enum AuthActionType {
   FETCH_LOGIN = '@auth/FETCH_LOGIN',
-  FETCH_USER_INFO = '@auth/FETCH_INFO',
+  FETCH_USER_INFO = '@auth/FETCH_USER_INFO',
   SET_USER_INFO = '@auth/SET_USER_INFO',
   SET_IS_AUTH = '@auth/SET_IS_AUTH',
   SET_ERROR = '@auth/SET_ERROR'
