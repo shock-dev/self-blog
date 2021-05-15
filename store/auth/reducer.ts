@@ -3,17 +3,32 @@ import { AuthActionType, AuthState } from './types';
 
 const initialState: AuthState = {
   data: undefined,
-  isAuth: false
+  isAuth: false,
+  error: undefined
 };
 
 const user = produce((draft: Draft<AuthState>, action) => {
   switch (action.type) {
+    case AuthActionType.FETCH_LOGIN:
+      draft.isAuth = false;
+      draft.error = undefined;
+      break;
+
+    case AuthActionType.FETCH_USER_INFO:
+      draft.isAuth = false;
+      draft.error = undefined;
+      break;
+
     case AuthActionType.SET_USER_INFO:
       draft.data = action.payload;
       break;
 
     case AuthActionType.SET_IS_AUTH:
       draft.isAuth = action.payload;
+      break;
+
+    case AuthActionType.SET_ERROR:
+      draft.error = action.payload;
       break;
 
     default:
