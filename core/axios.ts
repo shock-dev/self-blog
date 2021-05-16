@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-axios.interceptors.request.use((config) => {
-  config.headers.Authorization = localStorage.getItem('authToken');
-  return config;
+const instance = axios.create({
+  baseURL: 'http://localhost:5000',
+  withCredentials: true
 });
 
-export default axios;
+export default instance;
