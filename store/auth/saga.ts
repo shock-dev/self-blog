@@ -10,7 +10,8 @@ function* fetchLogin(action): SagaIterator {
     const { status, data } = yield call(AuthApi.login, payload);
 
     if (status === 'ok' && data) {
-      localStorage.setItem('authToken', `Bearer ${data}`);
+      yield put(setUserInfo(data));
+      yield put(setIsAuth(true));
     }
   } catch (e) {
     const { message } = e.response.data;
