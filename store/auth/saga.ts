@@ -2,7 +2,7 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 import { AuthActionType } from './types';
 import AuthApi from '../../api/auth';
-import { setError, setIsAuth, setUserInfo } from './actions';
+import { logoutSuccess, setError, setIsAuth, setUserInfo } from './actions';
 
 function* fetchLogin(action): SagaIterator {
   try {
@@ -43,9 +43,28 @@ function* fetchUserInfo(): SagaIterator {
   }
 }
 
+function* fetchLogout(): SagaIterator {
+  try {
+    const { status } = yield call(AuthApi.logout);
+
+    if (status === 'ok') {
+      yield put(logoutSuccess());
+    }
+  } catch (e) {
+    const { error } = e.response.data;
+
+    if (error) {
+      yield put(setError(error));
+    } else {
+      yield put(setError('Something went wrong, try again'));
+    }
+  }
+}
+
 function* authSaga() {
   yield takeEvery(AuthActionType.FETCH_LOGIN, fetchLogin);
   yield takeEvery(AuthActionType.FETCH_USER_INFO, fetchUserInfo);
+  yield takeEvery(AuthActionType.LOGOUT_REQUEST, fetchLogout);
 }
 
 export default authSaga;
