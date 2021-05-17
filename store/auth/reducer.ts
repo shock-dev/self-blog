@@ -14,6 +14,11 @@ const user = produce((draft: Draft<AuthState>, action) => {
       draft.error = undefined;
       break;
 
+    case AuthActionType.LOGOUT_SUCCESS:
+      draft.isAuth = false;
+      draft.data = undefined;
+      break;
+
     case AuthActionType.FETCH_USER_INFO:
       draft.isAuth = false;
       draft.error = undefined;

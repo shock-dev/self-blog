@@ -11,6 +11,11 @@ class AuthApi {
     const { data } = await axios.get(`http://localhost:5000/api/users/me`);
     return data;
   }
+
+  logout = async () => {
+    const { data } = await axios.post(`http://localhost:5000/api/auth/logout`);
+    return data;
+  }
 }
 
 export default new AuthApi();
