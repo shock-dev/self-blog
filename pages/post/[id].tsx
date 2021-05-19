@@ -7,7 +7,7 @@ interface PostProps {
   data: IPost
 }
 
-export default function Post({ data }: PostProps) {
+const Post = ({ data }: PostProps) => {
   return (
     <MainLayout title="test">
       {data._id}
@@ -15,7 +15,7 @@ export default function Post({ data }: PostProps) {
       {data.title}
     </MainLayout>
   );
-}
+};
 
 export async function getServerSideProps({ params }) {
   const { data } = await PostsApi.getOne(params.id);
@@ -23,3 +23,5 @@ export async function getServerSideProps({ params }) {
     props: { data }
   };
 }
+
+export default Post;
