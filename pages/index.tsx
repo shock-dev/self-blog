@@ -1,14 +1,16 @@
 import React from 'react';
 import MainLayout from '../layouts/MainLayout';
 import Post from '../components/Post';
-import PostsApi from '../api/posts';
 import { IPost } from '../store/posts/types';
+import Cookies from 'nookies';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import axios from 'axios';
 
 interface HomeProps {
   data: IPost[]
 }
 
-export default function Home({ data }: HomeProps) {
+const Home = ({ data }: HomeProps) => {
   return (
     <MainLayout title="Home">
       {data.map((post) =>
@@ -21,12 +23,31 @@ export default function Home({ data }: HomeProps) {
       )}
     </MainLayout>
   );
-}
+};
 
-export async function getStaticProps() {
-  const { data } = await PostsApi.getAll();
+export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  try {
+    const cookies = Cookies.get(ctx);
 
-  return {
-    props: { data }
-  };
-}
+    await axios.get('http://localhost:5000/api/users/me', {
+      headers: {
+        cookie: `authToken=${cookies.authToken}`
+      }
+    });
+
+    return {
+      props: {
+        data: []
+      }
+    };
+  } catch (e) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false
+      }
+    };
+  }
+};
+
+export default Home;
