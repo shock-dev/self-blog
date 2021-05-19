@@ -30,6 +30,7 @@
         "@typescript-eslint/no-unused-vars": "error",
         "require-jsdoc": "off",
         "no-invalid-this": "off",
-        "linebreak-style": "off"
+        "linebreak-style": "off",
+        "react/display-name": "off"
     }
 }
