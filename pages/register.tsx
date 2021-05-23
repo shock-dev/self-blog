@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import Footer from '../components/Form/Footer';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
+import withNotAuthSS from '../hocs/withNotAuth';
 
 interface FormInputs {
   email: string
@@ -105,10 +106,10 @@ export default function Register() {
   );
 }
 
-export async function getStaticProps({ locale }) {
+export const getServerSideProps = withNotAuthSS(async ({ locale }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common']))
     }
   };
-}
+});

@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import Footer from '../components/Form/Footer';
 import { useDispatch } from 'react-redux';
 import { fetchLogin } from '../store/auth/actions';
+import withNotAuthSS from '../hocs/withNotAuth';
 
 export interface LoginFormInputs {
   email: string
@@ -77,3 +78,5 @@ export default function Login() {
     </MainLayout>
   );
 }
+
+export const getServerSideProps = withNotAuthSS();

@@ -2,9 +2,7 @@ import React from 'react';
 import MainLayout from '../layouts/MainLayout';
 import Post from '../components/Post';
 import { IPost } from '../store/posts/types';
-import Cookies from 'nookies';
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import axios from 'axios';
+import withAuthSS from '../hocs/withAuth';
 
 interface HomeProps {
   data: IPost[]
@@ -25,29 +23,12 @@ const Home = ({ data }: HomeProps) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  try {
-    const cookies = Cookies.get(ctx);
-
-    await axios.get('http://localhost:5000/api/users/me', {
-      headers: {
-        cookie: `authToken=${cookies.authToken}`
-      }
-    });
-
-    return {
-      props: {
-        data: []
-      }
-    };
-  } catch (e) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false
-      }
-    };
-  }
-};
-
 export default Home;
+
+export const getServerSideProps = withAuthSS(() => {
+  return {
+    props: {
+      data: []
+    }
+  };
+});
