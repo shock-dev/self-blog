@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app';
 import '../styles/index.scss';
 import { Provider } from 'react-redux';
 import store from '../store';
+import { appWithTranslation } from 'next-i18next';
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -19,4 +20,4 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-export default App;
+export default appWithTranslation(App);

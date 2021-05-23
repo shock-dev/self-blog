@@ -6,6 +6,8 @@ import Form from '../components/Form';
 import Field from '../components/Form/Field';
 import Button from '../components/Button';
 import Footer from '../components/Form/Footer';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 interface FormInputs {
   email: string
@@ -34,6 +36,7 @@ export default function Register() {
       console.log(data);
     }
   });
+  const { t } = useTranslation('common');
 
   return (
     <MainLayout
@@ -41,7 +44,7 @@ export default function Register() {
       center
     >
       <Form
-        title="Register"
+        title={t('registration')}
         onSubmit={handleSubmit}
       >
         <Field
@@ -100,4 +103,12 @@ export default function Register() {
       </Form>
     </MainLayout>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common']))
+    }
+  };
 }
