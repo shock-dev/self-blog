@@ -2,9 +2,9 @@ import produce, { Draft } from 'immer';
 import { AuthActionType, AuthState } from './types';
 
 const initialState: AuthState = {
-  data: undefined,
+  data: null,
   isAuth: false,
-  error: undefined
+  error: null
 };
 
 const user = produce((draft: Draft<AuthState>, action) => {
@@ -12,6 +12,11 @@ const user = produce((draft: Draft<AuthState>, action) => {
     case AuthActionType.FETCH_LOGIN:
       draft.isAuth = false;
       draft.error = undefined;
+      break;
+
+    case 'logout':
+      draft.isAuth = false;
+      draft.data = null;
       break;
 
     case AuthActionType.LOGOUT_SUCCESS:
