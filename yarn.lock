@@ -1990,6 +1990,11 @@ next-i18next@^8.3.0:
     i18next-fs-backend "^1.0.7"
     react-i18next "^11.8.13"
 
+next-redux-wrapper@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/next-redux-wrapper/-/next-redux-wrapper-6.0.2.tgz#b8dcd214e7b5cedd7a2a611ddb60422384d24374"
+  integrity sha512-I9CnIYhQwI/qEoNdc9VAPjIyuq4rFFhCTa4rKhoDHWEVHGB1DXZy8TAyGpwvWizESd8IoTI/OKlP6bFpCbXsOw==
+
 next@10.2.0:
   version "10.2.0"
   resolved "https://registry.npmjs.org/next/-/next-10.2.0.tgz"

@@ -5,9 +5,9 @@ export interface IUser {
 }
 
 export interface AuthState {
-  data?: IUser[]
+  data: IUser | null
   isAuth: boolean
-  error?: string
+  error: string | null
 }
 
 export enum AuthActionType {
