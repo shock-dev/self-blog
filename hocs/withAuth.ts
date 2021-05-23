@@ -1,9 +1,13 @@
 import { GetServerSidePropsContext } from 'next';
 import Cookies from 'nookies';
 import axios from '../core/axios';
+import { wrapper } from '../store';
+import { Store } from 'redux';
+import { RootState } from '../store/types';
+import { setIsAuth, setUserInfo } from '../store/auth/actions';
 
 const withAuthSS = (callback = undefined) => {
-  return async (context: GetServerSidePropsContext) => {
+  return wrapper.getServerSideProps(async (context: GetServerSidePropsContext & { store: Store<RootState>; }) => {
     try {
       const cookie = Cookies.get(context);
 
@@ -21,6 +25,9 @@ const withAuthSS = (callback = undefined) => {
           cookie: `authToken=${cookie.authToken}`
         }
       });
+
+      context.store.dispatch(setUserInfo(user));
+      context.store.dispatch(setIsAuth(true));
 
       if (callback) {
         return {
@@ -44,7 +51,7 @@ const withAuthSS = (callback = undefined) => {
         }
       };
     }
-  };
+  });
 };
 
 export default withAuthSS;
