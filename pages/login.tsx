@@ -9,6 +9,7 @@ import Footer from '../components/Form/Footer';
 import { useDispatch } from 'react-redux';
 import { fetchLogin } from '../store/auth/actions';
 import withNotAuthSS from '../hocs/withNotAuth';
+import { useRouter } from 'next/router';
 
 export interface LoginFormInputs {
   email: string
@@ -17,6 +18,7 @@ export interface LoginFormInputs {
 
 export default function Login() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const {
     handleSubmit,
     handleChange,
@@ -32,6 +34,7 @@ export default function Login() {
     validationSchema,
     onSubmit: async (data) => {
       await dispatch(fetchLogin(data));
+      await router.replace('/');
     }
   });
 
