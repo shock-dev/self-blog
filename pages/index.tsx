@@ -1,11 +1,10 @@
 import React from 'react';
 import MainLayout from '../layouts/MainLayout';
 import Post from '../components/Post';
-import { IPost } from '../store/posts/types';
 import withAuthSS from '../hocs/withAuth';
 
 interface HomeProps {
-  data: IPost[]
+  data: any[]
 }
 
 const Home = ({ data }: HomeProps) => {
