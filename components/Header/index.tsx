@@ -1,10 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
-import styles from './Header.module.scss';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsAuth } from '../../store/auth/selectors';
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/router';
+import { logoutRequest } from '../../store/auth/actions';
+import styles from './Header.module.scss';
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -12,11 +12,12 @@ export default function Header() {
   const isAuth = useSelector(selectIsAuth);
 
   const logoutHandler = async () => {
-    dispatch({
-      type: 'logout'
-    });
-    Cookies.remove('authToken');
-    await router.replace('/login');
+    try {
+      await dispatch(logoutRequest());
+      await router.push('/login');
+    } catch (e) {
+      alert(e.message);
+    }
   };
 
   return (

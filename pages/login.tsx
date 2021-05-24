@@ -33,8 +33,12 @@ export default function Login() {
     },
     validationSchema,
     onSubmit: async (data) => {
-      await dispatch(fetchLogin(data));
-      await router.replace('/');
+      try {
+        await dispatch(fetchLogin(data));
+        await router.push('/');
+      } catch (e) {
+        console.log(e.message);
+      }
     }
   });
 
