@@ -1,29 +1,118 @@
 .post {
   display: block;
   background-color: #fff;
-  padding: 25px 40px;
+  padding: 35px;
+  margin-bottom: 20px;
+}
 
-  &:not(:last-child) {
-    margin-bottom: 20px;
-  }
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.userWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin-right: 8px;
+}
+
+.username {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #6671DB;
+  margin-right: 8px;
+}
+
+.time {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #838383;
 }
 
 .title {
-  font-weight: 700;
-  display: block;
-  font-size: 22px;
-  line-height: 26px;
-  margin-bottom: 8px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: #2E2E2E;
+  margin-top: 12px;
 }
 
-.desc {
+.categories {
+  display: flex;
+  margin-top: 8px;
+}
+
+.category:not(:last-child) {
+  margin-right: 8px;
+}
+
+.categoryLink {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #9D9D9D;
+}
+
+.img {
+  display: flex;
+  margin-top: 16px;
+}
+
+.text {
+  margin-top: 16px;
   font-size: 16px;
-  line-height: 22px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow-y: hidden;
+  line-height: 19px;
+  letter-spacing: 0.03em;
+  color: #3C3C3C;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.btn {
+  border: 1px solid #3A64FA;
+  border-radius: 2px;
+  background-color: transparent;
+  padding: 10px 20px;
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 0.03em;
+  color: #6C8CFF;
+}
+
+.panel {
+  padding: 6px 10px;
+  border: 1px solid #3A64FA;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.panelItem {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.03em;
+  color: #3F55A4;
+}
+
+.panelItem:not(:last-child) {
+  margin-right: 18px;
+}
+
+.panelIcon {
+  margin-right: 3px;
 }
