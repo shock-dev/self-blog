@@ -2,15 +2,16 @@ import React from 'react';
 import MainLayout from '../layouts/MainLayout';
 import Post from '../components/Post';
 import withAuthSS from '../hocs/withAuth';
+import PostsApi from '../api/posts';
 
 interface HomeProps {
-  data: any[]
+  posts: any[]
 }
 
-const Home = ({ data }: HomeProps) => {
+const Home = ({ posts }: HomeProps) => {
   return (
     <MainLayout title="Home">
-      {data.map((post) =>
+      {posts.map((post) =>
         <Post
           key={post._id}
           id={post._id}
@@ -24,10 +25,12 @@ const Home = ({ data }: HomeProps) => {
 
 export default Home;
 
-export const getServerSideProps = withAuthSS(() => {
+export const getServerSideProps = withAuthSS(async () => {
+  const { data } = await PostsApi.getAll();
+
   return {
     props: {
-      data: []
+      posts: data
     }
   };
 });
