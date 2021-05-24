@@ -35,7 +35,7 @@ export default function Login() {
     onSubmit: async (data) => {
       try {
         await dispatch(fetchLogin(data));
-        await router.push('/');
+        await router.replace('/');
       } catch (e) {
         console.log(e.message);
       }
