@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.main {
+  width: 100%;
+  margin-right: 30px;
+}
+
+.aside {
+  width: 100%;
+  max-width: 230px;
+  background-color: #fff;
+}
