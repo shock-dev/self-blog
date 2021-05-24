@@ -1,29 +1,23 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './Post.module.scss';
-import { IPost } from '../../store/posts/types';
 
-interface PostProps {
-  id: IPost['_id']
-  title: IPost['title']
-  description: IPost['description']
-}
-
-export default function Post({
-  id,
-  title,
-  description
-}: PostProps) {
+export default function Post() {
   return (
     <article className={styles.post}>
-      <Link href={`/post/${id}`}>
-        <a className={styles.title}>
-          {title}
-        </a>
-      </Link>
-      <p className={styles.desc}>
-        {description}
-      </p>
+      <div>
+        <div className={styles.head}>
+          <img className={styles.avatar} src="https://res.cloudinary.com/demo/image/upload/w_40,h_40,c_fill/sample.jpg" alt="" />
+          <div className={styles.userWrapper}>
+            <Link href="/">
+              <a className={styles.username}>shock-dev</a>
+            </Link>
+            <div className={styles.time}>
+              Вчера в 15:40
+            </div>
+          </div>
+        </div>
+      </div>
     </article>
   );
 }

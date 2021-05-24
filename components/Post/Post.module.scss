@@ -1,29 +1,42 @@
 .post {
   display: block;
   background-color: #fff;
-  padding: 25px 40px;
+  padding: 25px 30px;
 
   &:not(:last-child) {
     margin-bottom: 20px;
   }
 }
 
-.title {
-  font-weight: 700;
-  display: block;
-  font-size: 22px;
-  line-height: 26px;
-  margin-bottom: 8px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.head {
+  display: flex;
+  align-items: center;
 }
 
-.desc {
-  font-size: 16px;
-  line-height: 22px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow-y: hidden;
+.userWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin-right: 8px;
+}
+
+.username {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #6671DB;
+  margin-right: 8px;
+}
+
+.time {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #838383;
 }
