@@ -2,24 +2,48 @@ import React from 'react';
 import Link from 'next/link';
 import styles from './Post.module.scss';
 
-export default function Post() {
+interface PostProps {
+  id: string
+  title: string
+  description: string
+  imageUrl: string
+  views: number
+  author: {
+    username: string
+    avatarUrl: string
+  }
+}
+
+export default function Post({
+  id,
+  title,
+  description,
+  imageUrl,
+  views,
+  author: {
+    username,
+    avatarUrl
+  }
+}: PostProps) {
+  const postUrl = `/${id}`;
+
   return (
     <article className={styles.post}>
       <div className={styles.header}>
-        <img className={styles.avatar} src="https://res.cloudinary.com/demo/image/upload/w_40,h_40,c_fill/sample.jpg" alt="" />
+        <img className={styles.avatar} src={avatarUrl} alt={`${username} avatar`} />
         <div className={styles.userWrapper}>
           <Link href="/">
-            <a className={styles.username}>shock-dev</a>
+            <a className={styles.username}>{username}</a>
           </Link>
           <div className={styles.time}>
             Вчера в 15:40
           </div>
         </div>
       </div>
-      <Link href="/">
+      <Link href={postUrl}>
         <a>
           <h2 className={styles.title}>
-            Как получить GATT характеристики для моего устройства?
+            {title}
           </h2>
         </a>
       </Link>
@@ -39,21 +63,20 @@ export default function Post() {
           </Link>
         </li>
       </ul>
-      <img className={styles.img} src="https://wantsee.world/wp-content/uploads/2019/06/New-York-City-USA.jpg" />
+      <img className={styles.img} src={imageUrl} alt={title} />
       <p className={styles.text}>
-        {/* eslint-disable-next-line max-len */}
-        Консоль привлекает многих своей минималистичностью и эстетикой, но даже в ней иногда хочется выделить определённый фрагмент, чтобы показать его роль или значимость. Например, отметить зелёным текстом сообщение об успешном выполнении операции или обозначить длинный текст ошибки курсивом. О том, как это делать, а также о реализации на питоне
+        {description}
       </p>
       <div className={styles.footer}>
-        <button className={styles.btn}>
-          Читать далее
-        </button>
+        <Link href={postUrl}>
+          <a className={styles.link}>Читать далее</a>
+        </Link>
         <ul className={styles.panel}>
           <li className={styles.panelItem}>
             <svg className={styles.panelIcon} width="26px" height="18px">
               <use href={`images/[post].svg#views`} />
             </svg>
-            15
+            {views}
           </li>
           <li className={styles.panelItem}>
             <Link href="/">
