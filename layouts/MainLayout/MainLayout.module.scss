@@ -1,11 +1,20 @@
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 80px 0;
-}
-
 .page {
   padding-top: 100px;
+}
+
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.main {
+  background-color: #fff;
+  width: 100%;
+  margin-right: 30px;
+}
+
+.aside {
+  width: 100%;
+  max-width: 230px;
+  background-color: #fff;
 }
