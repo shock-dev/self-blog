@@ -2,11 +2,10 @@ import React from 'react';
 import cn from 'classnames';
 import Head from 'next/head';
 import Header from '../../components/Header';
-import styles from './MainLayout.module.scss';
+import styles from './AuthLayout.module.scss';
 
 interface MainLayoutProps {
   title: string
-  center?: boolean
   children: React.ReactNode
 }
 
@@ -20,15 +19,8 @@ export default function MainLayout({
         <title>{title}</title>
       </Head>
       <Header />
-      <div className={cn('container', styles.page)}>
-        <div className={styles.wrapper}>
-          <main className={styles.main}>
-            {children}
-          </main>
-          <aside className={styles.aside}>
-            test
-          </aside>
-        </div>
+      <div className={cn('container', styles.center)}>
+        {children}
       </div>
     </>
   );

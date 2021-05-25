@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import validationSchema from '../validation/auth/login';
-import MainLayout from '../layouts/MainLayout';
+import AuthLayout from '../layouts/AuthLayout';
 import Form from '../components/Form';
 import Field from '../components/Form/Field';
 import Button from '../components/Button';
@@ -43,10 +43,7 @@ export default function Login() {
   });
 
   return (
-    <MainLayout
-      title="Login"
-      center
-    >
+    <AuthLayout title="Login">
       <Form
         title="Login"
         onSubmit={handleSubmit}
@@ -82,7 +79,7 @@ export default function Login() {
           to={{ url: '/register', title: 'Sign up' }}
         />
       </Form>
-    </MainLayout>
+    </AuthLayout>
   );
 }
 
