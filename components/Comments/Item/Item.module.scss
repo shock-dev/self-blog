@@ -1,0 +1,42 @@
+.comment {
+  margin-top: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  margin-right: 8px;
+}
+
+.username {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1;
+  color: #6671DB;
+  margin-right: 10px;
+}
+
+.time {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #838383;
+}
+
+.text {
+  font-size: 12px;
+  line-height: 14px;
+  color: #181818;
+}
