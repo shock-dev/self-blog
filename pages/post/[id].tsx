@@ -3,6 +3,7 @@ import MainLayout from '../../layouts/MainLayout';
 import PostsApi from '../../api/posts';
 import withAuthSS from '../../hocs/withAuth';
 import Post from '../../components/Post';
+import Comments from '../../components/Comments';
 
 interface PostProps {
   post: any
@@ -20,6 +21,9 @@ const PostPage = ({ post }: PostProps) => {
         views={post.views}
         author={post.user}
       />
+      <Comments>
+        <Comments.Item />
+      </Comments>
     </MainLayout>
   );
 };
