@@ -13,7 +13,7 @@ const withNotAuthSS = (callback = undefined) => {
         };
       }
 
-      const data = await axios.get('/api/users/me', {
+      const data = await axios.get('/auth/me', {
         headers: {
           cookie: `authToken=${cookie.authToken}`
         }
@@ -44,9 +44,7 @@ const withNotAuthSS = (callback = undefined) => {
       };
     } catch (e) {
       return {
-        redirect: {
-          props: {}
-        }
+        props: {}
       };
     }
   };

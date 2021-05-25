@@ -20,7 +20,7 @@ const withAuthSS = (callback = undefined) => {
         };
       }
 
-      const { data: { data: user } } = await axios.get('/api/users/me', {
+      const { data: { data: user } } = await axios.get('/auth/me', {
         headers: {
           cookie: `authToken=${cookie.authToken}`
         }
@@ -32,16 +32,13 @@ const withAuthSS = (callback = undefined) => {
       if (callback) {
         return {
           props: {
-            user,
             ...((await callback(context, user)).props || {})
           }
         };
       }
 
       return {
-        props: {
-          user
-        }
+        props: {}
       };
     } catch (e) {
       return {
