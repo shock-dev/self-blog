@@ -21,6 +21,7 @@ const Home = ({
           description={post.description}
           imageUrl={post.imageUrl}
           views={post.views}
+          withFooter={true}
           author={post.user}
         />
       )}

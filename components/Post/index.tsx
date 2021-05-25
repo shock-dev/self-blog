@@ -8,6 +8,7 @@ interface PostProps {
   description: string
   imageUrl: string
   views: number
+  withFooter?: boolean
   author: {
     username: string
     avatarUrl: string
@@ -20,6 +21,7 @@ export default function Post({
   description,
   imageUrl,
   views,
+  withFooter = false,
   author: {
     username,
     avatarUrl
@@ -67,29 +69,31 @@ export default function Post({
       <p className={styles.text}>
         {description}
       </p>
-      <div className={styles.footer}>
-        <Link href={postUrl}>
-          <a className={styles.link}>Читать далее</a>
-        </Link>
-        <ul className={styles.panel}>
-          <li className={styles.panelItem}>
-            <svg className={styles.panelIcon} width="26px" height="18px">
-              <use href={`images/[post].svg#views`} />
-            </svg>
-            {views}
-          </li>
-          <li className={styles.panelItem}>
-            <Link href="/">
-              <a className={styles.panelItem}>
-                <svg className={styles.panelIcon} width="26px" height="18px">
-                  <use href={`images/[post].svg#comments`} />
-                </svg>
-                3
-              </a>
-            </Link>
-          </li>
-        </ul>
-      </div>
+      {withFooter && (
+        <div className={styles.footer}>
+          <Link href={postUrl}>
+            <a className={styles.link}>Читать далее</a>
+          </Link>
+          <ul className={styles.panel}>
+            <li className={styles.panelItem}>
+              <svg className={styles.panelIcon} width="26px" height="18px">
+                <use href={`images/[post].svg#views`} />
+              </svg>
+              {views}
+            </li>
+            <li className={styles.panelItem}>
+              <Link href="/">
+                <a className={styles.panelItem}>
+                  <svg className={styles.panelIcon} width="26px" height="18px">
+                    <use href={`images/[post].svg#comments`} />
+                  </svg>
+                  3
+                </a>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </article>
   );
 }
