@@ -25,7 +25,7 @@ export default function Post({
     avatarUrl
   }
 }: PostProps) {
-  const postUrl = `/${id}`;
+  const postUrl = `/post/${id}`;
 
   return (
     <article className={styles.post}>
