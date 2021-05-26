@@ -1,8 +1,4 @@
-export interface IUser {
-  _id: string
-  email: string
-  username: string
-}
+import { IUser } from '../../types/user';
 
 export interface AuthState {
   data: IUser | null

@@ -1,13 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './Comment.module.scss';
+import { IUser } from '../../../types/user';
 
 interface CommentProps {
   text: string
-  user: {
-    username: string
-    avatarUrl: string
-  }
+  user: IUser
 }
 
 const Comment = ({

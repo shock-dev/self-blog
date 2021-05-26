@@ -24,7 +24,7 @@ const Home = ({
           withFooter={true}
           isShortText={true}
           commentsCount={post.comments.length}
-          author={post.user}
+          user={post.user}
         />
       )}
     </MainLayout>

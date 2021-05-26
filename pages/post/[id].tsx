@@ -4,9 +4,10 @@ import PostsApi from '../../api/posts';
 import withAuthSS from '../../hocs/withAuth';
 import Post from '../../components/Post';
 import Comments from '../../components/Comments';
+import { IPost } from '../../types/post';
 
 interface PostProps {
-  post: any
+  post: IPost
 }
 
 const PostPage = ({ post }: PostProps) => {
@@ -19,7 +20,7 @@ const PostPage = ({ post }: PostProps) => {
         description={post.description}
         imageUrl={post.imageUrl}
         views={post.views}
-        author={post.user}
+        user={post.user}
       />
       <Comments count={post.comments.length}>
         {post.comments.map((comment) =>

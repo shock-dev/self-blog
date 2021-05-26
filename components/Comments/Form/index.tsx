@@ -2,9 +2,10 @@ import React from 'react';
 import styles from './Form.module.scss';
 import { useFormik } from 'formik';
 import validationSchema from '../../../validation/post/comment';
+import { IComment } from '../../../types/comment';
 
 interface CommentFormInputs {
-  text: string
+  text: IComment['text']
 }
 
 const Form = () => {

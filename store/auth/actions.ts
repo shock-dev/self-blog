@@ -1,6 +1,7 @@
 import { action } from 'typesafe-actions';
-import { IUser, AuthActionType } from './types';
+import { AuthActionType } from './types';
 import { LoginFormInputs } from '../../pages/login';
+import { IUser } from '../../types/user';
 
 export const fetchLogin = (payload: LoginFormInputs) => action(AuthActionType.FETCH_LOGIN, payload);
 

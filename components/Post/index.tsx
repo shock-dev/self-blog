@@ -12,7 +12,7 @@ interface PostProps {
   withFooter?: boolean
   commentsCount?: number
   isShortText?: boolean
-  author: {
+  user: {
     username: string
     avatarUrl: string
   }
@@ -27,7 +27,7 @@ export default function Post({
   withFooter = false,
   commentsCount,
   isShortText = false,
-  author: {
+  user: {
     username,
     avatarUrl
   }
