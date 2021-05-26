@@ -1,0 +1,46 @@
+.form {
+  margin-top: 60px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #474747;
+  margin-bottom: 14px;
+}
+
+.wrapper {
+  background: #F5F5F5;
+  padding: 20px;
+}
+
+.body {
+  display: flex;
+}
+
+.textarea {
+  padding: 10px 15px;
+  width: 100%;
+  min-height: 180px;
+  border: 1px solid #D3D3D3;
+  resize: vertical;
+}
+
+.error {
+  color: red;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.footer {
+  display: flex;
+}
+
+.sendBtn {
+  background: #849AE8;
+  color: #fff;
+  padding: 8px 16px;
+  margin-top: 10px;
+  border: none;
+}
