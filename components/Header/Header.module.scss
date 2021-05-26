@@ -13,3 +13,21 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.loginBtn,
+.registerBtn {
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.loginBtn {
+  margin-right: 10px;
+  background-color: #5f8de7;
+}
+
+.registerBtn {
+  border: 1px solid #5f8de7;
+  color: #5f8de7;
+}

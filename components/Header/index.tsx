@@ -1,24 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectIsAuth } from '../../store/auth/selectors';
-import { logoutRequest } from '../../store/auth/actions';
 import styles from './Header.module.scss';
+import UserPopup from '../UserPopup';
 
 export default function Header() {
-  const dispatch = useDispatch();
-  const router = useRouter();
   const isAuth = useSelector(selectIsAuth);
-
-  const logoutHandler = async () => {
-    try {
-      await dispatch(logoutRequest());
-      await router.replace('/login');
-    } catch (e) {
-      alert(e.message);
-    }
-  };
 
   return (
     <header className={styles.header}>
@@ -30,16 +18,18 @@ export default function Header() {
             </a>
           </Link>
           {isAuth ? (
-            <button onClick={logoutHandler}>
-              Выйти
-            </button>
+            <UserPopup />
           ) : (
             <div>
               <Link href="/login">
-                <a>Login</a>
+                <a className={styles.loginBtn}>
+                  Login
+                </a>
               </Link>
               <Link href="/register">
-                <a>Register</a>
+                <a className={styles.registerBtn}>
+                  Register
+                </a>
               </Link>
             </div>
           )}
