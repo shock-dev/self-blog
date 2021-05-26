@@ -5,7 +5,7 @@ import withAuthSS from '../../hocs/withAuth';
 import Post from '../../components/Post';
 import Comments from '../../components/Comments';
 import { IPost } from '../../types/post';
-import { setComments } from '../../store/comments/action';
+import { setComments } from '../../store/comments/actions';
 import { useSelector } from 'react-redux';
 import { selectCommentsData } from '../../store/comments/selectors';
 
@@ -28,7 +28,7 @@ const PostPage = ({ post }: PostProps) => {
         user={post.user}
       />
       {comments && (
-        <Comments count={post.comments.length}>
+        <Comments count={comments.length}>
           {comments.map((comment) =>
             <Comments.Item
               key={comment._id}
@@ -38,7 +38,7 @@ const PostPage = ({ post }: PostProps) => {
           )}
         </Comments>
       )}
-      <Comments.Form />
+      <Comments.Form postId={post._id} />
     </MainLayout>
   );
 };
