@@ -7,6 +7,6 @@ export interface IPost {
   description: string
   imageUrl: string
   views: number
-  comments: string[] | IComment[]
+  comments: IComment[]
   user: IUser
 }
