@@ -30,6 +30,7 @@ const PostPage = ({ post }: PostProps) => {
           />
         )}
       </Comments>
+      <Comments.Form />
     </MainLayout>
   );
 };
