@@ -21,8 +21,14 @@ const PostPage = ({ post }: PostProps) => {
         views={post.views}
         author={post.user}
       />
-      <Comments>
-        <Comments.Item />
+      <Comments count={post.comments.length}>
+        {post.comments.map((comment) =>
+          <Comments.Item
+            key={comment._id}
+            text={comment.text}
+            user={comment.user}
+          />
+        )}
       </Comments>
     </MainLayout>
   );

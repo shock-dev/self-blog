@@ -1,17 +1,19 @@
 import React from 'react';
 import styles from './Comments.module.scss';
-import Item from './Item';
+import Item from './Comment';
 
 interface CommentsProps {
   children?: React.ReactNode
+  count: number
 }
 
 const Comments = ({
-  children
+  children,
+  count
 }: CommentsProps) => {
   return (
     <div className={styles.wrapper}>
-      <p className={styles.title}>Комментарии <span>2</span></p>
+      <p className={styles.title}>Комментарии <span>{count}</span></p>
       {children}
     </div>
   );

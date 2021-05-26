@@ -1,8 +1,22 @@
 import React from 'react';
 import Link from 'next/link';
-import styles from './Item.module.scss';
+import styles from './Comment.module.scss';
 
-const Item = () => {
+interface CommentProps {
+  text: string
+  user: {
+    username: string
+    avatarUrl: string
+  }
+}
+
+const Comment = ({
+  text,
+  user: {
+    username,
+    avatarUrl
+  }
+}: CommentProps) => {
   return (
     <div className={styles.comment}>
       <div className={styles.header}>
@@ -10,11 +24,11 @@ const Item = () => {
           <a className={styles.user}>
             <img
               className={styles.avatar}
-              src="https://res.cloudinary.com/demo/image/upload/w_20,h_20,c_fill/sample.jpg"
+              src={avatarUrl}
               alt=""
             />
             <div className={styles.username}>
-              shock_dev
+              {username}
             </div>
           </a>
         </Link>
@@ -23,10 +37,10 @@ const Item = () => {
         </div>
       </div>
       <p className={styles.text}>
-        Some text
+        {text}
       </p>
     </div>
   );
 };
 
-export default Item;
+export default Comment;
