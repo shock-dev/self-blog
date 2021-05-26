@@ -1,0 +1,44 @@
+.wrapper {
+  position: relative;
+}
+
+.avatar {
+  display: block;
+  border: none;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  border-radius: 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.popup {
+  position: absolute;
+  top: 54px;
+  right: 0;
+  display: block;
+  background-color: #fff;
+  width: 250px;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgb(0 0 0 / 20%);
+  overflow: hidden;
+}
+
+.link {
+  display: block;
+  width: 100%;
+  background-color: #fff;
+  border: none;
+  text-align: left;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #4e4e4e;
+  font-family: inherit;
+
+  &:hover {
+    background-color: #5f8de7;
+    color: #fff;
+  }
+}
