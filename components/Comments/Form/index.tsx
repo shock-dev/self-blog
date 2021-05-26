@@ -3,12 +3,22 @@ import styles from './Form.module.scss';
 import { useFormik } from 'formik';
 import validationSchema from '../../../validation/post/comment';
 import { IComment } from '../../../types/comment';
+import { useDispatch } from 'react-redux';
+import { requestAddComment } from '../../../store/comments/actions';
+import { IPost } from '../../../types/post';
+
+interface FormProps {
+  postId: IPost['_id']
+}
 
 interface CommentFormInputs {
   text: IComment['text']
 }
 
-const Form = () => {
+export interface IAddComment extends FormProps, CommentFormInputs {}
+
+const Form = ({ postId }: FormProps) => {
+  const dispatch = useDispatch();
   const {
     handleSubmit,
     handleChange,
@@ -21,8 +31,12 @@ const Form = () => {
       text: ''
     },
     validationSchema,
-    onSubmit: (data) => {
-      console.log(data);
+    onSubmit: async (data) => {
+      const payload: IAddComment = {
+        text: data.text,
+        postId
+      };
+      await dispatch(requestAddComment(payload));
     }
   });
 
