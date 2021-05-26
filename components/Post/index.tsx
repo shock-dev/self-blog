@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './Post.module.scss';
+import cn from 'classnames';
 
 interface PostProps {
   id: string
@@ -9,6 +10,8 @@ interface PostProps {
   imageUrl: string
   views: number
   withFooter?: boolean
+  commentsCount?: number
+  isShortText?: boolean
   author: {
     username: string
     avatarUrl: string
@@ -22,6 +25,8 @@ export default function Post({
   imageUrl,
   views,
   withFooter = false,
+  commentsCount,
+  isShortText = false,
   author: {
     username,
     avatarUrl
@@ -66,7 +71,7 @@ export default function Post({
         </li>
       </ul>
       <img className={styles.img} src={imageUrl} alt={title} />
-      <p className={styles.text}>
+      <p className={cn(styles.text, { [styles.short]: isShortText })}>
         {description}
       </p>
       {withFooter && (
@@ -87,7 +92,7 @@ export default function Post({
                   <svg className={styles.panelIcon} width="26px" height="18px">
                     <use href={`images/[post].svg#comments`} />
                   </svg>
-                  3
+                  {commentsCount}
                 </a>
               </Link>
             </li>

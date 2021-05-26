@@ -22,6 +22,8 @@ const Home = ({
           imageUrl={post.imageUrl}
           views={post.views}
           withFooter={true}
+          isShortText={true}
+          commentsCount={post.comments.length}
           author={post.user}
         />
       )}
