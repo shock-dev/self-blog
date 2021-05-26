@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Comments.module.scss';
-import Item from './Comment';
+import Comment from './Comment';
+import Form from './Form';
 
 interface CommentsProps {
   children?: React.ReactNode
@@ -12,13 +13,14 @@ const Comments = ({
   count
 }: CommentsProps) => {
   return (
-    <div className={styles.wrapper}>
+    <>
       <p className={styles.title}>Комментарии <span>{count}</span></p>
       {children}
-    </div>
+    </>
   );
 };
 
-Comments.Item = Item;
+Comments.Item = Comment;
+Comments.Form = Form;
 
 export default Comments;
