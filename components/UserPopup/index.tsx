@@ -10,6 +10,7 @@ import { selectAuth } from '../../store/auth/selectors';
 const UserPopup = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const userId = useSelector(selectAuth).data._id;
   const [visible, setVisible] = useState(false);
   const avatarUrl = useSelector(selectAuth).data.avatarUrl;
   const ref = useRef() as MutableRefObject<HTMLUListElement>;
@@ -47,7 +48,7 @@ const UserPopup = () => {
           ref={ref}
         >
           <li>
-            <Link href="/">
+            <Link href={`/user/${userId}`}>
               <a className={styles.link}>Profile</a>
             </Link>
           </li>

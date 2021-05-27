@@ -38,7 +38,7 @@ export default function Post({
       <div className={styles.header}>
         <img className={styles.avatar} src={avatarUrl} alt={`${username} avatar`} />
         <div className={styles.userWrapper}>
-          <Link href={`/${_id}`}>
+          <Link href={`/user/${_id}`}>
             <a className={styles.username}>{username}</a>
           </Link>
           <div className={styles.time}>

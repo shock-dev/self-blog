@@ -19,7 +19,7 @@ const Comment = ({
   return (
     <div className={styles.comment}>
       <div className={styles.header}>
-        <Link href={`/${_id}`}>
+        <Link href={`/user/${_id}`}>
           <a className={styles.user}>
             <img
               className={styles.avatar}
