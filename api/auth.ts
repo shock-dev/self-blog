@@ -3,17 +3,17 @@ import { LoginFormInputs } from '../pages/login';
 
 class AuthApi {
   login = async (payload: LoginFormInputs) => {
-    const { data } = await axios.post(`http://localhost:5000/auth/login`, payload);
+    const { data } = await axios.post(`/auth/login`, payload);
     return data;
   }
 
   getMe = async () => {
-    const { data } = await axios.get(`http://localhost:5000/auth/me`);
+    const { data } = await axios.get(`/auth/me`);
     return data;
   }
 
   logout = async () => {
-    const { data } = await axios.post(`http://localhost:5000/auth/logout`);
+    const { data } = await axios.post(`/auth/logout`);
     return data;
   }
 }

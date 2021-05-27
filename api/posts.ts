@@ -1,15 +1,13 @@
-import axios from 'axios';
+import axios from '../core/axios';
 
 class PostsApi {
-  private api = `${process.env.API_URL}/posts`;
-
   getAll = async () => {
-    const { data } = await axios.get(this.api);
+    const { data } = await axios.get('/posts');
     return data;
   }
 
   getOne = async (id: string) => {
-    const { data } = await axios.get(`${this.api}/${id}`);
+    const { data } = await axios.get(`posts/${id}`);
     return data;
   }
 }
