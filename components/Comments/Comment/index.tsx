@@ -11,6 +11,7 @@ interface CommentProps {
 const Comment = ({
   text,
   user: {
+    _id,
     username,
     avatarUrl
   }
@@ -18,7 +19,7 @@ const Comment = ({
   return (
     <div className={styles.comment}>
       <div className={styles.header}>
-        <Link href="/">
+        <Link href={`/${_id}`}>
           <a className={styles.user}>
             <img
               className={styles.avatar}

@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import styles from './Post.module.scss';
+import { IUser } from '../../types/user';
 
 interface PostProps {
   id: string
@@ -12,10 +13,7 @@ interface PostProps {
   withFooter?: boolean
   commentsCount?: number
   isShortText?: boolean
-  user: {
-    username: string
-    avatarUrl: string
-  }
+  user: IUser
 }
 
 export default function Post({
@@ -28,6 +26,7 @@ export default function Post({
   commentsCount,
   isShortText = false,
   user: {
+    _id,
     username,
     avatarUrl
   }
@@ -39,7 +38,7 @@ export default function Post({
       <div className={styles.header}>
         <img className={styles.avatar} src={avatarUrl} alt={`${username} avatar`} />
         <div className={styles.userWrapper}>
-          <Link href="/">
+          <Link href={`/${_id}`}>
             <a className={styles.username}>{username}</a>
           </Link>
           <div className={styles.time}>
