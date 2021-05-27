@@ -14,7 +14,7 @@ interface FormInputs {
   email: string
   username: string
   password: string
-  confirmPassword: string
+  passwordConfirm: string
 }
 
 export default function Register() {
@@ -30,7 +30,7 @@ export default function Register() {
       email: '',
       username: '',
       password: '',
-      confirmPassword: ''
+      passwordConfirm: ''
     },
     validationSchema,
     onSubmit: (data) => {
@@ -85,11 +85,11 @@ export default function Register() {
           placeholder="Repeat your password"
           icon="confirm"
           name="confirmPassword"
-          value={values.confirmPassword}
+          value={values.passwordConfirm}
           onChange={handleChange}
           onBlur={handleBlur}
-          error={touched.confirmPassword && !!errors.confirmPassword}
-          message={errors.confirmPassword}
+          error={touched.passwordConfirm && !!errors.passwordConfirm}
+          message={errors.passwordConfirm}
         />
         <Button type="submit">
           Sign up

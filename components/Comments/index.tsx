@@ -13,10 +13,12 @@ const Comments = ({
   count
 }: CommentsProps) => {
   return (
-    <>
-      <p className={styles.title}>Комментарии <span>{count}</span></p>
+    <div className={styles.wrapper}>
+      <p className={styles.title}>
+        Комментарии <span>{count}</span>
+      </p>
       {children}
-    </>
+    </div>
   );
 };
 

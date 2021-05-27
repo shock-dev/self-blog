@@ -3,7 +3,7 @@ import { IAddComment } from '../components/Comments/Form';
 
 class CommentsApi {
   create = async ({ postId, text }: IAddComment) => {
-    const { data } = await axios.post(`http://localhost:5000/posts/${postId}/comment`, { text });
+    const { data } = await axios.post(`/posts/${postId}/comment`, { text });
     return data;
   }
 }
