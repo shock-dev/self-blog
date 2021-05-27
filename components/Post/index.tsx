@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
-import styles from './Post.module.scss';
 import cn from 'classnames';
+import styles from './Post.module.scss';
 
 interface PostProps {
   id: string
