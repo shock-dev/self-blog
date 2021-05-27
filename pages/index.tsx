@@ -1,5 +1,5 @@
 import React from 'react';
-import MainLayout from '../layouts/MainLayout';
+import ContentLayout from '../layouts/ContentLayout';
 import Post from '../components/Post';
 import withAuthSS from '../hocs/withAuth';
 import PostsApi from '../api/posts';
@@ -12,7 +12,7 @@ const Home = ({
   posts
 }: HomeProps) => {
   return (
-    <MainLayout title="Home">
+    <ContentLayout title="Home">
       {posts.map((post) =>
         <Post
           key={post._id}
@@ -27,7 +27,7 @@ const Home = ({
           user={post.user}
         />
       )}
-    </MainLayout>
+    </ContentLayout>
   );
 };
 

@@ -6,7 +6,6 @@ import styles from './MainLayout.module.scss';
 
 interface MainLayoutProps {
   title: string
-  center?: boolean
   children: React.ReactNode
 }
 
@@ -21,14 +20,7 @@ export default function MainLayout({
       </Head>
       <Header />
       <div className={cn('container', styles.page)}>
-        <div className={styles.wrapper}>
-          <main className={styles.main}>
-            {children}
-          </main>
-          <aside className={styles.aside}>
-            test
-          </aside>
-        </div>
+        {children}
       </div>
     </>
   );

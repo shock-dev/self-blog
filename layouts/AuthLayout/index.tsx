@@ -4,15 +4,15 @@ import Head from 'next/head';
 import Header from '../../components/Header';
 import styles from './AuthLayout.module.scss';
 
-interface MainLayoutProps {
+interface AuthLayoutProps {
   title: string
   children: React.ReactNode
 }
 
-export default function MainLayout({
+export default function AuthLayout({
   title,
   children
-}: MainLayoutProps) {
+}: AuthLayoutProps) {
   return (
     <>
       <Head>

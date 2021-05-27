@@ -1,5 +1,5 @@
 import React from 'react';
-import MainLayout from '../../layouts/MainLayout';
+import ContentLayout from '../../layouts/ContentLayout';
 import PostsApi from '../../api/posts';
 import withAuthSS from '../../hocs/withAuth';
 import Post from '../../components/Post';
@@ -17,7 +17,7 @@ const PostPage = ({ post }: PostProps) => {
   const comments = useSelector(selectCommentsData);
 
   return (
-    <MainLayout title={post.title}>
+    <ContentLayout title={post.title}>
       <Post
         key={post._id}
         id={post._id}
@@ -39,7 +39,7 @@ const PostPage = ({ post }: PostProps) => {
         </Comments>
       )}
       <Comments.Form postId={post._id} />
-    </MainLayout>
+    </ContentLayout>
   );
 };
 
