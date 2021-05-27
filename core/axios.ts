@@ -1,7 +1,11 @@
 import axios from 'axios';
 
+if (!process.env.NEXT_PUBLIC_API_URL) {
+  throw new Error('specify NEXT_PUBLIC_API_URL in .env.local');
+}
+
 const instance = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true
 });
 
