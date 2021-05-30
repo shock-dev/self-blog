@@ -3,6 +3,7 @@ import Link from 'next/link';
 import cn from 'classnames';
 import styles from './Post.module.scss';
 import { IUser } from '../../types/user';
+import Avatar from '../Avatar';
 
 interface PostProps {
   id: string
@@ -25,21 +26,23 @@ export default function Post({
   withFooter = false,
   commentsCount,
   isShortText = false,
-  user: {
-    _id,
-    username,
-    avatarUrl
-  }
+  user
 }: PostProps) {
   const postUrl = `/post/${id}`;
 
   return (
     <article className={styles.post}>
       <div className={styles.header}>
-        <img className={styles.avatar} src={avatarUrl} alt={`${username} avatar`} />
+        <Avatar
+          url={user.avatarUrl}
+          width={40}
+          height={40}
+          additionalStyles={{ marginRight: '10px' }}
+          alt={`Avatar of ${user.username}`}
+        />
         <div className={styles.userWrapper}>
-          <Link href={`/user/${_id}`}>
-            <a className={styles.username}>{username}</a>
+          <Link href={`/user/${user._id}`}>
+            <a className={styles.username}>{user.username}</a>
           </Link>
           <div className={styles.time}>
             Вчера в 15:40

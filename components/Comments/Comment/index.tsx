@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import styles from './Comment.module.scss';
 import { IUser } from '../../../types/user';
+import Avatar from '../../Avatar';
 
 interface CommentProps {
   text: string
@@ -10,24 +11,21 @@ interface CommentProps {
 
 const Comment = ({
   text,
-  user: {
-    _id,
-    username,
-    avatarUrl
-  }
+  user
 }: CommentProps) => {
   return (
     <div className={styles.comment}>
       <div className={styles.header}>
-        <Link href={`/user/${_id}`}>
+        <Link href={`/user/${user._id}`}>
           <a className={styles.user}>
-            <img
-              className={styles.avatar}
-              src={avatarUrl}
-              alt=""
+            <Avatar
+              url={user.avatarUrl}
+              width={20}
+              height={20}
+              alt={`Avatar of ${user.username}`}
             />
             <div className={styles.username}>
-              {username}
+              {user.username}
             </div>
           </a>
         </Link>
