@@ -53,7 +53,7 @@ const UserPopup = () => {
             </Link>
           </li>
           <li>
-            <Link href="/">
+            <Link href={`/settings/profile`}>
               <a className={styles.link}>Settings</a>
             </Link>
           </li>
