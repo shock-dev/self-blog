@@ -71,7 +71,12 @@ export default function Login() {
           error={touched.password && !!errors.password}
           message={errors.password}
         />
-        <Button type="submit">
+        <Button
+          type="submit"
+          color="green"
+          around
+          full
+        >
           Login
         </Button>
         <Footer

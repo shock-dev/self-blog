@@ -6,6 +6,7 @@ import { IComment } from '../../../types/comment';
 import { useDispatch } from 'react-redux';
 import { requestAddComment } from '../../../store/comments/actions';
 import { IPost } from '../../../types/post';
+import Button from '../../Button';
 
 interface FormProps {
   postId: IPost['_id']
@@ -64,12 +65,13 @@ const Form = ({ postId }: FormProps) => {
           </p>
         )}
         <div className={styles.footer}>
-          <button
-            className={styles.sendBtn}
+          <Button
             type="submit"
+            color="blue"
+            customStyles={{ marginTop: '10px' }}
           >
             Отправить
-          </button>
+          </Button>
         </div>
       </div>
     </form>

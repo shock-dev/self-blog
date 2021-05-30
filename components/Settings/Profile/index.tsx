@@ -55,7 +55,7 @@ const Profile = () => {
             title="Username"
             value={user.username}
           />
-          <Button>
+          <Button color="green">
             Применить
           </Button>
         </div>

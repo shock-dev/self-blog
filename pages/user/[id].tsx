@@ -5,6 +5,7 @@ import UsersApi from '../../api/users';
 import styles from '../../styles/pages/User.module.scss';
 import { IUser } from '../../types/user';
 import Avatar from '../../components/Avatar';
+import Button from '../../components/Button';
 
 interface UserPageProps {
   user: IUser
@@ -28,9 +29,12 @@ const UserPage = ({
           <p className={styles.rank}>
             Admin
           </p>
-          <button className={styles.followBtn}>
+          <Button
+            customStyles={{ marginTop: '20px' }}
+            full
+          >
             Подписаться
-          </button>
+          </Button>
         </div>
         <div className={styles.info}>
           <div className={styles.infoTop}>
