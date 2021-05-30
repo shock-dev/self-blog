@@ -6,13 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import styles from './UserPopup.module.scss';
 import { selectAuth } from '../../store/auth/selectors';
+import Avatar from '../Avatar';
 
 const UserPopup = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const userId = useSelector(selectAuth).data._id;
+  const user = useSelector(selectAuth).data;
   const [visible, setVisible] = useState(false);
-  const avatarUrl = useSelector(selectAuth).data.avatarUrl;
   const ref = useRef() as MutableRefObject<HTMLUListElement>;
 
   const toggleVisible = (): void => {
@@ -37,18 +37,23 @@ const UserPopup = () => {
   return (
     <div className={styles.wrapper}>
       <button
-        className={styles.avatar}
-        style={{ backgroundImage: `url(${avatarUrl})` }}
-        type="button"
         onClick={toggleVisible}
-      />
+        style={{ border: 'none' }}
+      >
+        <Avatar
+          url={user.avatarUrl}
+          width={40}
+          height={40}
+          alt={`Avatar of ${user.username}`}
+        />
+      </button>
       {visible && (
         <ul
           className={styles.popup}
           ref={ref}
         >
           <li>
-            <Link href={`/user/${userId}`}>
+            <Link href={`/user/${user._id}`}>
               <a className={styles.link}>Profile</a>
             </Link>
           </li>

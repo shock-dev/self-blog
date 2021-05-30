@@ -28,14 +28,14 @@ export default function SettingsLayout({
             </div>
             <ul>
               <li>
-                <Link href="/">
+                <Link href="/settings/profile">
                   <a className={styles.asideLink}>
                     Профиль
                   </a>
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/settings/account">
                   <a className={styles.asideLink}>
                     Аккаунт
                   </a>
