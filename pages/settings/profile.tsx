@@ -1,6 +1,7 @@
 import React from 'react';
 import SettingsLayout from '../../layouts/SettingsLayout';
 import Profile from '../../components/Settings/Profile';
+import withAuthSS from '../../hocs/withAuth';
 
 const profileSettings = () => {
   return (
@@ -9,5 +10,7 @@ const profileSettings = () => {
     </SettingsLayout>
   );
 };
+
+export const getServerSideProps = withAuthSS();
 
 export default profileSettings;
