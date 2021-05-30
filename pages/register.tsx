@@ -91,7 +91,12 @@ export default function Register() {
           error={touched.passwordConfirm && !!errors.passwordConfirm}
           message={errors.passwordConfirm}
         />
-        <Button type="submit">
+        <Button
+          type="submit"
+          color="green"
+          around
+          full
+        >
           Sign up
         </Button>
         <Footer
