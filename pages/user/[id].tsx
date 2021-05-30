@@ -4,6 +4,7 @@ import MainLayout from '../../layouts/MainLayout';
 import UsersApi from '../../api/users';
 import styles from '../../styles/pages/User.module.scss';
 import { IUser } from '../../types/user';
+import Avatar from '../../components/Avatar';
 
 interface UserPageProps {
   user: IUser
@@ -16,7 +17,11 @@ const UserPage = ({
     <MainLayout title="Profile">
       <div className={styles.wrapper}>
         <div className={styles.user}>
-          <img className={styles.avatar} src={user.avatarUrl} alt="" />
+          <Avatar
+            url={user.avatarUrl}
+            type="circle"
+            alt={`Avatar of ${user.username}`}
+          />
           <h4 className={styles.username}>
             {user.username}
           </h4>
