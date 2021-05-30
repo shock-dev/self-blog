@@ -14,7 +14,7 @@ export default function Header() {
         <div className={styles.inner}>
           <Link href="/">
             <a>
-              <img src="/images/logo.png" alt="Logo" />
+              <img src="/images/logo.svg" alt="Logo" />
             </a>
           </Link>
           {isAuth ? (
