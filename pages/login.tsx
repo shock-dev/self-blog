@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchLogin } from '../store/auth/actions';
 import withNotAuthSS from '../hocs/withNotAuth';
 import { useRouter } from 'next/router';
-import { selectAuthError, selectIsAuth } from '../store/auth/selectors';
+import { selectAuthError, selectIsAuth, selectIsLoading } from '../store/auth/selectors';
 import { useAlert } from 'react-alert';
 
 export interface LoginFormInputs {
@@ -23,6 +23,7 @@ export default function Login() {
   const router = useRouter();
   const isAuth = useSelector(selectIsAuth);
   const error = useSelector(selectAuthError);
+  const isLoading = useSelector(selectIsLoading);
   const alert = useAlert();
   const {
     handleSubmit,
@@ -86,6 +87,7 @@ export default function Login() {
         <Button
           type="submit"
           color="green"
+          loading={isLoading}
           around
           full
         >
