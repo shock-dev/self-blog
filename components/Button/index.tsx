@@ -19,10 +19,12 @@ interface ButtonProps {
   full?: boolean
   outline?: boolean
   around?: boolean
+  loading?: boolean
+  disabled?: boolean
   customStyles?: CSSProperties
 }
 
-export default function Button({
+const Button = ({
   children,
   onClick,
   color = 'blue',
@@ -30,8 +32,10 @@ export default function Button({
   full = false,
   outline = false,
   around = false,
+  loading = false,
+  disabled = false,
   customStyles
-}: ButtonProps) {
+}: ButtonProps) => {
   const [BgColor, setBgColor] = useState<string>(outline ? 'transparent' : Palette[color]);
   const [textColor, setTextColor] = useState<string>(outline ? Palette[color] : '#fff');
 
@@ -65,6 +69,12 @@ export default function Button({
     setBgColor(Palette[color]);
   };
 
+  if (loading || disabled) {
+    buttonStyles.opacity = '.8';
+    buttonStyles.userSelect = 'none';
+    buttonStyles.cursor = 'default';
+  }
+
   return (
     <button
       type={type}
@@ -73,8 +83,16 @@ export default function Button({
       onClick={onClick}
       onMouseOver={mouseOverHandler}
       onMouseOut={mouseLeaveHandler}
+      disabled={loading || disabled}
     >
-      {children}
+      {loading && (
+        <span className={styles.loading} />
+      )}
+      <span className={styles.text}>
+        {children}
+      </span>
     </button>
   );
-}
+};
+
+export default Button;
