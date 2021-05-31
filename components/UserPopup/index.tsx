@@ -54,12 +54,22 @@ const UserPopup = () => {
         >
           <li>
             <Link href={`/user/${user._id}`}>
-              <a className={styles.link}>Profile</a>
+              <a className={styles.link}>
+                <svg className={styles.svg}>
+                  <use href={'/images/[popup].svg#user'} />
+                </svg>
+                Profile
+              </a>
             </Link>
           </li>
           <li>
             <Link href={`/settings/profile`}>
-              <a className={styles.link}>Settings</a>
+              <a className={styles.link}>
+                <svg className={styles.svg}>
+                  <use href={'/images/[popup].svg#settings'} />
+                </svg>
+                Settings
+              </a>
             </Link>
           </li>
           <li>
@@ -67,6 +77,9 @@ const UserPopup = () => {
               className={styles.link}
               onClick={logoutHandler}
             >
+              <svg className={styles.svg}>
+                <use href={'/images/[popup].svg#logout'} />
+              </svg>
               Logout
             </button>
           </li>
