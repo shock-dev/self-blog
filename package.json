@@ -21,6 +21,8 @@
     "nextjs-progressbar": "^0.0.9",
     "nookies": "^2.5.2",
     "react": "17.0.2",
+    "react-alert": "^7.0.3",
+    "react-alert-template-basic": "^1.0.2",
     "react-dom": "17.0.2",
     "react-redux": "^7.2.4",
     "redux": "^4.1.0",
@@ -32,6 +34,7 @@
   "devDependencies": {
     "@types/js-cookie": "^2.2.6",
     "@types/react": "^17.0.5",
+    "@types/react-alert": "^5.2.0",
     "@typescript-eslint/eslint-plugin": "^4.22.1",
     "@typescript-eslint/parser": "^4.22.1",
     "editorconfig-checker": "^4.0.2",
