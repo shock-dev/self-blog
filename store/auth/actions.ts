@@ -9,8 +9,6 @@ export const logoutRequest = () => action(AuthActionType.LOGOUT_REQUEST);
 
 export const logoutSuccess = () => action(AuthActionType.LOGOUT_SUCCESS);
 
-export const fetchUserInfo = () => action(AuthActionType.FETCH_USER_INFO);
-
 export const setUserInfo = (payload: IUser) => action(AuthActionType.SET_USER_INFO, payload);
 
 export const setIsAuth = (payload: boolean) => action(AuthActionType.SET_IS_AUTH, payload);
