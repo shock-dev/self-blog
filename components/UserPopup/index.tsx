@@ -22,7 +22,7 @@ const UserPopup = () => {
   const logoutHandler = async () => {
     try {
       await dispatch(logoutRequest());
-      await router.replace('/login');
+      router.replace('/login');
     } catch (e) {
       alert(e.message);
     }
