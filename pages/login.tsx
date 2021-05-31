@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import validationSchema from '../validation/auth/login';
 import AuthLayout from '../layouts/AuthLayout';
@@ -6,10 +6,12 @@ import Form from '../components/Form';
 import Field from '../components/Form/Field';
 import Button from '../components/Button';
 import Footer from '../components/Form/Footer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchLogin } from '../store/auth/actions';
 import withNotAuthSS from '../hocs/withNotAuth';
 import { useRouter } from 'next/router';
+import { selectAuthError, selectIsAuth } from '../store/auth/selectors';
+import { useAlert } from 'react-alert';
 
 export interface LoginFormInputs {
   email: string
@@ -19,6 +21,9 @@ export interface LoginFormInputs {
 export default function Login() {
   const dispatch = useDispatch();
   const router = useRouter();
+  const isAuth = useSelector(selectIsAuth);
+  const error = useSelector(selectAuthError);
+  const alert = useAlert();
   const {
     handleSubmit,
     handleChange,
@@ -33,14 +38,21 @@ export default function Login() {
     },
     validationSchema,
     onSubmit: async (data) => {
-      try {
-        await dispatch(fetchLogin(data));
-        router.replace('/');
-      } catch (e) {
-        console.log(e.message);
-      }
+      await dispatch(fetchLogin(data));
     }
   });
+
+  useEffect(() => {
+    if (error !== null) {
+      alert.error(error);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (isAuth) {
+      router.replace('/');
+    }
+  }, [isAuth]);
 
   return (
     <AuthLayout title="Login">

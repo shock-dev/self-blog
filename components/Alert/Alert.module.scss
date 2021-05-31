@@ -1,0 +1,43 @@
+.wrapper {
+  margin-top: 20px;
+  position: relative;
+  padding: 15px 30px;
+  background-color: #ff6868;
+  border-radius: 5px;
+  border: 1px solid red;
+  color: #ffd7d7;
+  overflow: hidden;
+}
+
+.title {
+  font-weight: 700;
+  display: inline-block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.message {
+  color: #fff4f4;
+  font-size: 16px;
+}
+
+.close {
+  display: flex;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+
+  &:hover .svg {
+    fill: #fff
+  }
+}
+
+.svg {
+  width: 12px;
+  height: 12px;
+  fill: #ffd5d5;
+}

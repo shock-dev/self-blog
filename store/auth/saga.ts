@@ -14,10 +14,10 @@ function* fetchLogin(action): SagaIterator {
       yield put(setIsAuth(true));
     }
   } catch (e) {
-    const { message } = e.response.data;
+    const { data } = e.response.data;
 
-    if (message) {
-      yield put(setError(message));
+    if (data) {
+      yield put(setError(data));
     } else {
       yield put(setError('Something went wrong, try again'));
     }
