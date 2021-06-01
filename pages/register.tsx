@@ -37,14 +37,14 @@ export default function Register() {
   });
 
   return (
-    <AuthLayout title="Registration">
+    <AuthLayout title="Регистрация">
       <Form
         title="Регистрация"
         onSubmit={handleSubmit}
       >
         <Field
           title="Email"
-          placeholder="Type your email address"
+          placeholder="Введите email адрес"
           icon="email"
           name="email"
           value={values.email}
@@ -55,7 +55,7 @@ export default function Register() {
         />
         <Field
           title="Username"
-          placeholder="Type your username"
+          placeholder="Введите username"
           icon="user"
           name="username"
           value={values.username}
@@ -65,9 +65,9 @@ export default function Register() {
           message={errors.username}
         />
         <Field
-          title="Password"
+          title="Пароль"
           type="password"
-          placeholder="Type your password"
+          placeholder="Введите password"
           icon="lock"
           name="password"
           value={values.password}
@@ -77,7 +77,7 @@ export default function Register() {
           message={errors.password}
         />
         <Field
-          title="Confirm password"
+          title="Поддтвердите пароль"
           type="password"
           placeholder="Repeat your password"
           icon="confirm"
@@ -97,8 +97,8 @@ export default function Register() {
           Sign up
         </Button>
         <Footer
-          text="do you already have an account?"
-          to={{ url: '/login', title: 'Login' }}
+          text="Уже зарегестрированы?"
+          to={{ url: '/login', title: 'Войти' }}
         />
       </Form>
     </AuthLayout>
