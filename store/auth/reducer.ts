@@ -17,6 +17,8 @@ const user = produce((draft: Draft<AuthState>, action) => {
       break;
 
     case AuthActionType.LOGOUT_SUCCESS:
+      draft.isLoading = false;
+      draft.error = null;
       draft.isAuth = false;
       draft.data = null;
       break;
