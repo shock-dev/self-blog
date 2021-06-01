@@ -15,7 +15,7 @@ const UserPage = ({
   user
 }: UserPageProps) => {
   return (
-    <MainLayout title="Profile">
+    <MainLayout title={user.username}>
       <div className={styles.wrapper}>
         <div className={styles.user}>
           <Avatar
