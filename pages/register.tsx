@@ -81,7 +81,7 @@ export default function Register() {
           type="password"
           placeholder="Repeat your password"
           icon="confirm"
-          name="confirmPassword"
+          name="passwordConfirm"
           value={values.passwordConfirm}
           onChange={handleChange}
           onBlur={handleBlur}
