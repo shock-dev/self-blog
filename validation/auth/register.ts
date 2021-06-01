@@ -1,21 +1,25 @@
 import * as Yup from 'yup';
+import { ValidationConfig } from '../config';
 
 export default Yup.object({
   email: Yup
     .string()
-    .email('Incorrect email')
-    .required('Required'),
+    .email(ValidationConfig.Email)
+    .required(ValidationConfig.Required),
+
   username: Yup
     .string()
-    .min(3, 'Username must be more than 3 characters')
-    .max(16, 'Username must be shorter than 16 characters')
-    .required('Required'),
+    .min(3, 'Минимальная длина username 3 символа')
+    .max(16, 'Username не должен превышать 16 символов')
+    .required(ValidationConfig.Required),
+
   password: Yup
     .string()
-    .min(6, 'Password must be more than 6 characters')
-    .required('Required'),
-  confirmPassword: Yup
+    .min(6, 'Минимальная длина пароля 6 символов')
+    .required(ValidationConfig.Required),
+
+  passwordConfirm: Yup
     .string()
-    .oneOf([Yup.ref('password')], 'There are no matches')
-    .required('Required')
+    .oneOf([Yup.ref('password')], 'Нет совпадений')
+    .required(ValidationConfig.Required)
 });
