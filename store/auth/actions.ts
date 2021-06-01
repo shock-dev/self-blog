@@ -5,7 +5,9 @@ import { IUser } from '../../types/user';
 
 export const fetchLogin = (payload: LoginFormInputs) => action(AuthActionType.FETCH_LOGIN, payload);
 
-export const logoutRequest = () => action(AuthActionType.LOGOUT_REQUEST);
+export const fetchUserInfo = (token: string) => action(AuthActionType.FETCH_USER_INFO, token);
+
+export const fetchLogout = () => action(AuthActionType.FETCH_LOGOUT);
 
 export const logoutSuccess = () => action(AuthActionType.LOGOUT_SUCCESS);
 
