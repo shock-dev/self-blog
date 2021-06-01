@@ -6,8 +6,6 @@ import Form from '../components/Form';
 import Field from '../components/Form/Field';
 import Button from '../components/Button';
 import Footer from '../components/Form/Footer';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'next-i18next';
 import withNotAuthSS from '../hocs/withNotAuth';
 
 interface FormInputs {
@@ -37,12 +35,11 @@ export default function Register() {
       console.log(data);
     }
   });
-  const { t } = useTranslation('common');
 
   return (
     <AuthLayout title="Registration">
       <Form
-        title={t('registration')}
+        title="Регистрация"
         onSubmit={handleSubmit}
       >
         <Field
@@ -108,10 +105,4 @@ export default function Register() {
   );
 }
 
-export const getServerSideProps = withNotAuthSS(async ({ locale }) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['common']))
-    }
-  };
-});
+export const getServerSideProps = withNotAuthSS();
