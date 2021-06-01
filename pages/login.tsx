@@ -56,14 +56,14 @@ export default function Login() {
   }, [isAuth]);
 
   return (
-    <AuthLayout title="Login">
+    <AuthLayout title="Вход">
       <Form
-        title="Login"
+        title="Вход"
         onSubmit={handleSubmit}
       >
         <Field
           title="Email"
-          placeholder="Type your email"
+          placeholder="Введите email"
           icon="email"
           name="email"
           value={values.email}
@@ -73,9 +73,9 @@ export default function Login() {
           message={errors.email}
         />
         <Field
-          title="Password"
+          title="Пароль"
           type="password"
-          placeholder="Type your password"
+          placeholder="Введите пароль"
           icon="lock"
           name="password"
           value={values.password}
@@ -91,11 +91,11 @@ export default function Login() {
           around
           full
         >
-          Login
+          Войти
         </Button>
         <Footer
-          text="Or sing up using"
-          to={{ url: '/register', title: 'Sign up' }}
+          text="Или вы можете зарегестрироваться"
+          to={{ url: '/register', title: 'Регистрация' }}
         />
       </Form>
     </AuthLayout>

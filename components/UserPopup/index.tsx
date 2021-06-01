@@ -1,7 +1,7 @@
 import React, { MutableRefObject, useRef, useState } from 'react';
 import Link from 'next/link';
-import useOutsideClick from '../../hooks/useOutsideClick';
 import { useSelector } from 'react-redux';
+import useOutsideClick from '../../hooks/useOutsideClick';
 import styles from './UserPopup.module.scss';
 import { selectAuth } from '../../store/auth/selectors';
 import Avatar from '../Avatar';
@@ -31,7 +31,7 @@ const UserPopup = () => {
           url={user.avatarUrl}
           width={40}
           height={40}
-          alt={`Avatar of ${user.username}`}
+          alt={`Аватар ${user.username}`}
         />
       </button>
       {visible && (
@@ -45,7 +45,7 @@ const UserPopup = () => {
                 <svg className={styles.svg}>
                   <use href={'/images/[popup].svg#user'} />
                 </svg>
-                Profile
+                Профиль
               </a>
             </Link>
           </li>
@@ -55,7 +55,7 @@ const UserPopup = () => {
                 <svg className={styles.svg}>
                   <use href={'/images/[popup].svg#settings'} />
                 </svg>
-                Settings
+                Настройки
               </a>
             </Link>
           </li>
@@ -65,7 +65,7 @@ const UserPopup = () => {
                 <svg className={styles.svg}>
                   <use href={'/images/[popup].svg#logout'} />
                 </svg>
-                Logout
+                Выйти
               </a>
             </Link>
           </li>

@@ -22,7 +22,7 @@ const Comment = ({
               url={user.avatarUrl}
               width={20}
               height={20}
-              alt={`Avatar of ${user.username}`}
+              alt={`Аватар ${user.username}`}
             />
             <div className={styles.username}>
               {user.username}

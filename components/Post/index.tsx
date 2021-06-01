@@ -38,7 +38,7 @@ export default function Post({
           width={40}
           height={40}
           additionalStyles={{ marginRight: '10px' }}
-          alt={`Avatar of ${user.username}`}
+          alt={`Аватар ${user.username}`}
         />
         <div className={styles.userWrapper}>
           <Link href={`/user/${user._id}`}>

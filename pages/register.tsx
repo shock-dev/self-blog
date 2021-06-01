@@ -6,8 +6,6 @@ import Form from '../components/Form';
 import Field from '../components/Form/Field';
 import Button from '../components/Button';
 import Footer from '../components/Form/Footer';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'next-i18next';
 import withNotAuthSS from '../hocs/withNotAuth';
 
 interface FormInputs {
@@ -37,17 +35,16 @@ export default function Register() {
       console.log(data);
     }
   });
-  const { t } = useTranslation('common');
 
   return (
-    <AuthLayout title="Registration">
+    <AuthLayout title="Регистрация">
       <Form
-        title={t('registration')}
+        title="Регистрация"
         onSubmit={handleSubmit}
       >
         <Field
           title="Email"
-          placeholder="Type your email address"
+          placeholder="Введите email адрес"
           icon="email"
           name="email"
           value={values.email}
@@ -58,7 +55,7 @@ export default function Register() {
         />
         <Field
           title="Username"
-          placeholder="Type your username"
+          placeholder="Введите username"
           icon="user"
           name="username"
           value={values.username}
@@ -68,9 +65,9 @@ export default function Register() {
           message={errors.username}
         />
         <Field
-          title="Password"
+          title="Пароль"
           type="password"
-          placeholder="Type your password"
+          placeholder="Введите password"
           icon="lock"
           name="password"
           value={values.password}
@@ -80,7 +77,7 @@ export default function Register() {
           message={errors.password}
         />
         <Field
-          title="Confirm password"
+          title="Поддтвердите пароль"
           type="password"
           placeholder="Repeat your password"
           icon="confirm"
@@ -100,18 +97,12 @@ export default function Register() {
           Sign up
         </Button>
         <Footer
-          text="do you already have an account?"
-          to={{ url: '/login', title: 'Login' }}
+          text="Уже зарегестрированы?"
+          to={{ url: '/login', title: 'Войти' }}
         />
       </Form>
     </AuthLayout>
   );
 }
 
-export const getServerSideProps = withNotAuthSS(async ({ locale }) => {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['common']))
-    }
-  };
-});
+export const getServerSideProps = withNotAuthSS();

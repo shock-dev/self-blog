@@ -12,7 +12,7 @@ const Home = ({
   posts
 }: HomeProps) => {
   return (
-    <ContentLayout title="Home">
+    <ContentLayout title="Главная">
       {posts.map((post) =>
         <Post
           key={post._id}
