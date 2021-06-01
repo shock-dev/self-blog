@@ -7,8 +7,12 @@ class AuthApi {
     return data;
   }
 
-  getMe = async () => {
-    const { data } = await axios.get(`/auth/me`);
+  getMe = async (token: string) => {
+    const { data } = await axios.get(`/auth/me`, {
+      headers: {
+        cookie: `authToken=${token}`
+      }
+    });
     return data;
   }
 

@@ -24,10 +24,23 @@ function* fetchLogin(action): SagaIterator {
   }
 }
 
-function* fetchLogout(action): SagaIterator {
+function* fetchUserInfo(action) {
   try {
-    yield call(AuthApi.logout, action.payload);
+    const { data } = yield call(AuthApi.getMe, action.payload);
+    yield put(setUserInfo(data));
+  } catch (e) {
+    const { data } = e.response.data;
+    if (data) {
+      yield put(setError(data));
+    } else {
+      yield put(setError('Something went wrong, try again'));
+    }
+  }
+}
 
+function* fetchLogout(): SagaIterator {
+  try {
+    yield call(AuthApi.logout);
     yield put(logoutSuccess());
   } catch (e) {
     const { message } = e.response.data;
@@ -42,7 +55,8 @@ function* fetchLogout(action): SagaIterator {
 
 function* authSaga() {
   yield takeLatest(AuthActionType.FETCH_LOGIN, fetchLogin);
-  yield takeLatest(AuthActionType.LOGOUT_REQUEST, fetchLogout);
+  yield takeLatest(AuthActionType.FETCH_USER_INFO, fetchUserInfo);
+  yield takeLatest(AuthActionType.FETCH_LOGOUT, fetchLogout);
 }
 
 export default authSaga;
