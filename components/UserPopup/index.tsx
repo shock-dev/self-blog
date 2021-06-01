@@ -1,31 +1,18 @@
 import React, { MutableRefObject, useRef, useState } from 'react';
 import Link from 'next/link';
 import useOutsideClick from '../../hooks/useOutsideClick';
-import { logoutRequest } from '../../store/auth/actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import styles from './UserPopup.module.scss';
 import { selectAuth } from '../../store/auth/selectors';
 import Avatar from '../Avatar';
 
 const UserPopup = () => {
-  const dispatch = useDispatch();
-  const router = useRouter();
   const user = useSelector(selectAuth).data;
   const [visible, setVisible] = useState(false);
   const ref = useRef() as MutableRefObject<HTMLUListElement>;
 
   const toggleVisible = (): void => {
     setVisible(!visible);
-  };
-
-  const logoutHandler = async () => {
-    try {
-      await dispatch(logoutRequest());
-      router.replace('/login');
-    } catch (e) {
-      alert(e.message);
-    }
   };
 
   useOutsideClick(ref, () => {
@@ -73,15 +60,14 @@ const UserPopup = () => {
             </Link>
           </li>
           <li>
-            <button
-              className={styles.link}
-              onClick={logoutHandler}
-            >
-              <svg className={styles.svg}>
-                <use href={'/images/[popup].svg#logout'} />
-              </svg>
-              Logout
-            </button>
+            <Link href={`/user/logout`}>
+              <a className={styles.link}>
+                <svg className={styles.svg}>
+                  <use href={'/images/[popup].svg#logout'} />
+                </svg>
+                Logout
+              </a>
+            </Link>
           </li>
         </ul>
       )}
