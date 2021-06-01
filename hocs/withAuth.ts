@@ -1,15 +1,13 @@
-import { GetServerSidePropsContext } from 'next';
 import Cookies from 'nookies';
-import axios from '../core/axios';
-import { wrapper } from '../store';
-import { Store } from 'redux';
-import { RootState } from '../store/types';
-import { setIsAuth, setUserInfo } from '../store/auth/actions';
+import { SagaStore, wrapper } from '../store';
+import { fetchUserInfo } from '../store/auth/actions';
+import { GetServerSidePropsContext } from 'next';
+import { END } from 'redux-saga';
 
 const withAuthSS = (callback = undefined) => {
-  return wrapper.getServerSideProps(async (context: GetServerSidePropsContext & { store: Store<RootState>; }) => {
+  return wrapper.getServerSideProps(async (ctx: GetServerSidePropsContext & { store: SagaStore }) => {
     try {
-      const cookie = Cookies.get(context);
+      const cookie = Cookies.get(ctx);
 
       if (!cookie.authToken) {
         return {
@@ -20,17 +18,13 @@ const withAuthSS = (callback = undefined) => {
         };
       }
 
-      const { data: { data: user } } = await axios.get('/auth/me', {
-        headers: {
-          cookie: `authToken=${cookie.authToken}`
-        }
-      });
+      ctx.store.dispatch(fetchUserInfo(cookie.authToken));
+      ctx.store.dispatch(END);
 
-      context.store.dispatch(setUserInfo(user));
-      context.store.dispatch(setIsAuth(true));
+      await ctx.store.sagaTask.toPromise();
 
       if (callback) {
-        return await callback(context, user);
+        return await callback(ctx);
       }
 
       return {
