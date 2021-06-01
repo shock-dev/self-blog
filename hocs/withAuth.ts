@@ -30,11 +30,7 @@ const withAuthSS = (callback = undefined) => {
       context.store.dispatch(setIsAuth(true));
 
       if (callback) {
-        return {
-          props: {
-            ...((await callback(context, user)).props || {})
-          }
-        };
+        return await callback(context, user);
       }
 
       return {
