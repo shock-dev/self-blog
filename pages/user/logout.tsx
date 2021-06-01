@@ -1,9 +1,11 @@
-import withAuthSS from '../../hocs/withAuth';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchLogout } from '../../store/auth/actions';
-import { selectIsAuth } from '../../store/auth/selectors';
+import React, { useEffect } from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from '../../styles/pages/Logout.module.scss';
+import withAuthSS from '../../hocs/withAuth';
+import { logoutRequest } from '../../store/auth/actions';
+import { selectIsAuth } from '../../store/auth/selectors';
 
 const Logout = () => {
   const dispatch = useDispatch();
@@ -11,14 +13,31 @@ const Logout = () => {
   const isAuth = useSelector(selectIsAuth);
 
   useEffect(() => {
-    dispatch(fetchLogout());
+    dispatch(logoutRequest());
   }, []);
 
   useEffect(() => {
     router.replace('/login');
   }, [isAuth]);
 
-  return null;
+  return (
+    <div className={styles.wrapper}>
+      <Head>
+        <title>Подождите, мы выходим..</title>
+      </Head>
+      <div className={styles.blog}>
+        <h4 className={styles.title}>
+          Подождите, мы выходим..
+        </h4>
+        <div className={styles.ldsRing}>
+          <div />
+          <div />
+          <div />
+          <div />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export const getServerSideProps = withAuthSS();
