@@ -7,7 +7,7 @@ export const fetchLogin = (payload: LoginFormInputs) => action(AuthActionType.FE
 
 export const fetchUserInfo = (token: string) => action(AuthActionType.FETCH_USER_INFO, token);
 
-export const fetchLogout = () => action(AuthActionType.FETCH_LOGOUT);
+export const logoutRequest = () => action(AuthActionType.LOGOUT_REQUEST);
 
 export const logoutSuccess = () => action(AuthActionType.LOGOUT_SUCCESS);
 
