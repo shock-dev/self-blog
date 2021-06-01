@@ -1,27 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Profile.module.scss';
 import Input from '../Input';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectAuth } from '../../../store/auth/selectors';
 import Button from '../../Button';
-import axios from '../../../core/axios';
-import { setUserInfo } from '../../../store/auth/actions';
 import Avatar from '../../Avatar';
 
-const uploadFile = async (file: File) => {
-  const formData = new FormData();
-  formData.append('avatar', file);
-
-  const { data } = await axios.post('/users/avatar', formData, {
-    headers: { 'Content-Type': 'multipart/form-data' }
-  });
-
-  return data;
-};
-
 const Profile = () => {
-  const dispatch = useDispatch();
   const user = useSelector(selectAuth).data;
+  const [avatarUrl, setAvatarUrl] = useState<string>(user.avatarUrl);
   const inputFileRef = React.useRef<HTMLInputElement>(null);
 
   const handleChangeImage = async (event: Event) => {
@@ -29,8 +16,8 @@ const Profile = () => {
     const file = target.files[0];
 
     if (file) {
-      const { data } = await uploadFile(file);
-      dispatch(setUserInfo(data));
+      const imageUrl = URL.createObjectURL(file);
+      setAvatarUrl(imageUrl);
     }
   };
 
@@ -61,7 +48,7 @@ const Profile = () => {
         </div>
         <div>
           <Avatar
-            url={user.avatarUrl}
+            url={avatarUrl}
             type="circle"
             additionalStyles={{ marginBottom: '20px' }}
             alt={`Avatar of ${user.username}`}
