@@ -56,7 +56,7 @@ function* fetchLogout(): SagaIterator {
 function* authSaga() {
   yield takeLatest(AuthActionType.FETCH_LOGIN, fetchLogin);
   yield takeLatest(AuthActionType.FETCH_USER_INFO, fetchUserInfo);
-  yield takeLatest(AuthActionType.FETCH_LOGOUT, fetchLogout);
+  yield takeLatest(AuthActionType.LOGOUT_REQUEST, fetchLogout);
 }
 
 export default authSaga;
