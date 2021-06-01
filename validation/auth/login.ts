@@ -1,12 +1,13 @@
 import * as Yup from 'yup';
+import { ValidationConfig } from '../config';
 
 export default Yup.object({
   email: Yup
     .string()
-    .email('Incorrect email')
-    .required('Required'),
+    .email(ValidationConfig.Email)
+    .required(ValidationConfig.Required),
+
   password: Yup
     .string()
-    .min(6, 'Password must be more than 6 characters')
-    .required('Required')
+    .required(ValidationConfig.Required)
 });
