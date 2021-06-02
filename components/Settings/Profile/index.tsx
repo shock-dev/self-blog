@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectAuth } from '../../../store/auth/selectors';
 import Button from '../../Button';
 import Avatar from '../../Avatar';
+import Birthday from '../Birthday';
 
 const Profile = () => {
   const user = useSelector(selectAuth).data;
@@ -42,6 +43,7 @@ const Profile = () => {
             title="Username"
             value={user.username}
           />
+          <Birthday />
           <Button color="green">
             Применить
           </Button>
