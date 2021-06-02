@@ -77,9 +77,9 @@ export default function Register() {
           message={errors.password}
         />
         <Field
-          title="Поддтвердите пароль"
+          title="Подтверждение пароля"
           type="password"
-          placeholder="Repeat your password"
+          placeholder="Подтвердите ваш пароль"
           icon="confirm"
           name="passwordConfirm"
           value={values.passwordConfirm}
@@ -94,7 +94,7 @@ export default function Register() {
           around
           full
         >
-          Sign up
+          Зарегестрироваться
         </Button>
         <Footer
           text="Уже зарегестрированы?"
