@@ -23,6 +23,17 @@ const user = produce((draft: Draft<AuthState>, action) => {
       draft.data = null;
       break;
 
+    case AuthActionType.REGISTER_REQUEST:
+      draft.error = null;
+      draft.isLoading = true;
+      break;
+
+    case AuthActionType.REGISTER_SUCCESS:
+      draft.error = null;
+      draft.isLoading = false;
+      draft.isAuth = true;
+      break;
+
     case AuthActionType.SET_USER_INFO:
       draft.data = action.payload;
       draft.isAuth = true;
@@ -32,6 +43,11 @@ const user = produce((draft: Draft<AuthState>, action) => {
 
     case AuthActionType.SET_ERROR:
       draft.error = action.payload;
+      draft.isLoading = false;
+      break;
+
+    case AuthActionType.CLEAR_FIELDS:
+      draft.error = null;
       draft.isLoading = false;
       break;
 

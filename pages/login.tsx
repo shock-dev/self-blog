@@ -7,7 +7,7 @@ import Field from '../components/Form/Field';
 import Button from '../components/Button';
 import Footer from '../components/Form/Footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchLogin } from '../store/auth/actions';
+import { clearFields, fetchLogin } from '../store/auth/actions';
 import withNotAuthSS from '../hocs/withNotAuth';
 import { useRouter } from 'next/router';
 import { selectAuthError, selectIsAuth, selectIsLoading } from '../store/auth/selectors';
@@ -47,6 +47,12 @@ export default function Login() {
     if (error !== null) {
       alert.error(error);
     }
+
+    return () => {
+      if (!isAuth) {
+        dispatch(clearFields());
+      }
+    };
   }, [error]);
 
   useEffect(() => {

@@ -2,10 +2,15 @@ import { action } from 'typesafe-actions';
 import { AuthActionType } from './types';
 import { LoginFormInputs } from '../../pages/login';
 import { IUser } from '../../types/user';
+import { RegisterFormInputs } from '../../pages/register';
 
 export const fetchLogin = (payload: LoginFormInputs) => action(AuthActionType.FETCH_LOGIN, payload);
 
 export const fetchUserInfo = (token: string) => action(AuthActionType.FETCH_USER_INFO, token);
+
+export const registerRequest = (payload: RegisterFormInputs) => action(AuthActionType.REGISTER_REQUEST, payload);
+
+export const registerSuccess = () => action(AuthActionType.REGISTER_SUCCESS);
 
 export const logoutRequest = () => action(AuthActionType.LOGOUT_REQUEST);
 
@@ -16,3 +21,5 @@ export const setUserInfo = (payload: IUser) => action(AuthActionType.SET_USER_IN
 export const setIsAuth = (payload: boolean) => action(AuthActionType.SET_IS_AUTH, payload);
 
 export const setError = (payload: string) => action(AuthActionType.SET_ERROR, payload);
+
+export const clearFields = () => action(AuthActionType.CLEAR_FIELDS);
