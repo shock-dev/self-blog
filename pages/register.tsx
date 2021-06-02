@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import validationSchema from '../validation/auth/register';
 import AuthLayout from '../layouts/AuthLayout';
@@ -7,8 +7,13 @@ import Field from '../components/Form/Field';
 import Button from '../components/Button';
 import Footer from '../components/Form/Footer';
 import withNotAuthSS from '../hocs/withNotAuth';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearFields, registerRequest } from '../store/auth/actions';
+import { selectAuthError, selectIsAuth, selectIsLoading } from '../store/auth/selectors';
+import { useAlert } from 'react-alert';
+import { useRouter } from 'next/router';
 
-interface FormInputs {
+export interface RegisterFormInputs {
   email: string
   username: string
   password: string
@@ -16,6 +21,12 @@ interface FormInputs {
 }
 
 export default function Register() {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const alert = useAlert();
+  const isAuth = useSelector(selectIsAuth);
+  const error = useSelector(selectAuthError);
+  const isLoading = useSelector(selectIsLoading);
   const {
     handleSubmit,
     handleChange,
@@ -23,7 +34,7 @@ export default function Register() {
     errors,
     touched,
     handleBlur
-  } = useFormik<FormInputs>({
+  } = useFormik<RegisterFormInputs>({
     initialValues: {
       email: '',
       username: '',
@@ -31,10 +42,28 @@ export default function Register() {
       passwordConfirm: ''
     },
     validationSchema,
-    onSubmit: (data) => {
-      console.log(data);
+    onSubmit: async (data) => {
+      dispatch(registerRequest(data));
     }
   });
+
+  useEffect(() => {
+    if (error !== null) {
+      alert.error(error);
+    }
+
+    return () => {
+      if (!isAuth) {
+        dispatch(clearFields());
+      }
+    };
+  }, [error]);
+
+  useEffect(() => {
+    if (isAuth) {
+      router.replace('/');
+    }
+  }, [isAuth]);
 
   return (
     <AuthLayout title="Регистрация">
@@ -91,6 +120,7 @@ export default function Register() {
         <Button
           type="submit"
           color="green"
+          loading={isLoading}
           around
           full
         >
