@@ -1,14 +1,30 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from '../../Select';
 import { availableDays, availableYears, months } from '../../../resources/birthday';
 import styles from './Birthday.module.scss';
+import { BirthdayType } from '../../../pages/register';
 
-const Birthday = () => {
+interface BirthdayProps {
+  day: number
+  month: number
+  year: number
+  onChange: (date: BirthdayType) => any
+}
+
+const Birthday = ({
+  day,
+  month,
+  year,
+  onChange
+}: BirthdayProps) => {
   const allYears = availableYears();
-  const [yearOption, setYearOption] = useState(allYears.find((i) => i.value === 2000));
-  const [monthOption, setMonthOption] = useState(months[0]);
+  const [yearOption, setYearOption] = useState({ label: year, value: year });
+  const [monthOption, setMonthOption] = useState({
+    label: months.find((i) => i.value === month).label,
+    value: month
+  });
   const days = availableDays(yearOption.value, monthOption.value);
-  const [daysOption, setDaysOption] = useState(days[0]);
+  const [daysOption, setDaysOption] = useState({ label: day, value: day });
 
   const handleChangeDay = (selectedOption) => {
     setDaysOption(selectedOption);
@@ -22,14 +38,22 @@ const Birthday = () => {
     setYearOption(selectedOption);
   };
 
-  const miniSelectStyle = {
-    width: '180px'
-  };
+  const generateWidth = (w: number) => ({
+    width: `${w}px`
+  });
+
+  useEffect(() => {
+    onChange({
+      year: yearOption.value,
+      month: monthOption.value,
+      day: daysOption.value
+    });
+  }, [yearOption, monthOption, daysOption]);
 
   return (
     <div>
       <span className={styles.title}>
-        День рождения:
+        Дата рождения:
       </span>
       <div className={styles.selectors}>
         <Select
@@ -37,7 +61,7 @@ const Birthday = () => {
           selectedOption={daysOption}
           handleChange={handleChangeDay}
           options={days}
-          styles={{ marginRight: '15px', ...miniSelectStyle }}
+          styles={{ marginRight: '15px', ...generateWidth(165) }}
         />
         <Select
           id="month"
@@ -51,7 +75,7 @@ const Birthday = () => {
           selectedOption={yearOption}
           handleChange={handleChangeYear}
           options={allYears}
-          styles={{ ...miniSelectStyle }}
+          styles={{ ...generateWidth(205) }}
         />
       </div>
     </div>
