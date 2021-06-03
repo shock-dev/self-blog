@@ -1,51 +1,72 @@
-import React, { useEffect } from 'react';
-import { useFormik } from 'formik';
-import validationSchema from '../validation/auth/register';
+import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import AuthLayout from '../layouts/AuthLayout';
-import Form from '../components/Form';
-import Field from '../components/Form/Field';
-import Button from '../components/Button';
-import Footer from '../components/Form/Footer';
 import withNotAuthSS from '../hocs/withNotAuth';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearFields, registerRequest } from '../store/auth/actions';
-import { selectAuthError, selectIsAuth, selectIsLoading } from '../store/auth/selectors';
+import { clearFields } from '../store/auth/actions';
+import { selectAuthError, selectIsAuth } from '../store/auth/selectors';
 import { useAlert } from 'react-alert';
 import { useRouter } from 'next/router';
+import InfoStep from '../components/RegisterSteps/InfoStep';
+import PasswordStep from '../components/RegisterSteps/PasswordStep';
 
-export interface RegisterFormInputs {
+const RegisterSteps = {
+  0: InfoStep,
+  1: PasswordStep
+};
+
+interface RegisterContextProps {
+  onNextStep: () => void;
+  onBackStep: () => void;
+  step: number,
+  userData: RegisterFormInputs
+  setUserData: Dispatch<SetStateAction<RegisterFormInputs>>
+}
+
+export const RegisterContext = createContext({} as RegisterContextProps);
+
+export interface InfoStepFormInputs {
   email: string
+  fullname: string
   username: string
+}
+
+export interface PasswordStepFormInputs {
   password: string
   passwordConfirm: string
 }
 
+export type BirthdayType = {
+  day: number
+  month: number
+  year: number
+}
+
+export type RegisterFormInputs = InfoStepFormInputs & PasswordStepFormInputs & { birthday: BirthdayType }
+
 export default function Register() {
   const dispatch = useDispatch();
+  const [step, setStep] = React.useState(0);
+  const CurrentStep = RegisterSteps[step];
   const router = useRouter();
   const alert = useAlert();
   const isAuth = useSelector(selectIsAuth);
   const error = useSelector(selectAuthError);
-  const isLoading = useSelector(selectIsLoading);
-  const {
-    handleSubmit,
-    handleChange,
-    values,
-    errors,
-    touched,
-    handleBlur
-  } = useFormik<RegisterFormInputs>({
-    initialValues: {
-      email: '',
-      username: '',
-      password: '',
-      passwordConfirm: ''
-    },
-    validationSchema,
-    onSubmit: async (data) => {
-      dispatch(registerRequest(data));
-    }
+  const [userData, setUserData] = useState<RegisterFormInputs>({
+    email: '',
+    fullname: '',
+    username: '',
+    birthday: { day: 1, month: 0, year: 2000 },
+    password: '',
+    passwordConfirm: ''
   });
+
+  const onNextStep = () => {
+    setStep((prev) => prev + 1);
+  };
+
+  const onBackStep = () => {
+    setStep((prev) => prev - 1);
+  };
 
   useEffect(() => {
     if (error !== null) {
@@ -67,70 +88,9 @@ export default function Register() {
 
   return (
     <AuthLayout title="Регистрация">
-      <Form
-        title="Регистрация"
-        onSubmit={handleSubmit}
-      >
-        <Field
-          title="Email"
-          placeholder="Введите email адрес"
-          icon="email"
-          name="email"
-          value={values.email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={touched.email && !!errors.email}
-          message={errors.email}
-        />
-        <Field
-          title="Username"
-          placeholder="Введите username"
-          icon="user"
-          name="username"
-          value={values.username}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={touched.username && !!errors.username}
-          message={errors.username}
-        />
-        <Field
-          title="Пароль"
-          type="password"
-          placeholder="Введите password"
-          icon="lock"
-          name="password"
-          value={values.password}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={touched.password && !!errors.password}
-          message={errors.password}
-        />
-        <Field
-          title="Подтверждение пароля"
-          type="password"
-          placeholder="Подтвердите ваш пароль"
-          icon="confirm"
-          name="passwordConfirm"
-          value={values.passwordConfirm}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={touched.passwordConfirm && !!errors.passwordConfirm}
-          message={errors.passwordConfirm}
-        />
-        <Button
-          type="submit"
-          color="green"
-          loading={isLoading}
-          around
-          full
-        >
-          Зарегестрироваться
-        </Button>
-        <Footer
-          text="Уже зарегестрированы?"
-          to={{ url: '/login', title: 'Войти' }}
-        />
-      </Form>
+      <RegisterContext.Provider value={{ step, onNextStep, onBackStep, userData, setUserData }}>
+        <CurrentStep />
+      </RegisterContext.Provider>
     </AuthLayout>
   );
 }
