@@ -4,11 +4,13 @@ import styles from './Input.module.scss';
 interface InputProps {
   title: string
   value: string
+  placeholder?: string
 }
 
 const Input = ({
   title,
-  value
+  value,
+  placeholder = ''
 }: InputProps) => {
   return (
     <label className={styles.label}>
@@ -19,6 +21,7 @@ const Input = ({
         className={styles.input}
         type="text"
         value={value}
+        placeholder={placeholder}
       />
     </label>
   );
