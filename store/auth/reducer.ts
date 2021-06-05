@@ -32,6 +32,7 @@ const user = produce((draft: Draft<AuthState>, action) => {
       draft.error = null;
       draft.isLoading = false;
       draft.isAuth = true;
+      draft.data = action.payload;
       break;
 
     case AuthActionType.SET_USER_INFO:
