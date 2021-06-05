@@ -1,17 +1,19 @@
-import React, { createContext, Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { createContext, Dispatch, FormEvent, SetStateAction, useEffect, useState } from 'react';
 import AuthLayout from '../layouts/AuthLayout';
 import withNotAuthSS from '../hocs/withNotAuth';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearFields } from '../store/auth/actions';
+import { clearFields, registerRequest } from '../store/auth/actions';
 import { selectAuthError, selectIsAuth } from '../store/auth/selectors';
 import { useAlert } from 'react-alert';
 import { useRouter } from 'next/router';
 import InfoStep from '../components/RegisterSteps/InfoStep';
 import PasswordStep from '../components/RegisterSteps/PasswordStep';
+import ResultStep from '../components/RegisterSteps/ResultStep';
 
 const RegisterSteps = {
   0: InfoStep,
-  1: PasswordStep
+  1: PasswordStep,
+  2: ResultStep
 };
 
 interface RegisterContextProps {
@@ -20,6 +22,7 @@ interface RegisterContextProps {
   step: number,
   userData: RegisterFormInputs
   setUserData: Dispatch<SetStateAction<RegisterFormInputs>>
+  registerHandler: (e: FormEvent<HTMLFormElement>) => any
 }
 
 export const RegisterContext = createContext({} as RegisterContextProps);
@@ -68,6 +71,11 @@ export default function Register() {
     setStep((prev) => prev - 1);
   };
 
+  const registerHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await dispatch(registerRequest(userData));
+  };
+
   useEffect(() => {
     if (error !== null) {
       alert.error(error);
@@ -86,9 +94,18 @@ export default function Register() {
     }
   }, [isAuth]);
 
+  const ContextValue = {
+    step,
+    onNextStep,
+    onBackStep,
+    userData,
+    setUserData,
+    registerHandler
+  };
+
   return (
     <AuthLayout title="Регистрация">
-      <RegisterContext.Provider value={{ step, onNextStep, onBackStep, userData, setUserData }}>
+      <RegisterContext.Provider value={ContextValue}>
         <CurrentStep />
       </RegisterContext.Provider>
     </AuthLayout>

@@ -7,7 +7,7 @@ import { PasswordStepValidation } from '../../validation/auth/register';
 import { PasswordStepFormInputs, RegisterContext } from '../../pages/register';
 
 const PasswordStep = () => {
-  const { onBackStep, userData, setUserData } = useContext(RegisterContext);
+  const { onBackStep, userData, setUserData, onNextStep } = useContext(RegisterContext);
   const {
     handleSubmit,
     handleChange,
@@ -21,8 +21,12 @@ const PasswordStep = () => {
       passwordConfirm: userData.passwordConfirm
     },
     validationSchema: PasswordStepValidation,
-    onSubmit: () => {
-      console.log('test');
+    onSubmit: (data: PasswordStepFormInputs) => {
+      setUserData({
+        ...userData,
+        ...data
+      });
+      onNextStep();
     }
   });
 
@@ -36,7 +40,7 @@ const PasswordStep = () => {
 
   return (
     <Form
-      title="Регистрация"
+      title="🔒 Защита аккаунта"
       onSubmit={handleSubmit}
     >
       <Field
@@ -69,15 +73,15 @@ const PasswordStep = () => {
         around
         full
       >
-        Зарегестрироваться
+        Следующий шаг
       </Button>
       <Button
         color="blue"
         customStyles={{ marginTop: '10px' }}
+        onClick={handleBack}
         around
         outline
         full
-        onClick={handleBack}
       >
         Назад
       </Button>

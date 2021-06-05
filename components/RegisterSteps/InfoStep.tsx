@@ -44,7 +44,7 @@ const infoStep = () => {
 
   return (
     <Form
-      title="Регистрация"
+      title="📝 Регистрация"
       onSubmit={handleSubmit}
     >
       <Field

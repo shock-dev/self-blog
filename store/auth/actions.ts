@@ -10,7 +10,7 @@ export const fetchUserInfo = (token: string) => action(AuthActionType.FETCH_USER
 
 export const registerRequest = (payload: RegisterFormInputs) => action(AuthActionType.REGISTER_REQUEST, payload);
 
-export const registerSuccess = () => action(AuthActionType.REGISTER_SUCCESS);
+export const registerSuccess = (data: IUser) => action(AuthActionType.REGISTER_SUCCESS, data);
 
 export const logoutRequest = () => action(AuthActionType.LOGOUT_REQUEST);
 
