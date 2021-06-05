@@ -44,8 +44,13 @@ function* fetchUserInfo(action) {
 
 function* fetchRegister(action): SagaIterator {
   try {
-    yield call(AuthApi.register, action.payload);
-    yield put(registerSuccess());
+    const { year, month, day } = action.payload.birthday;
+    const payload = {
+      ...action.payload,
+      birthday: new Date(year, month, day).toLocaleDateString()
+    };
+    const { data } = yield call(AuthApi.register, payload);
+    yield put(registerSuccess(data));
   } catch (e) {
     const { message } = e.response.data;
 
