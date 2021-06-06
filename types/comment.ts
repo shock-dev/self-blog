@@ -4,4 +4,6 @@ export interface IComment {
   _id: string
   text: string
   user: IUser
+  createdAt: Date
+  updatedAt: Date
 }

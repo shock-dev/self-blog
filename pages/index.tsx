@@ -23,6 +23,7 @@ const Home = ({
           views={post.views}
           withFooter={true}
           isShortText={true}
+          createdAt={post.createdAt}
           commentsCount={post.comments.length}
           user={post.user}
         />
