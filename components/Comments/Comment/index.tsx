@@ -3,15 +3,18 @@ import Link from 'next/link';
 import styles from './Comment.module.scss';
 import { IUser } from '../../../types/user';
 import Avatar from '../../Avatar';
+import { getDifference } from '../../../utils/reformDate';
 
 interface CommentProps {
   text: string
   user: IUser
+  createdAt: Date
 }
 
 const Comment = ({
   text,
-  user
+  user,
+  createdAt
 }: CommentProps) => {
   return (
     <div className={styles.comment}>
@@ -30,7 +33,7 @@ const Comment = ({
           </a>
         </Link>
         <div className={styles.time}>
-          Вчера в 15:40
+          {getDifference(createdAt)} назад
         </div>
       </div>
       <p className={styles.text}>

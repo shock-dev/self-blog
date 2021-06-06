@@ -4,6 +4,7 @@ import cn from 'classnames';
 import styles from './Post.module.scss';
 import { IUser } from '../../types/user';
 import Avatar from '../Avatar';
+import { getDifference } from '../../utils/reformDate';
 
 interface PostProps {
   id: string
@@ -14,6 +15,7 @@ interface PostProps {
   withFooter?: boolean
   commentsCount?: number
   isShortText?: boolean
+  createdAt: Date
   user: IUser
 }
 
@@ -26,6 +28,7 @@ export default function Post({
   withFooter = false,
   commentsCount,
   isShortText = false,
+  createdAt,
   user
 }: PostProps) {
   const postUrl = `/post/${id}`;
@@ -45,7 +48,7 @@ export default function Post({
             <a className={styles.username}>{user.username}</a>
           </Link>
           <div className={styles.time}>
-            Вчера в 15:40
+            {getDifference(createdAt)} назад
           </div>
         </div>
       </div>

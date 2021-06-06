@@ -25,6 +25,7 @@ const PostPage = ({ post }: PostProps) => {
         description={post.description}
         imageUrl={post.imageUrl}
         views={post.views}
+        createdAt={post.createdAt}
         user={post.user}
       />
       {comments && (
@@ -34,6 +35,7 @@ const PostPage = ({ post }: PostProps) => {
               key={comment._id}
               text={comment.text}
               user={comment.user}
+              createdAt={comment.createdAt}
             />
           )}
         </Comments>
