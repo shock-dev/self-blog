@@ -9,4 +9,6 @@ export interface IPost {
   views: number
   comments: IComment[]
   user: IUser
+  createdAt: Date
+  updatedAt: Date
 }
