@@ -1,9 +1,25 @@
 .wrapper {
   overflow: hidden;
+  background-color: #ff913a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .avatar {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  color: #fff;
+}
+
+.svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.letter {
+  transform: scale(2.6);
+  font-weight: 500;
 }
