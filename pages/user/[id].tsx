@@ -21,7 +21,7 @@ const UserPage = ({
           <Avatar
             url={user.avatarUrl}
             type="circle"
-            alt={`Avatar of ${user.username}`}
+            username={user.username}
           />
           <h4 className={styles.username}>
             {user.username}

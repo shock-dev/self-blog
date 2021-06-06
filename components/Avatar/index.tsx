@@ -6,8 +6,8 @@ interface AvatarProps {
   width?: number
   height?: number
   type?: 'circle' | 'square'
-  alt: string
   additionalStyles?: CSSProperties
+  username: string
 }
 
 const Avatar = ({
@@ -33,7 +33,7 @@ const Avatar = ({
       <img
         className={styles.avatar}
         src={url}
-        alt={alt}
+        alt={`Аватарка ${username}`}
       />
     </div>
   );

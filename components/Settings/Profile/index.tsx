@@ -56,7 +56,7 @@ const Profile = () => {
             url={avatarUrl}
             type="circle"
             additionalStyles={{ marginBottom: '20px' }}
-            alt={`Аватар ${user.username}`}
+            username={user.username}
           />
           <input type="file" ref={inputFileRef} />
         </div>

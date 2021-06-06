@@ -31,7 +31,7 @@ const UserPopup = () => {
           url={user.avatarUrl}
           width={40}
           height={40}
-          alt={`Аватар ${user.username}`}
+          username={user.username}
         />
       </button>
       {visible && (

@@ -64,7 +64,7 @@ export default function Login() {
   return (
     <AuthLayout title="Вход">
       <Form
-        title="Вход"
+        title="🚪 Вход"
         onSubmit={handleSubmit}
       >
         <Field
@@ -100,7 +100,7 @@ export default function Login() {
           Войти
         </Button>
         <Footer
-          text="Или вы можете зарегестрироваться"
+          text="Или вы можете зарегистрироваться"
           to={{ url: '/register', title: 'Регистрация' }}
         />
       </Form>
