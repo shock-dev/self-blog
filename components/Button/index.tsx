@@ -50,6 +50,10 @@ const Button = ({
   };
 
   const mouseOverHandler = () => {
+    if (disabled) {
+      return;
+    }
+
     if (outline) {
       setTextColor('#fff');
       setBgColor(Palette[color]);
@@ -60,6 +64,10 @@ const Button = ({
   };
 
   const mouseLeaveHandler = () => {
+    if (disabled) {
+      return;
+    }
+
     if (outline) {
       setTextColor(Palette[color]);
       setBgColor('transparent');
