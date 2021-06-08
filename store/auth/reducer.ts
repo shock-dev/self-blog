@@ -42,8 +42,14 @@ const user = produce((draft: Draft<AuthState>, action) => {
       draft.isLoading = false;
       break;
 
+    case AuthActionType.ADD_AVATAR_REQUEST:
+      draft.error = null;
+      draft.isLoading = true;
+      break;
+
     case AuthActionType.ADD_AVATAR_SUCCESS:
       draft.data = action.payload;
+      draft.isLoading = false;
       draft.error = null;
       break;
 

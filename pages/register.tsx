@@ -71,9 +71,9 @@ export default function Register() {
     setStep((prev) => prev - 1);
   };
 
-  const registerHandler = async (e: FormEvent<HTMLFormElement>) => {
+  const registerHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await dispatch(registerRequest(userData));
+    dispatch(registerRequest(userData));
   };
 
   useEffect(() => {
