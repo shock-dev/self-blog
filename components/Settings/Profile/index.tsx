@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styles from './Profile.module.scss';
 import Input from '../Input';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAuth } from '../../../store/auth/selectors';
+import { selectAuth, selectAuthError, selectIsLoading } from '../../../store/auth/selectors';
 import Button from '../../Button';
 import Avatar from '../../Avatar';
 import Upload from '../../Upload';
-import { addAvatarRequest } from '../../../store/auth/actions';
+import { addAvatarRequest, setError } from '../../../store/auth/actions';
+import { useAlert } from 'react-alert';
+import { checkFIleExt } from '../../../utils/checkFIleExt';
 
 interface AvatarProps {
   url: string
@@ -15,25 +17,32 @@ interface AvatarProps {
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const alert = useAlert();
   const user = useSelector(selectAuth).data;
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectAuthError);
   const [avatarUrl, setAvatarUrl] = useState<AvatarProps>({
     url: user.avatarUrl,
     file: null
   });
   const [avatarChanged, setAvatarChanged] = useState(false);
+  const [avatarLoading, setAvatarLoading] = useState(false);
+  const [infoLoading] = useState(false);
   const inputFileRef = React.useRef<HTMLInputElement>(null);
 
   const handleChangeImage = async (event: Event) => {
     const target = event.target as HTMLInputElement;
     const file = target.files[0];
 
-    if (file) {
+    if (file && checkFIleExt(file)) {
       const imageUrl = URL.createObjectURL(file);
       setAvatarUrl({
         url: imageUrl,
         file
       });
       setAvatarChanged(true);
+    } else {
+      dispatch(setError('Выберете другой тип файла. Поддерживаются только jpeg, jpg, png'));
     }
   };
 
@@ -43,9 +52,17 @@ const Profile = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (error !== null) {
+      alert.error(error);
+    }
+  }, [error]);
+
   const uploadAvatarHandler = async () => {
     if (avatarUrl.url !== user.avatarUrl) {
+      setAvatarLoading(true);
       dispatch(addAvatarRequest(avatarUrl.file));
+      setAvatarChanged(false);
     }
   };
 
@@ -69,7 +86,10 @@ const Profile = () => {
             value={user?.fullname ?? ''}
             placeholder="Имя Фамилия"
           />
-          <Button color="green">
+          <Button
+            color="green"
+            loading={infoLoading && isLoading}
+          >
             Применить
           </Button>
         </div>
@@ -86,6 +106,7 @@ const Profile = () => {
               onClick={uploadAvatarHandler}
               customStyles={{ marginLeft: '5px' }}
               disabled={!avatarChanged}
+              loading={avatarLoading && isLoading}
               full
             >
               Загрузить
