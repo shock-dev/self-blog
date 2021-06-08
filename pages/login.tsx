@@ -38,8 +38,8 @@ export default function Login() {
       password: ''
     },
     validationSchema,
-    onSubmit: async (data) => {
-      await dispatch(fetchLogin(data));
+    onSubmit: (data) => {
+      dispatch(fetchLogin(data));
     }
   });
 
