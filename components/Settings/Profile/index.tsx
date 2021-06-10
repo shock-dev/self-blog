@@ -6,14 +6,23 @@ import { selectAuth, selectAuthError, selectIsLoading } from '../../../store/aut
 import Button from '../../Button';
 import Avatar from '../../Avatar';
 import Upload from '../../Upload';
-import { setError, setUserInfo } from '../../../store/auth/actions';
+import { setError, setUserInfo, updateUserRequest } from '../../../store/auth/actions';
 import { useAlert } from 'react-alert';
 import { checkFIleExt } from '../../../utils/checkFIleExt';
 import UserApi from '../../../api/users';
+import { useFormik } from 'formik';
+import { UpdateUserValidation } from '../../../validation/auth/update';
+import { compareObjs } from '../../../utils/compareObjs';
 
 interface AvatarProps {
   url: string
   file: File | null
+}
+
+export interface UpdateFormInputs {
+  email: string
+  username: string
+  fullname: string
 }
 
 const Profile = () => {
@@ -28,8 +37,32 @@ const Profile = () => {
   });
   const [avatarChanged, setAvatarChanged] = useState(false);
   const [avatarLoading, setAvatarLoading] = useState(false);
-  const [infoLoading] = useState(false);
   const inputFileRef = React.useRef<HTMLInputElement>(null);
+  const defaultUserData = {
+    email: user.email,
+    username: user.username,
+    fullname: user.fullname
+  };
+  const {
+    handleSubmit,
+    handleChange,
+    values,
+    handleBlur,
+    errors,
+    touched
+  } = useFormik<UpdateFormInputs>({
+    initialValues: {
+      email: user.email,
+      username: user.username,
+      fullname: user.fullname
+    },
+    validationSchema: UpdateUserValidation,
+    onSubmit: (data) => {
+      if (!compareObjs(defaultUserData, data)) {
+        dispatch(updateUserRequest(data));
+      }
+    }
+  });
 
   const uploadAvatar = async (file: File): Promise<void> => {
     try {
@@ -62,6 +95,15 @@ const Profile = () => {
     }
   };
 
+  const uploadAvatarHandler = async () => {
+    if (avatarUrl.url !== user.avatarUrl) {
+      setAvatarLoading(true);
+      await uploadAvatar(avatarUrl.file);
+      setAvatarLoading(false);
+      setAvatarChanged(false);
+    }
+  };
+
   useEffect(() => {
     if (inputFileRef.current) {
       inputFileRef.current.addEventListener('change', handleChangeImage);
@@ -74,42 +116,50 @@ const Profile = () => {
     }
   }, [error]);
 
-  const uploadAvatarHandler = async () => {
-    if (avatarUrl.url !== user.avatarUrl) {
-      setAvatarLoading(true);
-      await uploadAvatar(avatarUrl.file);
-      setAvatarLoading(false);
-      setAvatarChanged(false);
-    }
-  };
-
   return (
     <div>
       <h4 className={styles.header}>
         Изменить профиль
       </h4>
       <div className={styles.wrapper}>
-        <div className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <Input
+            name="email"
             title="Email"
-            value={user.email}
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.email && !!errors.email}
+            message={errors.email}
           />
           <Input
+            name="username"
             title="Username"
-            value={user.username}
+            value={values.username}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.username && !!errors.username}
+            message={errors.username}
           />
           <Input
+            name="fullname"
             title="Полное имя"
-            value={user?.fullname ?? ''}
-            placeholder="Имя Фамилия"
+            placeholder="Имя фамилия"
+            value={values.fullname}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.fullname && !!errors.fullname}
+            message={errors.fullname}
           />
           <Button
+            type="submit"
             color="green"
-            loading={infoLoading && isLoading}
+            loading={isLoading}
+            disabled={compareObjs(defaultUserData, values) || !!Object.keys(errors).length}
           >
             Применить
           </Button>
-        </div>
+        </form>
         <div>
           <Avatar
             url={avatarUrl.url}
@@ -118,7 +168,7 @@ const Profile = () => {
             username={user.username}
           />
           <div style={{ display: 'flex' }}>
-            <Upload onChange={handleChangeImage} ref={inputFileRef} />
+            <Upload onChange={handleChangeImage} uploadRef={inputFileRef} />
             <Button
               onClick={uploadAvatarHandler}
               customStyles={{ marginLeft: '5px' }}

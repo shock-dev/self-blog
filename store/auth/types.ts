@@ -17,6 +17,8 @@ export enum AuthActionType {
   LOGOUT_REQUEST = '@auth/FETCH_LOGOUT',
   LOGOUT_SUCCESS = '@auth/LOGOUT_SUCCESS',
 
+  UPDATE_USER_REQUEST = '@auth/UPDATE_USER_REQUEST',
+
   SET_USER_INFO = '@auth/SET_USER_INFO',
   SET_IS_AUTH = '@auth/SET_IS_AUTH',
   SET_ERROR = '@auth/SET_ERROR',

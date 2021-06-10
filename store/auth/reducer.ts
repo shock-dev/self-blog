@@ -35,6 +35,11 @@ const user = produce((draft: Draft<AuthState>, action) => {
       draft.data = action.payload;
       break;
 
+    case AuthActionType.UPDATE_USER_REQUEST:
+      draft.error = null;
+      draft.isLoading = true;
+      break;
+
     case AuthActionType.SET_USER_INFO:
       draft.data = action.payload;
       draft.isAuth = true;
