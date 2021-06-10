@@ -1,5 +1,6 @@
 .wrapper {
   display: flex;
+  align-items: flex-start;
 }
 
 .user {
@@ -45,21 +46,4 @@
   margin-top: 10px;
   font-family: inherit;
   font-weight: 500;
-}
-
-.info {
-  width: 100%;
-  background-color: #fff;
-  box-shadow: 0 1px 0 0 #e7e8ec, 0 0 0 1px #e7e8ec;
-  border-radius: 4px;
-  padding: 20px 30px;
-}
-
-.infoTop {
-  border-bottom: 1px solid #e6e6e6;
-  padding-bottom: 10px;
-}
-
-.time {
-  color: #868686;
 }
