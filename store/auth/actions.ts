@@ -3,6 +3,7 @@ import { AuthActionType } from './types';
 import { LoginFormInputs } from '../../pages/login';
 import { IUser } from '../../types/user';
 import { RegisterFormInputs } from '../../pages/register';
+import { UpdateFormInputs } from '../../components/Settings/Profile';
 
 export const fetchLogin = (payload: LoginFormInputs) => action(AuthActionType.FETCH_LOGIN, payload);
 
@@ -11,6 +12,8 @@ export const fetchUserInfo = (token: string) => action(AuthActionType.FETCH_USER
 export const registerRequest = (payload: RegisterFormInputs) => action(AuthActionType.REGISTER_REQUEST, payload);
 
 export const registerSuccess = (data: IUser) => action(AuthActionType.REGISTER_SUCCESS, data);
+
+export const updateUserRequest = (data: UpdateFormInputs) => action(AuthActionType.UPDATE_USER_REQUEST, data);
 
 export const logoutRequest = () => action(AuthActionType.LOGOUT_REQUEST);
 
