@@ -2,6 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 import { AuthActionType } from './types';
 import AuthApi from '../../api/auth';
+import UsersApi from '../../api/users';
 import {
   logoutSuccess,
   registerSuccess,
@@ -77,11 +78,27 @@ function* fetchLogout(): SagaIterator {
   }
 }
 
+function* fetchUpdateUser(action): SagaIterator {
+  try {
+    const { data } = yield call(UsersApi.update, action.payload);
+    yield put(setUserInfo(data));
+  } catch (e) {
+    const { message } = e.response.data;
+
+    if (message) {
+      yield put(setError(message));
+    } else {
+      yield put(setError('Something went wrong, try again'));
+    }
+  }
+}
+
 function* authSaga() {
   yield takeLatest(AuthActionType.FETCH_LOGIN, fetchLogin);
   yield takeLatest(AuthActionType.FETCH_USER_INFO, fetchUserInfo);
   yield takeLatest(AuthActionType.REGISTER_REQUEST, fetchRegister);
   yield takeLatest(AuthActionType.LOGOUT_REQUEST, fetchLogout);
+  yield takeLatest(AuthActionType.UPDATE_USER_REQUEST, fetchUpdateUser);
 }
 
 export default authSaga;
