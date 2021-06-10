@@ -6,6 +6,7 @@ import styles from '../../styles/pages/User.module.scss';
 import { IUser } from '../../types/user';
 import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
+import UserInfo from '../../components/UserInfo';
 
 interface UserPageProps {
   user: IUser
@@ -36,13 +37,13 @@ const UserPage = ({
             Подписаться
           </Button>
         </div>
-        <div className={styles.info}>
-          <div className={styles.infoTop}>
-            <span className={styles.time}>
-              Заходил день назад
-            </span>
-          </div>
-        </div>
+        <UserInfo
+          email={user.email}
+          fullname={user.fullname}
+          birthday={new Date(user.birthday).toLocaleDateString()}
+          postCount={user.posts.length}
+          registerDate={new Date(user.createdAt).toLocaleDateString()}
+        />
       </div>
     </MainLayout>
   );
