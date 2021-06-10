@@ -6,9 +6,10 @@ import { selectAuth, selectAuthError, selectIsLoading } from '../../../store/aut
 import Button from '../../Button';
 import Avatar from '../../Avatar';
 import Upload from '../../Upload';
-import { addAvatarRequest, setError } from '../../../store/auth/actions';
+import { setError, setUserInfo } from '../../../store/auth/actions';
 import { useAlert } from 'react-alert';
 import { checkFIleExt } from '../../../utils/checkFIleExt';
+import UserApi from '../../../api/users';
 
 interface AvatarProps {
   url: string
@@ -29,6 +30,21 @@ const Profile = () => {
   const [avatarLoading, setAvatarLoading] = useState(false);
   const [infoLoading] = useState(false);
   const inputFileRef = React.useRef<HTMLInputElement>(null);
+
+  const uploadAvatar = async (file: File): Promise<void> => {
+    try {
+      const formData = new FormData();
+
+      formData.append('avatar', file);
+
+      const { data } = await UserApi.uploadAvatar(formData);
+
+      dispatch(setUserInfo(data));
+      setAvatarLoading(false);
+    } catch (e) {
+      alert.error('Что-то пошло не так');
+    }
+  };
 
   const handleChangeImage = async (event: Event) => {
     const target = event.target as HTMLInputElement;
@@ -61,7 +77,8 @@ const Profile = () => {
   const uploadAvatarHandler = async () => {
     if (avatarUrl.url !== user.avatarUrl) {
       setAvatarLoading(true);
-      dispatch(addAvatarRequest(avatarUrl.file));
+      await uploadAvatar(avatarUrl.file);
+      setAvatarLoading(false);
       setAvatarChanged(false);
     }
   };
@@ -106,7 +123,7 @@ const Profile = () => {
               onClick={uploadAvatarHandler}
               customStyles={{ marginLeft: '5px' }}
               disabled={!avatarChanged}
-              loading={avatarLoading && isLoading}
+              loading={avatarLoading}
               full
             >
               Загрузить
