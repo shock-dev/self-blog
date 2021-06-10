@@ -118,7 +118,7 @@ const Profile = () => {
             username={user.username}
           />
           <div style={{ display: 'flex' }}>
-            <Upload onChange={handleChangeImage} ref={inputFileRef} />
+            <Upload onChange={handleChangeImage} uploadRef={inputFileRef} />
             <Button
               onClick={uploadAvatarHandler}
               customStyles={{ marginLeft: '5px' }}
