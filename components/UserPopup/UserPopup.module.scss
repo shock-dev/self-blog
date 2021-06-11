@@ -3,16 +3,20 @@
 }
 
 .popup {
+  display: none;
   position: absolute;
   z-index: 100;
   top: 54px;
   right: 0;
-  display: block;
   background-color: #fff;
   width: 230px;
   border-radius: 4px;
   box-shadow: 0 0 8px rgb(0 0 0 / 20%);
   overflow: hidden;
+}
+
+.show {
+  display: block;
 }
 
 .link {

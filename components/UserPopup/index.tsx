@@ -5,6 +5,7 @@ import useOutsideClick from '../../hooks/useOutsideClick';
 import styles from './UserPopup.module.scss';
 import { selectAuth } from '../../store/auth/selectors';
 import Avatar from '../Avatar';
+import cn from 'classnames';
 
 const UserPopup = () => {
   const user = useSelector(selectAuth).data;
@@ -34,43 +35,41 @@ const UserPopup = () => {
           username={user.username}
         />
       </button>
-      {visible && (
-        <ul
-          className={styles.popup}
-          ref={ref}
-        >
-          <li>
-            <Link href={`/user/${user._id}`}>
-              <a className={styles.link}>
-                <svg className={styles.svg}>
-                  <use href={'/images/[popup].svg#user'} />
-                </svg>
-                Профиль
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href={`/settings/profile`}>
-              <a className={styles.link}>
-                <svg className={styles.svg}>
-                  <use href={'/images/[popup].svg#settings'} />
-                </svg>
-                Настройки
-              </a>
-            </Link>
-          </li>
-          <li>
-            <Link href={`/user/logout`}>
-              <a className={styles.link}>
-                <svg className={styles.svg}>
-                  <use href={'/images/[popup].svg#logout'} />
-                </svg>
-                Выйти
-              </a>
-            </Link>
-          </li>
-        </ul>
-      )}
+      <ul
+        className={cn(styles.popup, { [styles.show]: visible })}
+        ref={ref}
+      >
+        <li>
+          <Link href={`/user/${user._id}`}>
+            <a className={styles.link}>
+              <svg className={styles.svg}>
+                <use href={'/images/[popup].svg#user'} />
+              </svg>
+              Профиль
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link href={`/settings/profile`}>
+            <a className={styles.link}>
+              <svg className={styles.svg}>
+                <use href={'/images/[popup].svg#settings'} />
+              </svg>
+              Настройки
+            </a>
+          </Link>
+        </li>
+        <li>
+          <Link href={`/user/logout`}>
+            <a className={styles.link}>
+              <svg className={styles.svg}>
+                <use href={'/images/[popup].svg#logout'} />
+              </svg>
+              Выйти
+            </a>
+          </Link>
+        </li>
+      </ul>
     </div>
   );
 };
