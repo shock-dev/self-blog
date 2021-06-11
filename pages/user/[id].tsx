@@ -27,9 +27,6 @@ const UserPage = ({
           <h4 className={styles.username}>
             {user.username}
           </h4>
-          <p className={styles.rank}>
-            Admin
-          </p>
           <Button
             customStyles={{ marginTop: '20px' }}
             full
