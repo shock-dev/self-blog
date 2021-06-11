@@ -7,12 +7,12 @@ import { selectAuthError, selectIsAuth } from '../store/auth/selectors';
 import { useAlert } from 'react-alert';
 import { useRouter } from 'next/router';
 import InfoStep from '../components/RegisterSteps/InfoStep';
-import PasswordStep from '../components/RegisterSteps/PasswordStep';
+import AdditionalStep from '../components/RegisterSteps/AdditionalStep';
 import ResultStep from '../components/RegisterSteps/ResultStep';
 
 const RegisterSteps = {
   0: InfoStep,
-  1: PasswordStep,
+  1: AdditionalStep,
   2: ResultStep
 };
 
@@ -29,22 +29,28 @@ export const RegisterContext = createContext({} as RegisterContextProps);
 
 export interface InfoStepFormInputs {
   email: string
-  fullname: string
   username: string
-}
-
-export interface PasswordStepFormInputs {
   password: string
   passwordConfirm: string
 }
 
-export type BirthdayType = {
-  day: number
-  month: number
-  year: number
+export interface AdditionInfoStepFormInputs {
+  name: string
+  surname: string
+  gender: {
+    label: string
+    value: string
+  }
+  birthday: {
+    day: number
+    month: number
+    year: number
+  }
 }
 
-export type RegisterFormInputs = InfoStepFormInputs & PasswordStepFormInputs & { birthday: BirthdayType }
+export type RegisterFormInputs =
+  & InfoStepFormInputs
+  & AdditionInfoStepFormInputs
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -56,9 +62,11 @@ export default function Register() {
   const error = useSelector(selectAuthError);
   const [userData, setUserData] = useState<RegisterFormInputs>({
     email: '',
-    fullname: '',
     username: '',
+    name: '',
+    surname: '',
     birthday: { day: 1, month: 0, year: 2000 },
+    gender: { label: 'Мужской', value: 'male' },
     password: '',
     passwordConfirm: ''
   });

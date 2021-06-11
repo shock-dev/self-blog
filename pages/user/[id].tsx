@@ -39,9 +39,10 @@ const UserPage = ({
         </div>
         <UserInfo
           email={user.email}
-          fullname={user.fullname}
+          fullname={`${user.name} ${user.surname}`}
           birthday={new Date(user.birthday).toLocaleDateString()}
           postCount={user.posts.length}
+          gender={user.gender}
           registerDate={new Date(user.createdAt).toLocaleDateString()}
         />
       </div>

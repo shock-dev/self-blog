@@ -5,8 +5,7 @@ import Footer from '../Form/Footer';
 import Form from '../Form';
 import { useFormik } from 'formik';
 import { InfoStepValidation } from '../../validation/auth/register';
-import { BirthdayType, InfoStepFormInputs, RegisterContext } from '../../pages/register';
-import Birthday from '../Settings/Birthday';
+import { InfoStepFormInputs, RegisterContext } from '../../pages/register';
 
 const infoStep = () => {
   const { onNextStep, setUserData, userData } = useContext(RegisterContext);
@@ -20,11 +19,13 @@ const infoStep = () => {
   } = useFormik<InfoStepFormInputs>({
     initialValues: {
       email: userData.email,
-      fullname: userData.fullname,
-      username: userData.username
+      username: userData.username,
+      password: userData.password,
+      passwordConfirm: userData.passwordConfirm
     },
     validationSchema: InfoStepValidation,
     onSubmit: (data: InfoStepFormInputs) => {
+      console.log(errors);
       setUserData({
         ...userData,
         ...data
@@ -32,15 +33,6 @@ const infoStep = () => {
       onNextStep();
     }
   });
-
-  const handleChangeDate = (date: BirthdayType) => {
-    setUserData({
-      ...userData,
-      birthday: date
-    });
-  };
-
-  const { day, month, year } = userData.birthday;
 
   return (
     <Form
@@ -69,22 +61,29 @@ const infoStep = () => {
         error={touched.username && !!errors.username}
         message={errors.username}
       />
-      <Birthday
-        day={day}
-        month={month}
-        year={year}
-        onChange={handleChangeDate}
-      />
       <Field
-        title="Полное имя"
-        placeholder="Имя фамилия"
-        icon="fullname"
-        name="fullname"
-        value={values.fullname}
+        title="Пароль"
+        type="password"
+        placeholder="Введите password"
+        icon="lock"
+        name="password"
+        value={values.password}
         onChange={handleChange}
         onBlur={handleBlur}
-        error={touched.fullname && !!errors.fullname}
-        message={errors.fullname}
+        error={touched.password && !!errors.password}
+        message={errors.password}
+      />
+      <Field
+        title="Подтверждение пароля"
+        type="password"
+        placeholder="Подтвердите ваш пароль"
+        icon="confirm"
+        name="passwordConfirm"
+        value={values.passwordConfirm}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        error={touched.passwordConfirm && !!errors.passwordConfirm}
+        message={errors.passwordConfirm}
       />
       <Button
         color="green"
@@ -95,7 +94,7 @@ const infoStep = () => {
         Следующий шаг
       </Button>
       <Footer
-        text="Уже зарегестрированы?"
+        text="Уже зарегистрированы?"
         to={{ url: '/login', title: 'Войти' }}
       />
     </Form>

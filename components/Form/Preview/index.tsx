@@ -3,40 +3,46 @@ import { RegisterFormInputs } from '../../../pages/register';
 import styles from './Preview.module.scss';
 
 const Preview = (data: RegisterFormInputs) => {
-  // FIXME: Сделать формат даты вида 14 июня 2001 г.
-
   const { day, month, year } = data.birthday;
+  const output = [
+    {
+      title: 'Email',
+      value: data.email
+    },
+    {
+      title: 'Username',
+      value: data.username
+    },
+    {
+      title: 'Полное имя',
+      value: `${data.name} ${data.surname}`
+    },
+    {
+      title: 'Дата рождения',
+      value: new Date(year, month, day).toLocaleDateString()
+    },
+    {
+      title: 'Пол',
+      value: data.gender.label
+    }
+  ];
 
   return (
     <div>
       <p className={styles.text}>
-        <strong>{data.fullname}</strong>, проверьте, все ли так с вашими данными,
+        <strong>{data.name}</strong>, проверьте, все ли так с вашими данными,
         на данном этапе вы имеете возможность вернуться к предыдущим шагам и поменять данные
       </p>
-      <div className={styles.item}>
-        <p className={styles.title}>
-          Email:
-        </p>
-        <p className={styles.value}>
-          {data.email}
-        </p>
-      </div>
-      <div className={styles.item}>
-        <p className={styles.title}>
-          Username:
-        </p>
-        <p className={styles.value}>
-          {data.username}
-        </p>
-      </div>
-      <div className={styles.item}>
-        <p className={styles.title}>
-          Дата рождения:
-        </p>
-        <p className={styles.value}>
-          {new Date(year, month, day).toLocaleDateString()}
-        </p>
-      </div>
+      {output.map((item, index) =>
+        <div className={styles.item} key={index}>
+          <p className={styles.title}>
+            {item.title}:
+          </p>
+          <p className={styles.value}>
+            {item.value}
+          </p>
+        </div>
+      )}
     </div>
   );
 };
