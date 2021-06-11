@@ -23,14 +23,9 @@ const UserInfo = ({
   return (
     <div className={styles.info}>
       <div className={styles.header}>
-        <div className={styles.top}>
-          <h4 className={styles.fullname}>
-            {fullname}
-          </h4>
-          <span className={styles.time}>
-            Заходил день назад
-          </span>
-        </div>
+        <h4 className={styles.fullname}>
+          {fullname}
+        </h4>
         {bio && (
           <p className={styles.desc}>
             {bio}
@@ -61,7 +56,21 @@ const UserInfo = ({
             Пол:
           </div>
           <div className={styles.col}>
-            {gender === 'male' ? 'Мужской' : 'Женский'}
+            {gender === 'male' ? (
+              <img
+                src="/images/male.svg"
+                alt="Мужской"
+                title="Мужской"
+                width={16}
+              />
+            ) : (
+              <img
+                src="/images/female.svg"
+                alt="Женский"
+                title="Женский"
+                width={16}
+              />
+            )}
           </div>
         </div>
       </div>
