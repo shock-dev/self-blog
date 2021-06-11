@@ -39,3 +39,19 @@
   font-family: inherit;
   font-weight: 500;
 }
+
+.followersWrapper {
+  margin-top: 10px;
+  display: flex;
+
+  a {
+    font-weight: 500;
+    color: #686868;
+  }
+}
+
+.followersLink {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import withAuthSS from '../../hocs/withAuth';
 import MainLayout from '../../layouts/MainLayout';
 import UsersApi from '../../api/users';
@@ -27,6 +28,21 @@ const UserPage = ({
           <h4 className={styles.username}>
             {user.username}
           </h4>
+          <div className={styles.followersWrapper}>
+            <Link href={`/user/${user._id}/followers`}>
+              <a className={styles.followersLink}>
+                <img
+                  src="/images/followers.svg"
+                  alt="Followers"
+                  style={{ marginRight: '5px' }}
+                />
+                20 Подписчиков
+              </a>
+            </Link>
+            <Link href={`/user/${user._id}/following`}>
+              <a>1 Подписок</a>
+            </Link>
+          </div>
           <Button
             customStyles={{ marginTop: '20px' }}
             full
