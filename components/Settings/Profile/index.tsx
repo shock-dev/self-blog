@@ -22,7 +22,6 @@ interface AvatarProps {
 export interface UpdateFormInputs {
   email: string
   username: string
-  fullname: string
 }
 
 const Profile = () => {
@@ -40,8 +39,7 @@ const Profile = () => {
   const inputFileRef = React.useRef<HTMLInputElement>(null);
   const defaultUserData = {
     email: user.email,
-    username: user.username,
-    fullname: user.fullname
+    username: user.username
   };
   const {
     handleSubmit,
@@ -53,8 +51,7 @@ const Profile = () => {
   } = useFormik<UpdateFormInputs>({
     initialValues: {
       email: user.email,
-      username: user.username,
-      fullname: user.fullname
+      username: user.username
     },
     validationSchema: UpdateUserValidation,
     onSubmit: (data) => {
@@ -140,16 +137,6 @@ const Profile = () => {
             onBlur={handleBlur}
             error={touched.username && !!errors.username}
             message={errors.username}
-          />
-          <Input
-            name="fullname"
-            title="Полное имя"
-            placeholder="Имя фамилия"
-            value={values.fullname}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={touched.fullname && !!errors.fullname}
-            message={errors.fullname}
           />
           <Button
             type="submit"

@@ -7,6 +7,7 @@ interface UserInfoProps {
   email: string
   birthday: string
   postCount: number
+  gender: string
   registerDate: string
 }
 
@@ -16,6 +17,7 @@ const UserInfo = ({
   email,
   birthday,
   postCount,
+  gender,
   registerDate
 }: UserInfoProps) => {
   return (
@@ -59,7 +61,7 @@ const UserInfo = ({
             Пол:
           </div>
           <div className={styles.col}>
-            муж.
+            {gender === 'male' ? 'Мужской' : 'Женский'}
           </div>
         </div>
       </div>
