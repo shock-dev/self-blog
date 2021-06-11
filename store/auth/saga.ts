@@ -48,6 +48,7 @@ function* fetchRegister(action): SagaIterator {
     const { year, month, day } = action.payload.birthday;
     const payload = {
       ...action.payload,
+      gender: action.payload.gender.value,
       birthday: new Date(year, month, day).toLocaleDateString()
     };
     const { data } = yield call(AuthApi.register, payload);
