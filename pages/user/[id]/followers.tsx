@@ -5,15 +5,15 @@ import { IUser } from '../../../types/user';
 import ProfileLayout from '../../../layouts/ProfileLayout';
 import FollowerBox from '../../../components/FollowerBox';
 
-interface UserPageProps {
+interface FollowersPageProps {
   user: IUser
   followers: IUser[]
 }
 
-const UserPage = ({
+const FollowersPage = ({
   user,
   followers
-}: UserPageProps) => {
+}: FollowersPageProps) => {
   return (
     <ProfileLayout title={`${user.username} - Подписчики`} user={user}>
       <FollowerBox title="Подписчики" list={followers} />
@@ -21,7 +21,7 @@ const UserPage = ({
   );
 };
 
-export default UserPage;
+export default FollowersPage;
 
 export const getServerSideProps = withAuthSS(async ({ params }) => {
   try {
