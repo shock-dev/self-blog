@@ -3,7 +3,7 @@ import styles from './Avatar.module.scss';
 import cn from 'classnames';
 
 interface AvatarProps {
-  url: string
+  url?: string
   width?: number
   height?: number
   type?: 'circle' | 'square'

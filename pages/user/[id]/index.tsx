@@ -1,9 +1,9 @@
 import React from 'react';
-import withAuthSS from '../../hocs/withAuth';
-import UsersApi from '../../api/users';
-import { IUser } from '../../types/user';
-import UserInfo from '../../components/UserInfo';
-import ProfileLayout from '../../layouts/ProfileLayout';
+import withAuthSS from '../../../hocs/withAuth';
+import UsersApi from '../../../api/users';
+import { IUser } from '../../../types/user';
+import UserInfo from '../../../components/UserInfo';
+import ProfileLayout from '../../../layouts/ProfileLayout';
 
 interface UserPageProps {
   user: IUser
