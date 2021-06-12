@@ -4,6 +4,8 @@ import UsersApi from '../../../api/users';
 import { IUser } from '../../../types/user';
 import UserInfo from '../../../components/UserInfo';
 import ProfileLayout from '../../../layouts/ProfileLayout';
+import { useSelector } from 'react-redux';
+import { selectAuth } from '../../../store/auth/selectors';
 
 interface UserPageProps {
   user: IUser
@@ -12,8 +14,12 @@ interface UserPageProps {
 const UserPage = ({
   user
 }: UserPageProps) => {
+  const me = useSelector(selectAuth).data;
+  const isMe = me._id === user._id;
+  const pageTitle = isMe ? 'Ваш профиль' : `${user.username} (${user.name} ${user.surname})`;
+
   return (
-    <ProfileLayout title={user.username} user={user}>
+    <ProfileLayout title={pageTitle} user={user}>
       <UserInfo
         email={user.email}
         fullname={`${user.name} ${user.surname}`}

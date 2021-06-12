@@ -4,6 +4,8 @@ import UsersApi from '../../../api/users';
 import { IUser } from '../../../types/user';
 import ProfileLayout from '../../../layouts/ProfileLayout';
 import FollowerBox from '../../../components/FollowerBox';
+import { useSelector } from 'react-redux';
+import { selectAuth } from '../../../store/auth/selectors';
 
 interface FollowersPageProps {
   user: IUser
@@ -14,8 +16,12 @@ const FollowersPage = ({
   user,
   followers
 }: FollowersPageProps) => {
+  const me = useSelector(selectAuth).data;
+  const isMe = me._id === user._id;
+  const pageTitle = isMe ? 'Ваши подписчики' : `${user.username} (${user.name} ${user.surname}) / Подписчики`;
+
   return (
-    <ProfileLayout title={`${user.username} - Подписчики`} user={user}>
+    <ProfileLayout title={pageTitle} user={user}>
       <FollowerBox title="Подписчики" list={followers} />
     </ProfileLayout>
   );

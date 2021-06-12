@@ -4,6 +4,8 @@ import UsersApi from '../../../api/users';
 import { IUser } from '../../../types/user';
 import ProfileLayout from '../../../layouts/ProfileLayout';
 import FollowerBox from '../../../components/FollowerBox';
+import { useSelector } from 'react-redux';
+import { selectAuth } from '../../../store/auth/selectors';
 
 interface FollowingPageProps {
   user: IUser
@@ -14,8 +16,12 @@ const FollowingPage = ({
   user,
   following
 }: FollowingPageProps) => {
+  const me = useSelector(selectAuth).data;
+  const isMe = me._id === user._id;
+  const pageTitle = isMe ? 'Ваши подписки' : `${user.username} (${user.name} ${user.surname}) / Подписки`;
+
   return (
-    <ProfileLayout title={`${user.username} - Подписчики`} user={user}>
+    <ProfileLayout title={pageTitle} user={user}>
       <FollowerBox title="Подписки" list={following} />
     </ProfileLayout>
   );

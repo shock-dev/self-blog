@@ -1,8 +1,10 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import Link from 'next/link';
+import cn from 'classnames';
+import { useAlert } from 'react-alert';
 import styles from './Follower.module.scss';
 import Avatar from '../Avatar';
-import cn from 'classnames';
+import UsersApi from '../../api/users';
 
 interface FollowerProps {
   id: string
@@ -25,6 +27,27 @@ const Follower = ({
   isFollow,
   customStyles = {}
 }: FollowerProps) => {
+  const alert = useAlert();
+  const [isLocalFollow, setIsLocalFollow] = useState(isFollow);
+
+  const followHandler = async () => {
+    try {
+      await UsersApi.follow(id);
+      setIsLocalFollow(true);
+    } catch (e) {
+      alert.error('Не удалось подписаться');
+    }
+  };
+
+  const unfollowHandler = async () => {
+    try {
+      await UsersApi.unfollow(id);
+      setIsLocalFollow(false);
+    } catch (e) {
+      alert.error('Не удалось отписаться');
+    }
+  };
+
   return (
     <div className={styles.wrapper} style={customStyles}>
       <div className={styles.info}>
@@ -50,14 +73,22 @@ const Follower = ({
         </div>
       </div>
       {!isMe && (
-        isFollow ? (
-          <button className={cn(styles.follow, styles.followActive)}>
+        isLocalFollow ? (
+          <button
+            className={cn(styles.follow, styles.followActive)}
+            title="Отписаться"
+            onClick={unfollowHandler}
+          >
             <svg width={16} height={16}>
               <use href="/images/[global].svg#follow" />
             </svg>
           </button>
         ) : (
-          <button className={styles.follow}>
+          <button
+            className={styles.follow}
+            title="Подписаться"
+            onClick={followHandler}
+          >
             <svg width={16} height={16}>
               <use href="/images/[global].svg#follow" />
             </svg>
