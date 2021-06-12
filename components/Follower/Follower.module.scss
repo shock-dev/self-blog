@@ -26,18 +26,18 @@
 .follow {
   padding: 3px 6px;
   border: 1px solid #D8D8D8;
-  background-color: transparent;
+  background-color: #5C6ECE;
   border-radius: 4px;
 
   svg {
-    fill: #6c6c6c;
+    fill: #fff;
   }
 }
 
 .followActive {
-  background-color: #1d1d1d;
+  background-color: transparent;
 
   svg {
-    fill: #ffffff;
+    fill: #6c6c6c;
   }
 }
