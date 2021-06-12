@@ -29,6 +29,11 @@ class UsersApi {
     const { data } = await axios.patch(`/users/${id}/unfollow`);
     return data;
   }
+
+  getFollowers = async (id: string) => {
+    const { data } = await axios.get(`/users/${id}/followers`);
+    return data;
+  }
 }
 
 export default new UsersApi();
