@@ -1,0 +1,43 @@
+.wrapper {
+  border: 1px solid #D8D8D8;
+  border-radius: 4px;
+  padding: 15px;
+  width: calc(100% / 12 * 6 - 20px);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.info {
+  display: flex;
+}
+
+.fullname {
+  margin-bottom: 4px;
+}
+
+.username {
+  font-size: 12px;
+  line-height: 14px;
+  color: #597DFF;
+  font-weight: 500;
+}
+
+.follow {
+  padding: 3px 6px;
+  border: 1px solid #D8D8D8;
+  background-color: transparent;
+  border-radius: 4px;
+
+  svg {
+    fill: #6c6c6c;
+  }
+}
+
+.followActive {
+  background-color: #1d1d1d;
+
+  svg {
+    fill: #ffffff;
+  }
+}
