@@ -34,6 +34,11 @@ class UsersApi {
     const { data } = await axios.get(`/users/${id}/followers`);
     return data;
   }
+
+  getFollowing = async (id: string) => {
+    const { data } = await axios.get(`/users/${id}/following`);
+    return data;
+  }
 }
 
 export default new UsersApi();

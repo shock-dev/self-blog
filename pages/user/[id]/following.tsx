@@ -5,32 +5,32 @@ import { IUser } from '../../../types/user';
 import ProfileLayout from '../../../layouts/ProfileLayout';
 import FollowerBox from '../../../components/FollowerBox';
 
-interface FollowersPageProps {
+interface FollowingPageProps {
   user: IUser
-  followers: IUser[]
+  following: IUser[]
 }
 
-const FollowersPage = ({
+const FollowingPage = ({
   user,
-  followers
-}: FollowersPageProps) => {
+  following
+}: FollowingPageProps) => {
   return (
     <ProfileLayout title={`${user.username} - Подписчики`} user={user}>
-      <FollowerBox title="Подписчики" list={followers} />
+      <FollowerBox title="Подписки" list={following} />
     </ProfileLayout>
   );
 };
 
-export default FollowersPage;
+export default FollowingPage;
 
 export const getServerSideProps = withAuthSS(async ({ params }) => {
   try {
     const { data: user } = await UsersApi.one(params.id);
-    const { data: followers } = await UsersApi.getFollowers(params.id);
+    const { data: following } = await UsersApi.getFollowing(params.id);
     return {
       props: {
         user,
-        followers
+        following
       }
     };
   } catch (e) {
