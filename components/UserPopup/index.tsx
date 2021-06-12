@@ -26,13 +26,22 @@ const UserPopup = () => {
     <div className={styles.wrapper}>
       <button
         onClick={toggleVisible}
-        style={{ border: 'none' }}
+        className={styles.btn}
       >
+        <p className={styles.name}>
+          {user.name}
+        </p>
         <Avatar
           url={user.avatarUrl}
           width={40}
           height={40}
           username={user.username}
+          type="circle"
+        />
+        <img
+          src="/images/arrow-down.svg"
+          alt="arrow"
+          className={styles.arrow}
         />
       </button>
       <ul
