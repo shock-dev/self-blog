@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import withAuthSS from '../../hocs/withAuth';
 import MainLayout from '../../layouts/MainLayout';
@@ -8,6 +8,9 @@ import { IUser } from '../../types/user';
 import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
 import UserInfo from '../../components/UserInfo';
+import { useSelector } from 'react-redux';
+import { selectAuth } from '../../store/auth/selectors';
+import { useAlert } from 'react-alert';
 
 interface UserPageProps {
   user: IUser
@@ -16,6 +19,38 @@ interface UserPageProps {
 const UserPage = ({
   user
 }: UserPageProps) => {
+  const alert = useAlert();
+  const me = useSelector(selectAuth).data;
+  const [followersCount, setFollowersCount] = useState(user.followers.length);
+  const [isFollower, setIsFollower] = useState(user.followers.includes(me._id));
+  const [loading, setLoading] = useState(false);
+
+  const followHandler = async () => {
+    try {
+      setLoading(true);
+      await UsersApi.follow(user._id);
+      setFollowersCount((prev) => ++prev);
+      setIsFollower(true);
+    } catch (e) {
+      alert.error('Не удалось подписаться. Попробуйте снова');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const unfollowHandler = async () => {
+    try {
+      setLoading(true);
+      await UsersApi.unfollow(user._id);
+      setFollowersCount((prev) => --prev);
+      setIsFollower(false);
+    } catch (e) {
+      alert.error('Не удалось отписаться. Попробуйте снова');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <MainLayout title={user.username}>
       <div className={styles.wrapper}>
@@ -36,19 +71,35 @@ const UserPage = ({
                   alt="Followers"
                   style={{ marginRight: '5px' }}
                 />
-                20 Подписчиков
+                {followersCount} Подписчиков
               </a>
             </Link>
             <Link href={`/user/${user._id}/following`}>
-              <a>1 Подписок</a>
+              <a>{user.following.length} Подписок</a>
             </Link>
           </div>
-          <Button
-            customStyles={{ marginTop: '20px' }}
-            full
-          >
-            Подписаться
-          </Button>
+          {me._id !== user._id && (
+            isFollower ? (
+              <Button
+                customStyles={{ marginTop: '20px' }}
+                onClick={unfollowHandler}
+                loading={loading}
+                outline
+                full
+              >
+                Описаться
+              </Button>
+            ) : (
+              <Button
+                customStyles={{ marginTop: '20px' }}
+                onClick={followHandler}
+                loading={loading}
+                full
+              >
+                Подписаться
+              </Button>
+            )
+          )}
         </div>
         <UserInfo
           email={user.email}
