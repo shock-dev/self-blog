@@ -17,7 +17,16 @@ class UsersApi {
     const { data } = await axios.post('/users/avatar', formData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     });
+    return data;
+  }
 
+  follow = async (id: string) => {
+    const { data } = await axios.patch(`/users/${id}/follow`);
+    return data;
+  }
+
+  unfollow = async (id: string) => {
+    const { data } = await axios.patch(`/users/${id}/unfollow`);
     return data;
   }
 }
