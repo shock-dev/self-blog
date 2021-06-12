@@ -10,5 +10,7 @@ export interface IUser {
   birthday: string
   gender: 'male' | 'female'
   posts: IPost[]
+  followers: IUser[] & string
+  following: IUser[] & string
   createdAt: string
 }
