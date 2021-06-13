@@ -3,6 +3,7 @@ import cn from 'classnames';
 import Head from 'next/head';
 import Header from '../../components/Header';
 import styles from './ContentLayout.module.scss';
+import SuggestWriting from '../../components/SuggestWriting';
 
 interface ContentLayoutProps {
   title: string
@@ -22,6 +23,9 @@ export default function ContentLayout({
       <Header />
       <div className={cn('container', styles.page)}>
         <div className={styles.wrapper}>
+          <aside className={styles.aside}>
+            <SuggestWriting />
+          </aside>
           <main className={styles.main}>
             {children}
           </main>

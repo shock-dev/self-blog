@@ -1,11 +1,12 @@
 import React from 'react';
 import ContentLayout from '../layouts/ContentLayout';
-import Post from '../components/Post';
 import withAuthSS from '../hocs/withAuth';
 import PostsApi from '../api/posts';
+import PostMini from '../components/PostMini';
+import { IPost } from '../types/post';
 
 interface HomeProps {
-  posts: any[]
+  posts: IPost[]
 }
 
 const Home = ({
@@ -14,17 +15,12 @@ const Home = ({
   return (
     <ContentLayout title="Главная">
       {posts.map((post) =>
-        <Post
+        <PostMini
           key={post._id}
           id={post._id}
           title={post.title}
           description={post.description}
-          imageUrl={post.imageUrl}
-          views={post.views}
-          withFooter={true}
-          isShortText={true}
           createdAt={post.createdAt}
-          commentsCount={post.comments.length}
           user={post.user}
         />
       )}
