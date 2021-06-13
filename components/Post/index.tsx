@@ -10,7 +10,7 @@ interface PostProps {
   id: string
   title: string
   description: string
-  imageUrl: string
+  imageUrl?: string
   views: number
   withFooter?: boolean
   commentsCount?: number
@@ -23,7 +23,7 @@ export default function Post({
   id,
   title,
   description,
-  imageUrl,
+  imageUrl = null,
   views,
   withFooter = false,
   commentsCount,
@@ -75,7 +75,9 @@ export default function Post({
           </Link>
         </li>
       </ul>
-      <img className={styles.img} src={imageUrl} alt={title} />
+      {imageUrl && (
+        <img className={styles.img} src={imageUrl} alt={title} />
+      )}
       <p className={cn(styles.text, { [styles.short]: isShortText })}>
         {description}
       </p>
