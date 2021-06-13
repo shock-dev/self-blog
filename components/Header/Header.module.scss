@@ -31,3 +31,22 @@
   border: 1px solid #5f8de7;
   color: #5f8de7;
 }
+
+.panel {
+  display: flex;
+  align-items: center;
+}
+
+.write {
+  margin-right: 15px;
+
+  &:hover svg {
+    fill: #3d58d9;
+  }
+
+  svg {
+    width: 30px;
+    height: 30px;
+    fill: #5C6ECE;
+  }
+}

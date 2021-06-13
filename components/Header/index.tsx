@@ -18,7 +18,16 @@ export default function Header() {
             </a>
           </Link>
           {isAuth ? (
-            <UserPopup />
+            <div className={styles.panel}>
+              <Link href="/new">
+                <a className={styles.write}>
+                  <svg>
+                    <use href="/images/[global].svg#write" />
+                  </svg>
+                </a>
+              </Link>
+              <UserPopup />
+            </div>
           ) : (
             <div>
               <Link href="/login">
