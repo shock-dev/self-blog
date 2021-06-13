@@ -67,7 +67,7 @@ const Follower = ({
           </Link>
           <p className={styles.username}>
             <Link href={`/user/${id}`}>
-              <a>{username}</a>
+              <a>@{username}</a>
             </Link>
           </p>
         </div>

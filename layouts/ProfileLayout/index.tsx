@@ -70,7 +70,7 @@ export default function ProfileLayout({
               username={user.username}
             />
             <h4 className={styles.username}>
-              {user.username}
+              @{user.username}
             </h4>
             <div className={styles.followersWrapper}>
               <Link href={`/user/${user._id}/followers`}>
