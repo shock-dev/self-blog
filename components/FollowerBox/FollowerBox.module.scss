@@ -6,13 +6,26 @@
   min-height: 340px;
 }
 
-.title {
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid #e6e6e6;
   padding-bottom: 15px;
+  margin-bottom: 10px;
+}
+
+.goBack {
+  padding: 4px 10px;
+  background-color: #3486d2;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.title {
   font-weight: normal;
   font-size: 18px;
   line-height: 21px;
-  margin-bottom: 10px;
 }
 
 .list {

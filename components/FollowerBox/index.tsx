@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { IUser } from '../../types/user';
 import styles from './FollowerBox.module.scss';
 import Follower from '../Follower';
@@ -8,19 +9,28 @@ import { selectAuth } from '../../store/auth/selectors';
 interface FollowerBoxProps {
   title: string
   list: IUser[]
+  user: IUser
 }
 
 const FollowerBox = ({
   title,
-  list
+  list,
+  user
 }: FollowerBoxProps) => {
   const me = useSelector(selectAuth).data;
 
   return (
     <div className={styles.wrapper}>
-      <h3 className={styles.title}>
-        {title}
-      </h3>
+      <div className={styles.header}>
+        <h3 className={styles.title}>
+          {title}
+        </h3>
+        <Link href={`/user/${user._id}`}>
+          <a className={styles.goBack}>
+            Вернутся в профиль
+          </a>
+        </Link>
+      </div>
       <div className={styles.list}>
         {list.map((user) =>
           <Follower

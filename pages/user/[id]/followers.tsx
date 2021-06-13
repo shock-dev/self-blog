@@ -22,7 +22,11 @@ const FollowersPage = ({
 
   return (
     <ProfileLayout title={pageTitle} user={user}>
-      <FollowerBox title="Подписчики" list={followers} />
+      <FollowerBox
+        title="Подписчики"
+        list={followers}
+        user={user}
+      />
     </ProfileLayout>
   );
 };
