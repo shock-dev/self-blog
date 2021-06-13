@@ -1,0 +1,33 @@
+.wrapper {
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 1px 0 0 #e7e8ec, 0 0 0 1px #e7e8ec;
+  border-radius: 4px;
+  padding: 50px 60px;
+}
+
+.inputTitle {
+  display: block;
+  width: 100%;
+  padding: 20px;
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 42px;
+  margin-bottom: 30px;
+  border-radius: 4px;
+  border: 0;
+}
+
+.textarea {
+  font-size: 22px;
+  line-height: 26px;
+  color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  display: block;
+  width: 100%;
+  min-height: 300px;
+  margin-bottom: 20px;
+  resize: vertical;
+  border-radius: 4px;
+  border: 1px solid #dedede;
+}
