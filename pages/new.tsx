@@ -1,13 +1,13 @@
 import React from 'react';
-import ContentLayout from '../layouts/ContentLayout';
 import CreatePostForm from '../components/CreatePostForm';
 import withAuthSS from '../hocs/withAuth';
+import MainLayout from '../layouts/MainLayout';
 
 const NewPage = () => {
   return (
-    <ContentLayout title="Создание поста">
+    <MainLayout title="Создание поста">
       <CreatePostForm />
-    </ContentLayout>
+    </MainLayout>
   );
 };
 
