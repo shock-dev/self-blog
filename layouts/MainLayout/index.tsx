@@ -3,6 +3,7 @@ import cn from 'classnames';
 import Head from 'next/head';
 import Header from '../../components/Header';
 import styles from './MainLayout.module.scss';
+import DiscusWidget from '../../components/DiscusWidget';
 
 interface MainLayoutProps {
   title: string
@@ -20,7 +21,14 @@ export default function MainLayout({
       </Head>
       <Header />
       <div className={cn('container', styles.page)}>
-        {children}
+        <div className={styles.wrapper}>
+          <main className={styles.main}>
+            {children}
+          </main>
+          <aside className={styles.aside}>
+            <DiscusWidget />
+          </aside>
+        </div>
       </div>
     </>
   );

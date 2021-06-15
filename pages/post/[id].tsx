@@ -1,5 +1,4 @@
 import React from 'react';
-import ContentLayout from '../../layouts/ContentLayout';
 import PostsApi from '../../api/posts';
 import withAuthSS from '../../hocs/withAuth';
 import Post from '../../components/Post';
@@ -8,6 +7,7 @@ import { IPost } from '../../types/post';
 import { setComments } from '../../store/comments/actions';
 import { useSelector } from 'react-redux';
 import { selectCommentsData } from '../../store/comments/selectors';
+import MainLayout from '../../layouts/MainLayout';
 
 interface PostProps {
   post: IPost
@@ -17,7 +17,7 @@ const PostPage = ({ post }: PostProps) => {
   const comments = useSelector(selectCommentsData);
 
   return (
-    <ContentLayout title={post.title}>
+    <MainLayout title={post.title}>
       <Post
         key={post._id}
         id={post._id}
@@ -41,7 +41,7 @@ const PostPage = ({ post }: PostProps) => {
         </Comments>
       )}
       <Comments.Form postId={post._id} />
-    </ContentLayout>
+    </MainLayout>
   );
 };
 
