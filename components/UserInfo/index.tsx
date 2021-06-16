@@ -11,7 +11,7 @@ interface UserInfoProps {
 }
 
 const UserInfo = ({
-  bio,
+  bio = '',
   email,
   birthday,
   postCount,
@@ -24,7 +24,7 @@ const UserInfo = ({
         <h4 className={styles.fullname}>
           Основная информация
         </h4>
-        {bio && (
+        {!!bio.length && (
           <p className={styles.desc}>
             {bio}
           </p>

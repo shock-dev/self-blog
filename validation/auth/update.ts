@@ -11,5 +11,9 @@ export const UpdateUserValidation = Yup.object({
     .string()
     .min(3, 'Минимальная длина username 3 символа')
     .max(16, 'Username не должен превышать 16 символов')
-    .required(ValidationConfig.Required)
+    .required(ValidationConfig.Required),
+
+  bio: Yup
+    .string()
+    .max(100, 'Bio не должен превышать 100 символов')
 });

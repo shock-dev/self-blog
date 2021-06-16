@@ -8,6 +8,7 @@ export interface IUser {
   username: string
   avatarUrl: string
   birthday: string
+  bio?: string
   gender: 'male' | 'female'
   posts: IPost[]
   followers: IUser[] & string

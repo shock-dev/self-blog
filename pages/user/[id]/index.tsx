@@ -27,6 +27,7 @@ const UserPage = ({
     <ProfileLayout title={pageTitle} user={user}>
       <UserInfo
         email={user.email}
+        bio={user.bio}
         birthday={new Date(user.birthday).toLocaleDateString()}
         postCount={user.posts.length}
         gender={user.gender}
