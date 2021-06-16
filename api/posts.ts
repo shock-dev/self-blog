@@ -16,6 +16,11 @@ class PostsApi {
     const { data } = await axios.post(`/posts`, payload);
     return data;
   }
+
+  getByUserId = async (id: string) => {
+    const { data } = await axios.get(`/posts/${id}/user`);
+    return data;
+  }
 }
 
 export default new PostsApi();
