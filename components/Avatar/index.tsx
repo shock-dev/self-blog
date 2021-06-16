@@ -52,6 +52,7 @@ const Avatar = ({
         className={styles.avatar}
         src={url}
         alt={`Аватарка ${username}`}
+        title={`Аватарка ${username}`}
       />
     </div>
   );

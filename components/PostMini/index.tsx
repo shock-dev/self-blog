@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import Link from 'next/link';
 import styles from './PostMini.module.scss';
 import { IUser } from '../../types/user';
@@ -12,18 +12,20 @@ interface PostMiniProps {
   imageUrl?: string
   createdAt: Date
   user: IUser
+  customStyles?: CSSProperties
 }
 
 const PostMini = ({
   id,
   title,
   createdAt,
-  user
+  user,
+  customStyles = {}
 }: PostMiniProps) => {
   const postUrl = `/post/${id}`;
 
   return (
-    <article className={styles.post}>
+    <article className={styles.post} style={customStyles}>
       <div className={styles.header}>
         <Avatar
           url={user.avatarUrl}

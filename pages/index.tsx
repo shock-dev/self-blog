@@ -22,6 +22,7 @@ const Home = ({
           description={post.description}
           createdAt={post.createdAt}
           user={post.user}
+          customStyles={{ margin: '0 0 20px' }}
         />
       )}
     </ContentLayout>

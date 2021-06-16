@@ -27,7 +27,7 @@ const PostPage = ({ post }: PostProps) => {
         createdAt={post.createdAt}
         user={post.user}
       />
-      {comments && (
+      {!!comments.length && (
         <Comments count={comments.length}>
           {comments.map((comment) =>
             <Comments.Item
