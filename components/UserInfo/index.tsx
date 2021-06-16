@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './UserInfo.module.scss';
 
 interface UserInfoProps {
-  fullname: string
   bio?: string
   email: string
   birthday: string
@@ -12,7 +11,6 @@ interface UserInfoProps {
 }
 
 const UserInfo = ({
-  fullname,
   bio,
   email,
   birthday,
@@ -24,7 +22,7 @@ const UserInfo = ({
     <div className={styles.info}>
       <div className={styles.header}>
         <h4 className={styles.fullname}>
-          {fullname}
+          Основная информация
         </h4>
         {bio && (
           <p className={styles.desc}>

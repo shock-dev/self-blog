@@ -69,6 +69,9 @@ export default function ProfileLayout({
               type="circle"
               username={user.username}
             />
+            <h4 className={styles.fullname}>
+              {user.name} {user.surname}
+            </h4>
             <h4 className={styles.username}>
               @{user.username}
             </h4>

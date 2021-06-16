@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Select from '../../Select';
 import { availableDays, availableYears, months } from '../../../resources/birthday';
 import styles from './Birthday.module.scss';
-import { BirthdayType } from '../../../pages/register';
+import { AdditionInfoStepFormInputs } from '../../../pages/register';
 
 interface BirthdayProps {
   day: number
   month: number
   year: number
-  onChange: (date: BirthdayType) => any
+  onChange: (date: AdditionInfoStepFormInputs['birthday']) => any
 }
 
 const Birthday = ({
