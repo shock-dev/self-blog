@@ -32,12 +32,13 @@ const Form = ({ postId }: FormProps) => {
       text: ''
     },
     validationSchema,
-    onSubmit: async (data) => {
+    onSubmit: (data, { resetForm }) => {
       const payload: IAddComment = {
         text: data.text,
         postId
       };
-      await dispatch(requestAddComment(payload));
+      dispatch(requestAddComment(payload));
+      resetForm();
     }
   });
 
@@ -68,6 +69,7 @@ const Form = ({ postId }: FormProps) => {
           <Button
             type="submit"
             color="blue"
+            disabled={!values.text.length}
             customStyles={{ marginTop: '10px' }}
           >
             Отправить
