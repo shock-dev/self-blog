@@ -81,7 +81,7 @@ export default function Register() {
 
   const registerHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(registerRequest(userData));
+    dispatch(registerRequest(userData, router));
   };
 
   useEffect(() => {
@@ -95,12 +95,6 @@ export default function Register() {
       }
     };
   }, [error]);
-
-  useEffect(() => {
-    if (isAuth) {
-      router.replace('/');
-    }
-  }, [isAuth]);
 
   const ContextValue = {
     step,

@@ -5,17 +5,15 @@ import { IUser } from '../../types/user';
 import { RegisterFormInputs } from '../../pages/register';
 import { UpdateFormInputs } from '../../components/Settings/Profile';
 
-export const fetchLogin = (payload: LoginFormInputs) => action(AuthActionType.FETCH_LOGIN, payload);
+export const fetchLogin = (data: LoginFormInputs, router) => action(AuthActionType.FETCH_LOGIN, { data, router });
 
 export const fetchUserInfo = (token: string) => action(AuthActionType.FETCH_USER_INFO, token);
 
-export const registerRequest = (payload: RegisterFormInputs) => action(AuthActionType.REGISTER_REQUEST, payload);
-
-export const registerSuccess = (data: IUser) => action(AuthActionType.REGISTER_SUCCESS, data);
+export const registerRequest = (data: RegisterFormInputs, router) => action(AuthActionType.REGISTER_REQUEST, { data, router });
 
 export const updateUserRequest = (data: UpdateFormInputs) => action(AuthActionType.UPDATE_USER_REQUEST, data);
 
-export const logoutRequest = () => action(AuthActionType.LOGOUT_REQUEST);
+export const logoutRequest = (router) => action(AuthActionType.LOGOUT_REQUEST, { router });
 
 export const logoutSuccess = () => action(AuthActionType.LOGOUT_SUCCESS);
 

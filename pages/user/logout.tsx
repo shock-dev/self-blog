@@ -1,24 +1,18 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styles from '../../styles/pages/Logout.module.scss';
 import withAuthSS from '../../hocs/withAuth';
 import { logoutRequest } from '../../store/auth/actions';
-import { selectIsAuth } from '../../store/auth/selectors';
+import { useRouter } from 'next/router';
 
 const Logout = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const isAuth = useSelector(selectIsAuth);
 
   useEffect(() => {
-    dispatch(logoutRequest());
+    dispatch(logoutRequest(router));
   }, []);
-
-  useEffect(() => {
-    router.replace('/login');
-  }, [isAuth]);
 
   return (
     <div className={styles.wrapper}>
