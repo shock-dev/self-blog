@@ -39,7 +39,7 @@ export default function Login() {
     },
     validationSchema,
     onSubmit: (data) => {
-      dispatch(fetchLogin(data));
+      dispatch(fetchLogin(data, router));
     }
   });
 
@@ -54,12 +54,6 @@ export default function Login() {
       }
     };
   }, [error]);
-
-  useEffect(() => {
-    if (isAuth) {
-      router.replace('/');
-    }
-  }, [isAuth]);
 
   return (
     <AuthLayout title="Вход">
