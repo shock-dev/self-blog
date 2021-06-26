@@ -1,3 +1,4 @@
+import { setCookie, destroyCookie } from 'nookies';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { SagaIterator } from 'redux-saga';
 import { AuthActionType } from './types';
@@ -5,19 +6,20 @@ import AuthApi from '../../api/auth';
 import UsersApi from '../../api/users';
 import {
   logoutSuccess,
-  registerSuccess,
-  setError,
-  setIsAuth,
+  setError, setIsAuth,
   setUserInfo
 } from './actions';
 
 function* fetchLogin(action): SagaIterator {
   try {
-    const { payload } = action;
-    const { data } = yield call(AuthApi.login, payload);
+    const { data, router } = action.payload;
+    const { data: token } = yield call(AuthApi.login, data);
 
-    yield put(setUserInfo(data));
-    yield put(setIsAuth(true));
+    yield call(setCookie, null, 'authToken', token, {
+      maxAge: 30 * 24 * 60 * 60 * 1000
+    });
+
+    yield call(router.push, '/');
   } catch (e) {
     const { data } = e.response.data;
 
@@ -45,14 +47,20 @@ function* fetchUserInfo(action) {
 
 function* fetchRegister(action): SagaIterator {
   try {
+    const { data, router } = action.payload;
     const { year, month, day } = action.payload.birthday;
     const payload = {
-      ...action.payload,
+      ...data,
       gender: action.payload.gender.value,
       birthday: new Date(year, month, day).toLocaleDateString()
     };
-    const { data } = yield call(AuthApi.register, payload);
-    yield put(registerSuccess(data));
+    const { data: token } = yield call(AuthApi.register, payload);
+
+    yield call(setCookie, null, 'authToken', token, {
+      maxAge: 30 * 24 * 60 * 60 * 1000
+    });
+
+    yield call(router.push, '/');
   } catch (e) {
     const { message } = e.response.data;
 
@@ -64,10 +72,13 @@ function* fetchRegister(action): SagaIterator {
   }
 }
 
-function* fetchLogout(): SagaIterator {
+function* fetchLogout(action): SagaIterator {
   try {
-    yield call(AuthApi.logout);
+    const { router } = action.payload;
+    yield call(destroyCookie, null, 'authToken');
     yield put(logoutSuccess());
+    yield put(setIsAuth(false));
+    yield call(router.push, '/login');
   } catch (e) {
     const { message } = e.response.data;
 
