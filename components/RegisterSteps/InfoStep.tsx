@@ -25,7 +25,6 @@ const infoStep = () => {
     },
     validationSchema: InfoStepValidation,
     onSubmit: (data: InfoStepFormInputs) => {
-      console.log(errors);
       setUserData({
         ...userData,
         ...data
