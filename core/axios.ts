@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Cookies from 'nookies';
 
 if (!process.env.NEXT_PUBLIC_API_URL) {
   throw new Error('specify NEXT_PUBLIC_API_URL in .env.local');
@@ -6,7 +7,10 @@ if (!process.env.NEXT_PUBLIC_API_URL) {
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-  withCredentials: true
+  withCredentials: true,
+  headers: {
+    cookie: `authToken=${Cookies.get(null, 'authToken')}`
+  }
 });
 
 export default instance;
