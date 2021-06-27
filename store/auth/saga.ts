@@ -76,8 +76,6 @@ function* fetchLogout(action): SagaIterator {
   try {
     const { router } = action.payload;
     yield call(destroyCookie, null, 'authToken');
-    yield put(logoutSuccess());
-    yield put(setIsAuth(false));
     yield call(router.push, '/login');
   } catch (e) {
     const { message } = e.response.data;

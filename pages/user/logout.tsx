@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
-import { useDispatch } from 'react-redux';
 import styles from '../../styles/pages/Logout.module.scss';
 import withAuthSS from '../../hocs/withAuth';
-import { logoutRequest } from '../../store/auth/actions';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { logoutRequest } from '../../store/auth/actions';
 
 const Logout = () => {
   const dispatch = useDispatch();

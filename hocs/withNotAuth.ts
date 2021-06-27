@@ -1,19 +1,23 @@
 import { GetServerSidePropsContext } from 'next';
 import Cookies from 'nookies';
 import axios from '../core/axios';
+import { SagaStore, wrapper } from '../store';
+import { logoutSuccess } from '../store/auth/actions';
 
 const withNotAuthSS = (callback = undefined) => {
-  return async (context: GetServerSidePropsContext) => {
+  return wrapper.getServerSideProps(async (ctx: GetServerSidePropsContext & { store: SagaStore }) => {
+    const cookie = Cookies.get(ctx);
+
+    if (!cookie.authToken) {
+      ctx.store.dispatch(logoutSuccess());
+
+      return {
+        props: {}
+      };
+    }
+
     try {
-      const cookie = Cookies.get(context);
-
-      if (!cookie.authToken) {
-        return {
-          props: {}
-        };
-      }
-
-      const data = await axios.get('/auth/me', {
+      const { data: { data } } = await axios.get('/auth/me', {
         headers: {
           cookie: `authToken=${cookie.authToken}`
         }
@@ -31,7 +35,7 @@ const withNotAuthSS = (callback = undefined) => {
       if (callback) {
         return {
           props: {
-            ...((await callback(context)).props || {})
+            ...((await callback(ctx)).props || {})
           }
         };
       }
@@ -47,7 +51,7 @@ const withNotAuthSS = (callback = undefined) => {
         props: {}
       };
     }
-  };
+  });
 };
 
 export default withNotAuthSS;
