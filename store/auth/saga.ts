@@ -5,8 +5,7 @@ import { AuthActionType } from './types';
 import AuthApi from '../../api/auth';
 import UsersApi from '../../api/users';
 import {
-  logoutSuccess,
-  setError, setIsAuth,
+  setError,
   setUserInfo
 } from './actions';
 
@@ -48,12 +47,13 @@ function* fetchUserInfo(action) {
 function* fetchRegister(action): SagaIterator {
   try {
     const { data, router } = action.payload;
-    const { year, month, day } = action.payload.birthday;
+    const { year, month, day } = data.birthday;
     const payload = {
       ...data,
-      gender: action.payload.gender.value,
+      gender: data.gender.value,
       birthday: new Date(year, month, day).toLocaleDateString()
     };
+
     const { data: token } = yield call(AuthApi.register, payload);
 
     yield call(setCookie, null, 'authToken', token, {
