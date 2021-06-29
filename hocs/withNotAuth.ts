@@ -19,7 +19,7 @@ const withNotAuthSS = (callback = undefined) => {
     try {
       const { data: { data } } = await axios.get('/auth/me', {
         headers: {
-          cookie: `authToken=${cookie.authToken}`
+          Authorization: `Bearer ${cookie.authToken}`
         }
       });
 

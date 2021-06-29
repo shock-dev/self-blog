@@ -8,7 +8,7 @@ if (!process.env.NEXT_PUBLIC_API_URL) {
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
-    cookie: `authToken=${Cookies.get('authToken')}`
+    Authorization: `Bearer ${Cookies.get('authToken')}`
   }
 });
 

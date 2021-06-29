@@ -16,7 +16,7 @@ class AuthApi {
   getMe = async (token: string) => {
     const { data } = await axios.get(`/auth/me`, {
       headers: {
-        cookie: `authToken=${token}`
+        Authorization: `Bearer ${token}`
       }
     });
     return data;
