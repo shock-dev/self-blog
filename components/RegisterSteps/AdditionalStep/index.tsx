@@ -35,7 +35,8 @@ const AdditionalStep = () => {
     onSubmit: (data: AdditionInfoStepFormInputs) => {
       setUserData({
         ...userData,
-        ...data
+        name: data.name,
+        surname: data.surname
       });
       onNextStep();
     }
@@ -60,7 +61,8 @@ const AdditionalStep = () => {
   const handleBack = () => {
     setUserData({
       ...userData,
-      ...values
+      name: values.name,
+      surname: values.surname
     });
     onBackStep();
   };
