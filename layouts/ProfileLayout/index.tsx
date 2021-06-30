@@ -68,6 +68,9 @@ export default function ProfileLayout({
               url={user.avatarUrl}
               type="circle"
               username={user.username}
+              width={260}
+              height={260}
+              additionalStyles={{ margin: '0 0 15px' }}
             />
             <h4 className={styles.fullname}>
               {user.name} {user.surname}
