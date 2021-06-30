@@ -29,7 +29,7 @@ const UserPage = ({
         email={user.email}
         bio={user.bio}
         birthday={new Date(user.birthday).toLocaleDateString()}
-        postCount={user.posts.length}
+        postCount={posts.length}
         gender={user.gender}
         registerDate={new Date(user.createdAt).toLocaleDateString()}
       />
@@ -41,7 +41,7 @@ const UserPage = ({
           description={post.description}
           createdAt={post.createdAt}
           user={user}
-          customStyles={{ margin: '20px 0 0' }}
+          customStyles={{ margin: '0 0 20px' }}
         />
       )}
     </ProfileLayout>
