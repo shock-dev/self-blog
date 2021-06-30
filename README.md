@@ -16,4 +16,15 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## The technologies I used:
+
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org)
+- [Redux](https://redux.js.org)
+- [Redux-saga](https://redux-saga.js.org)
+- [Immer](https://immerjs.github.io/immer)
+- [SCSS](https://sass-lang.com)
+- [Axios](https://axios-http.com)
+- [Date-fns](https://date-fns.org/) for working with date
+- [Typesafe-actions](https://github.com/piotrwitek/typesafe-actions) for type redux actions
+- [Formik](https://formik.org/docs/overview) for working with forms easily
