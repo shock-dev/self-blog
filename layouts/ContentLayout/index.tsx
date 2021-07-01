@@ -9,11 +9,13 @@ import DiscusWidget from '../../components/DiscusWidget';
 interface ContentLayoutProps {
   title: string
   children: React.ReactNode
+  auth: boolean
 }
 
 export default function ContentLayout({
   title,
-  children
+  children,
+  auth
 }: ContentLayoutProps) {
   return (
     <>
@@ -24,7 +26,41 @@ export default function ContentLayout({
       <div className={cn('container', styles.page)}>
         <div className={styles.wrapper}>
           <aside className={styles.left}>
-            <SuggestWriting />
+            {auth ? (
+              <SuggestWriting
+                title="Пишите"
+                desc="Вы можете поделиться опытом, создавая пост или запустить тему для обсуждения"
+                links={[
+                  {
+                    url: '/new',
+                    text: 'Создать пост',
+                    isOutline: false
+                  },
+                  {
+                    url: '/new',
+                    text: 'Обсудить что-либо',
+                    isOutline: true
+                  }
+                ]}
+              />
+            ) : (
+              <SuggestWriting
+                title="Авторизуйтесь"
+                desc="Для больших действий на сайте вам необходимо войти в систему"
+                links={[
+                  {
+                    url: '/login',
+                    text: 'Войти',
+                    isOutline: false
+                  },
+                  {
+                    url: '/register',
+                    text: 'Зарегистрироваться',
+                    isOutline: true
+                  }
+                ]}
+              />
+            )}
           </aside>
           <main className={styles.main}>
             {children}
