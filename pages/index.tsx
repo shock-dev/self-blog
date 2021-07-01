@@ -7,13 +7,15 @@ import { IPost } from '../types/post';
 
 interface HomeProps {
   posts: IPost[]
+  auth: boolean
 }
 
 const Home = ({
-  posts
+  posts,
+  auth
 }: HomeProps) => {
   return (
-    <ContentLayout title="Главная">
+    <ContentLayout title="Главная" auth={auth}>
       {posts.map((post) =>
         <PostMini
           key={post._id}

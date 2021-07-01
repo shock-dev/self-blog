@@ -11,6 +11,10 @@ const profileSettings = () => {
   );
 };
 
-export const getServerSideProps = withAuthSS();
+export const getServerSideProps = withAuthSS(() => {
+  return {
+    protect: true
+  };
+});
 
 export default profileSettings;

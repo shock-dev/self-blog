@@ -16,17 +16,19 @@ interface ProfileLayoutProps {
   title: string
   children: React.ReactNode
   user: IUser
+  auth: boolean
 }
 
 export default function ProfileLayout({
   title,
   children,
-  user
+  user,
+  auth
 }: ProfileLayoutProps) {
   const alert = useAlert();
   const me = useSelector(selectAuth).data;
   const [followersCount, setFollowersCount] = useState(user.followers.length);
-  const [isFollower, setIsFollower] = useState(user.followers.includes(me._id));
+  const [isFollower, setIsFollower] = useState(user.followers.includes(me?._id));
   const [loading, setLoading] = useState(false);
 
   const followHandler = async () => {
@@ -54,6 +56,8 @@ export default function ProfileLayout({
       setLoading(false);
     }
   };
+
+  const isMe: boolean = me?._id !== user._id;
 
   return (
     <>
@@ -93,39 +97,41 @@ export default function ProfileLayout({
                 <a>{user.following.length} Подписок</a>
               </Link>
             </div>
-            {me._id !== user._id ? (
-              isFollower ? (
-                <Button
-                  customStyles={{ marginTop: '20px' }}
-                  onClick={unfollowHandler}
-                  loading={loading}
-                  outline
-                  full
-                >
-                  Описаться
-                </Button>
-              ) : (
-                <Button
-                  customStyles={{ marginTop: '20px' }}
-                  onClick={followHandler}
-                  loading={loading}
-                  full
-                >
-                  Подписаться
-                </Button>
-              )
-            ) : (
-              <Link href="/settings/profile">
-                <a className={styles.link}>
+            {auth && (
+              !isMe ? (
+                isFollower ? (
                   <Button
                     customStyles={{ marginTop: '20px' }}
+                    onClick={unfollowHandler}
+                    loading={loading}
                     outline
                     full
                   >
-                    Настройки
+                    Описаться
                   </Button>
-                </a>
-              </Link>
+                ) : (
+                  <Button
+                    customStyles={{ marginTop: '20px' }}
+                    onClick={followHandler}
+                    loading={loading}
+                    full
+                  >
+                    Подписаться
+                  </Button>
+                )
+              ) : (
+                <Link href="/settings/profile">
+                  <a className={styles.link}>
+                    <Button
+                      customStyles={{ marginTop: '20px' }}
+                      outline
+                      full
+                    >
+                      Настройки
+                    </Button>
+                  </a>
+                </Link>
+              )
             )}
           </div>
           <div className={styles.children}>

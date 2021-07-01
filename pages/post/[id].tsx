@@ -8,12 +8,17 @@ import { useSelector } from 'react-redux';
 import { selectCommentsData } from '../../store/comments/selectors';
 import MainLayout from '../../layouts/MainLayout';
 import PostFull from '../../components/PostFull';
+import Reminder from '../../components/Reminder';
 
 interface PostProps {
   post: IPost
+  auth: boolean
 }
 
-const PostPage = ({ post }: PostProps) => {
+const PostPage = ({
+  post,
+  auth
+}: PostProps) => {
   const comments = useSelector(selectCommentsData);
 
   return (
@@ -39,7 +44,11 @@ const PostPage = ({ post }: PostProps) => {
           )}
         </Comments>
       )}
-      <Comments.Form postId={post._id} />
+      {auth ? (
+        <Comments.Form postId={post._id} />
+      ) : (
+        <Reminder text="оставлять комментарии" />
+      )}
     </MainLayout>
   );
 };

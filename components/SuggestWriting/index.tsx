@@ -3,34 +3,44 @@ import Link from 'next/link';
 import styles from './SuggestWriting.module.scss';
 import Button from '../Button';
 
-const SuggestWriting = () => {
+interface LinksProps {
+  text: string
+  url: string
+  isOutline?: boolean
+}
+
+interface SuggestWritingProps {
+  title: string
+  desc: string
+  links: LinksProps[]
+}
+
+const SuggestWriting = ({
+  title,
+  desc,
+  links
+}: SuggestWritingProps) => {
   return (
     <div className={styles.wrapper}>
       <h6 className={styles.title}>
-        Пишите
+        {title}
       </h6>
-      <p className={styles.text}>Вы можете поделиться опытом, создавая пост или запустить тему для обсуждения</p>
-      <Link href="/new">
-        <a className={styles.link}>
-          <Button
-            customStyles={{ marginTop: '14px' }}
-            full
-          >
-            Создать пост
-          </Button>
-        </a>
-      </Link>
-      <Link href="/new">
-        <a className={styles.link}>
-          <Button
-            customStyles={{ marginTop: '7px' }}
-            outline
-            full
-          >
-            Обсудить что-либо
-          </Button>
-        </a>
-      </Link>
+      <p className={styles.text}>
+        {desc}
+      </p>
+      {links.map((link, index) =>
+        <Link href={link.url} key={index}>
+          <a className={styles.link}>
+            <Button
+              customStyles={{ marginTop: '7px' }}
+              full
+              outline={link.isOutline}
+            >
+              {link.text}
+            </Button>
+          </a>
+        </Link>
+      )}
     </div>
   );
 };
