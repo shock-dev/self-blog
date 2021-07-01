@@ -28,3 +28,7 @@ yarn dev
 - [Date-fns](https://date-fns.org/) for working with date
 - [Typesafe-actions](https://github.com/piotrwitek/typesafe-actions) for type redux actions
 - [Formik](https://formik.org/docs/overview) for working with forms easily
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
