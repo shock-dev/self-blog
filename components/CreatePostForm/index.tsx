@@ -8,6 +8,7 @@ import createPostValidationSchema from '../../validation/post/create';
 import cn from 'classnames';
 import { useRouter } from 'next/router';
 import { IPost } from '../../types/post';
+import Reminder from '../Reminder';
 
 export interface CreatePostFormInputs {
   title: string
@@ -51,6 +52,7 @@ const CreatePostForm = () => {
       className={styles.wrapper}
       onSubmit={handleSubmit}
     >
+      <Reminder text="написать пост" styles={{ margin: '0 0 20px' }} />
       <div className={styles.inputWrapper}>
         <input
           id="title"
