@@ -40,8 +40,8 @@ const FollowerBox = ({
             name={user.name}
             surname={user.surname}
             avatarUrl={user.avatarUrl}
-            isMe={me._id === user._id}
-            isFollow={me.following.includes(user._id)}
+            isMe={me?._id === user._id}
+            isFollow={me?.following.includes(user._id)}
             customStyles={{ margin: '10px 10px' }}
           />
         )}

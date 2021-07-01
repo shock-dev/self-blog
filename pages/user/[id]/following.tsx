@@ -10,18 +10,20 @@ import { selectAuth } from '../../../store/auth/selectors';
 interface FollowingPageProps {
   user: IUser
   following: IUser[]
+  auth: boolean
 }
 
 const FollowingPage = ({
   user,
-  following
+  following,
+  auth
 }: FollowingPageProps) => {
   const me = useSelector(selectAuth).data;
-  const isMe = me._id === user._id;
+  const isMe = me?._id === user._id;
   const pageTitle = isMe ? 'Ваши подписки' : `${user.username} (${user.name} ${user.surname}) / Подписки`;
 
   return (
-    <ProfileLayout title={pageTitle} user={user}>
+    <ProfileLayout title={pageTitle} user={user} auth={auth}>
       <FollowerBox
         title="Подписки"
         list={following}
