@@ -32,12 +32,12 @@ export default function Header() {
             <div>
               <Link href="/login">
                 <a className={styles.loginBtn}>
-                  Login
+                  Вход
                 </a>
               </Link>
               <Link href="/register">
                 <a className={styles.registerBtn}>
-                  Register
+                  Регистрация
                 </a>
               </Link>
             </div>
