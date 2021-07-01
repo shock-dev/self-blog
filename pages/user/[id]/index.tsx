@@ -13,18 +13,20 @@ import PostMini from '../../../components/PostMini';
 interface UserPageProps {
   user: IUser
   posts: IPost[]
+  auth: boolean
 }
 
 const UserPage = ({
   user,
-  posts
+  posts,
+  auth
 }: UserPageProps) => {
   const me = useSelector(selectAuth).data;
-  const isMe = me._id === user._id;
+  const isMe = me?._id === user?._id;
   const pageTitle = isMe ? 'Ваш профиль' : `${user.username} (${user.name} ${user.surname})`;
 
   return (
-    <ProfileLayout title={pageTitle} user={user}>
+    <ProfileLayout title={pageTitle} user={user} auth={auth}>
       <UserInfo
         email={user.email}
         bio={user.bio}
