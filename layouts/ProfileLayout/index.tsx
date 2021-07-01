@@ -93,7 +93,7 @@ export default function ProfileLayout({
                 <a>{user.following.length} Подписок</a>
               </Link>
             </div>
-            {me._id !== user._id && (
+            {me._id !== user._id ? (
               isFollower ? (
                 <Button
                   customStyles={{ marginTop: '20px' }}
@@ -114,6 +114,18 @@ export default function ProfileLayout({
                   Подписаться
                 </Button>
               )
+            ) : (
+              <Link href="/settings/profile">
+                <a className={styles.link}>
+                  <Button
+                    customStyles={{ marginTop: '20px' }}
+                    outline
+                    full
+                  >
+                    Настройки
+                  </Button>
+                </a>
+              </Link>
             )}
           </div>
           <div className={styles.children}>
