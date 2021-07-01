@@ -4,6 +4,10 @@ import Button from '../Button';
 import { useFormik } from 'formik';
 import PostsApi from '../../api/posts';
 import { useAlert } from 'react-alert';
+import createPostValidationSchema from '../../validation/post/create';
+import cn from 'classnames';
+import { useRouter } from 'next/router';
+import { IPost } from '../../types/post';
 
 export interface CreatePostFormInputs {
   title: string
@@ -12,21 +16,25 @@ export interface CreatePostFormInputs {
 
 const CreatePostForm = () => {
   const alert = useAlert();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const {
     handleSubmit,
     handleChange,
-    handleBlur
+    handleBlur,
+    errors,
+    touched
   } = useFormik<CreatePostFormInputs>({
     initialValues: {
       title: '',
       description: ''
     },
+    validationSchema: createPostValidationSchema,
     onSubmit: async (formData) => {
       try {
         setLoading(true);
-        const { data } = await PostsApi.create(formData);
-        console.log(data);
+        const { data }: { data: IPost } = await PostsApi.create(formData);
+        await router.push(`/post/${data._id}`);
       } catch (e) {
         alert.error('Не удалось опубликовать пост.');
       } finally {
@@ -35,26 +43,43 @@ const CreatePostForm = () => {
     }
   });
 
+  const titleError: boolean = touched.title && !!errors.title;
+  const descriptionError: boolean = touched.description && !!errors.description;
+
   return (
     <form
       className={styles.wrapper}
       onSubmit={handleSubmit}
     >
-      <input
-        id="title"
-        type="text"
-        placeholder="Тут введите название поста*"
-        className={styles.inputTitle}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
-      <textarea
-        id="description"
-        placeholder="Контент поста"
-        className={styles.textarea}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
+      <div className={styles.inputWrapper}>
+        <input
+          id="title"
+          type="text"
+          placeholder="Тут введите название поста*"
+          className={cn(styles.inputTitle, { [styles.inputError]: titleError })}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        {titleError && (
+          <p className={styles.errorMessage}>
+            {errors.title}
+          </p>
+        )}
+      </div>
+      <div className={styles.inputWrapper}>
+        <textarea
+          id="description"
+          placeholder="Контент поста"
+          className={cn(styles.textarea, { [styles.inputError]: descriptionError })}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        {descriptionError && (
+          <p className={styles.errorMessage}>
+            {errors.description}
+          </p>
+        )}
+      </div>
       <Button type="submit" loading={loading}>
         Опубликовать
       </Button>
