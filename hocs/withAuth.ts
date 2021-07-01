@@ -6,35 +6,40 @@ import { END } from 'redux-saga';
 
 const withAuthSS = (callback = undefined) => {
   return wrapper.getServerSideProps(async (ctx: GetServerSidePropsContext & { store: SagaStore }) => {
-    try {
-      const cookie = Cookies.get(ctx);
+    const callbackResult = callback ? await callback(ctx) : undefined;
 
-      if (!cookie.authToken) {
-        return {
-          redirect: {
-            permanent: false,
-            destination: '/login'
-          }
-        };
-      }
-
-      ctx.store.dispatch(fetchUserInfo(cookie.authToken));
-      ctx.store.dispatch(END);
-
-      await ctx.store.sagaTask.toPromise();
-
-      if (callback) {
-        return await callback(ctx);
-      }
-
-      return {
-        props: {}
-      };
-    } catch (e) {
+    if (callbackResult?.protect) {
       return {
         redirect: {
           permanent: false,
-          destination: '/login'
+          destination: '/login?msg=need'
+        }
+      };
+    }
+
+    try {
+      const cookie = Cookies.get(ctx);
+
+      if (cookie.authToken) {
+        ctx.store.dispatch(fetchUserInfo(cookie.authToken));
+        ctx.store.dispatch(END);
+
+        await ctx.store.sagaTask.toPromise();
+      }
+
+      return {
+        ...callbackResult,
+        props: {
+          ...callbackResult?.props,
+          auth: !!ctx.store.getState().user.data
+        }
+      };
+    } catch (e) {
+      return {
+        ...callbackResult,
+        props: {
+          ...callbackResult?.props,
+          auth: !!ctx.store.getState().user.data
         }
       };
     }
