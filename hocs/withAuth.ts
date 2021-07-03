@@ -7,8 +7,9 @@ import { END } from 'redux-saga';
 const withAuthSS = (callback = undefined) => {
   return wrapper.getServerSideProps(async (ctx: GetServerSidePropsContext & { store: SagaStore }) => {
     const callbackResult = callback ? await callback(ctx) : undefined;
+    const authToken = Cookies.get(ctx).authToken;
 
-    if (callbackResult?.protect) {
+    if (callbackResult?.protect && !authToken) {
       return {
         redirect: {
           permanent: false,
@@ -18,10 +19,8 @@ const withAuthSS = (callback = undefined) => {
     }
 
     try {
-      const cookie = Cookies.get(ctx);
-
-      if (cookie.authToken) {
-        ctx.store.dispatch(fetchUserInfo(cookie.authToken));
+      if (authToken) {
+        ctx.store.dispatch(fetchUserInfo(authToken));
         ctx.store.dispatch(END);
 
         await ctx.store.sagaTask.toPromise();
