@@ -57,7 +57,7 @@ export default function ProfileLayout({
     }
   };
 
-  const isMe: boolean = me?._id !== user._id;
+  const isMe: boolean = me?._id === user._id;
 
   return (
     <>
