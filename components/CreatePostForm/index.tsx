@@ -9,6 +9,8 @@ import cn from 'classnames';
 import { useRouter } from 'next/router';
 import { IPost } from '../../types/post';
 import Reminder from '../Reminder';
+import { useSelector } from 'react-redux';
+import { selectAuth } from '../../store/auth/selectors';
 
 export interface CreatePostFormInputs {
   title: string
@@ -16,6 +18,7 @@ export interface CreatePostFormInputs {
 }
 
 const CreatePostForm = () => {
+  const { data } = useSelector(selectAuth);
   const alert = useAlert();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -52,7 +55,9 @@ const CreatePostForm = () => {
       className={styles.wrapper}
       onSubmit={handleSubmit}
     >
-      <Reminder text="написать пост" styles={{ margin: '0 0 20px' }} />
+      {!data && (
+        <Reminder text="написать пост" styles={{ margin: '0 0 20px' }} />
+      )}
       <div className={styles.inputWrapper}>
         <input
           id="title"
