@@ -11,6 +11,7 @@ import { IPost } from '../../types/post';
 import Reminder from '../Reminder';
 import { useSelector } from 'react-redux';
 import { selectAuth } from '../../store/auth/selectors';
+import MarkdownOutput from '../MarkdownOutput';
 
 export interface CreatePostFormInputs {
   title: string
@@ -22,12 +23,14 @@ const CreatePostForm = () => {
   const alert = useAlert();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [isPreview, setIsPreview] = useState(false);
   const {
     handleSubmit,
     handleChange,
     handleBlur,
     errors,
-    touched
+    touched,
+    values
   } = useFormik<CreatePostFormInputs>({
     initialValues: {
       title: '',
@@ -58,38 +61,70 @@ const CreatePostForm = () => {
       {!data && (
         <Reminder text="написать пост" styles={{ margin: '0 0 20px' }} />
       )}
-      <div className={styles.inputWrapper}>
-        <input
-          id="title"
-          type="text"
-          placeholder="Тут введите название поста*"
-          className={cn(styles.inputTitle, { [styles.inputError]: titleError })}
-          onChange={handleChange}
-          onBlur={handleBlur}
+      {isPreview ? (
+        <MarkdownOutput
+          title={values.title}
+          description={values.description}
         />
-        {titleError && (
-          <p className={styles.errorMessage}>
-            {errors.title}
-          </p>
+      ) : (
+        <>
+          <div className={styles.inputWrapper}>
+            <input
+              id="title"
+              type="text"
+              placeholder="Тут введите название поста*"
+              className={cn(styles.inputTitle, { [styles.inputError]: titleError })}
+              value={values.title}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {titleError && (
+              <p className={styles.errorMessage}>
+                {errors.title}
+              </p>
+            )}
+          </div>
+          <div className={styles.inputWrapper}>
+            <textarea
+              id="description"
+              placeholder="Контент поста"
+              className={cn(styles.textarea, { [styles.inputError]: descriptionError })}
+              value={values.description}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {descriptionError && (
+              <p className={styles.errorMessage}>
+                {errors.description}
+              </p>
+            )}
+          </div>
+        </>
+      )}
+      <div className={styles.footer}>
+        <Button type="submit" loading={loading}>
+          Опубликовать
+        </Button>
+        {isPreview ? (
+          <Button
+            type="button"
+            customStyles={{ margin: '0 0 0 10px' }}
+            onClick={() => setIsPreview(false)}
+            outline
+          >
+            Вернуться
+          </Button>
+        ) : (
+          <Button
+            type="button"
+            customStyles={{ margin: '0 0 0 10px' }}
+            onClick={() => setIsPreview(true)}
+            outline
+          >
+            Предпросмотр
+          </Button>
         )}
       </div>
-      <div className={styles.inputWrapper}>
-        <textarea
-          id="description"
-          placeholder="Контент поста"
-          className={cn(styles.textarea, { [styles.inputError]: descriptionError })}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-        {descriptionError && (
-          <p className={styles.errorMessage}>
-            {errors.description}
-          </p>
-        )}
-      </div>
-      <Button type="submit" loading={loading}>
-        Опубликовать
-      </Button>
     </form>
   );
 };
