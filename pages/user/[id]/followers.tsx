@@ -28,6 +28,7 @@ const FollowersPage = ({
         title="Подписчики"
         list={followers}
         user={user}
+        auth={auth}
       />
     </ProfileLayout>
   );
