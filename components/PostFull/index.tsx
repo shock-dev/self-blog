@@ -7,7 +7,6 @@ import { getDifference } from '../../utils/reformDate';
 import MarkdownOutput from '../MarkdownOutput';
 
 interface PostFullProps {
-  id: string
   title: string
   description: string
   imageUrl?: string
@@ -16,15 +15,12 @@ interface PostFullProps {
 }
 
 const PostFull = ({
-  id,
   title,
   description,
   imageUrl = null,
   createdAt,
   user
 }: PostFullProps) => {
-  const postUrl = `/post/${id}`;
-
   return (
     <article className={styles.post}>
       <div className={styles.header}>
@@ -44,11 +40,7 @@ const PostFull = ({
           </div>
         </div>
       </div>
-      <Link href={postUrl}>
-        <a>
-          <MarkdownOutput title={title} />
-        </a>
-      </Link>
+      <MarkdownOutput title={title} />
       <ul className={styles.categories}>
         <li className={styles.category}>
           <Link href="/">
