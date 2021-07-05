@@ -4,6 +4,7 @@ import styles from './PostMini.module.scss';
 import { IUser } from '../../types/user';
 import Avatar from '../Avatar';
 import { getDifference } from '../../utils/reformDate';
+import MarkdownOutput from '../MarkdownOutput';
 
 interface PostMiniProps {
   id: string
@@ -53,9 +54,7 @@ const PostMini = ({
       </div>
       <Link href={postUrl}>
         <a>
-          <h2 className={styles.title}>
-            {title}
-          </h2>
+          <MarkdownOutput title={title} />
         </a>
       </Link>
       <ul className={styles.categories}>

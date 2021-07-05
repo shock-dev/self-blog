@@ -59,3 +59,18 @@ button {
   padding: 0 15px;
   margin: 0 auto;
 }
+
+.markdown-body {
+  min-width: 200px;
+  max-width: 100%;
+
+  ul,li {
+    list-style-type: disc;
+  }
+}
+
+@media (max-width: 767px) {
+  .markdown-body {
+    padding: 15px;
+  }
+}

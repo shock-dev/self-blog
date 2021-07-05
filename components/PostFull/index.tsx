@@ -4,6 +4,7 @@ import styles from './PostFull.module.scss';
 import { IUser } from '../../types/user';
 import Avatar from '../Avatar';
 import { getDifference } from '../../utils/reformDate';
+import MarkdownOutput from '../MarkdownOutput';
 
 interface PostFullProps {
   id: string
@@ -45,9 +46,7 @@ const PostFull = ({
       </div>
       <Link href={postUrl}>
         <a>
-          <h2 className={styles.title}>
-            {title}
-          </h2>
+          <MarkdownOutput title={title} />
         </a>
       </Link>
       <ul className={styles.categories}>
@@ -70,7 +69,7 @@ const PostFull = ({
         <img className={styles.img} src={imageUrl} alt={title} />
       )}
       <p className={styles.text}>
-        {description}
+        <MarkdownOutput description={description} />
       </p>
     </article>
   );

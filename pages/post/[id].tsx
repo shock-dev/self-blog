@@ -20,9 +20,10 @@ const PostPage = ({
   auth
 }: PostProps) => {
   const comments = useSelector(selectCommentsData);
+  const pageTitle = post.title.replaceAll('`', '');
 
   return (
-    <MainLayout title={post.title}>
+    <MainLayout title={pageTitle}>
       <PostFull
         key={post._id}
         id={post._id}
