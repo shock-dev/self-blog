@@ -28,6 +28,7 @@ const FollowingPage = ({
         title="Подписки"
         list={following}
         user={user}
+        auth={auth}
       />
     </ProfileLayout>
   );

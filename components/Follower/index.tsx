@@ -14,6 +14,7 @@ interface FollowerProps {
   surname: string
   isMe: boolean
   isFollow: boolean
+  hideBtn?: boolean
   customStyles?: CSSProperties
 }
 
@@ -25,6 +26,7 @@ const Follower = ({
   surname,
   isMe,
   isFollow,
+  hideBtn,
   customStyles = {}
 }: FollowerProps) => {
   const alert = useAlert();
@@ -72,27 +74,29 @@ const Follower = ({
           </p>
         </div>
       </div>
-      {!isMe && (
-        isLocalFollow ? (
-          <button
-            className={cn(styles.follow, styles.followActive)}
-            title="Отписаться"
-            onClick={unfollowHandler}
-          >
-            <svg width={16} height={16}>
-              <use href="/images/[global].svg#follow" />
-            </svg>
-          </button>
-        ) : (
-          <button
-            className={styles.follow}
-            title="Подписаться"
-            onClick={followHandler}
-          >
-            <svg width={16} height={16}>
-              <use href="/images/[global].svg#follow" />
-            </svg>
-          </button>
+      {hideBtn && (
+        !isMe && (
+          isLocalFollow ? (
+            <button
+              className={cn(styles.follow, styles.followActive)}
+              title="Отписаться"
+              onClick={unfollowHandler}
+            >
+              <svg width={16} height={16}>
+                <use href="/images/[global].svg#follow" />
+              </svg>
+            </button>
+          ) : (
+            <button
+              className={styles.follow}
+              title="Подписаться"
+              onClick={followHandler}
+            >
+              <svg width={16} height={16}>
+                <use href="/images/[global].svg#follow" />
+              </svg>
+            </button>
+          )
         )
       )}
     </div>

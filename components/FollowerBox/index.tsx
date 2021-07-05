@@ -10,12 +10,14 @@ interface FollowerBoxProps {
   title: string
   list: IUser[]
   user: IUser
+  auth: boolean
 }
 
 const FollowerBox = ({
   title,
   list,
-  user
+  user,
+  auth
 }: FollowerBoxProps) => {
   const me = useSelector(selectAuth).data;
 
@@ -43,6 +45,7 @@ const FollowerBox = ({
             isMe={me?._id === user._id}
             isFollow={me?.following.includes(user._id)}
             customStyles={{ margin: '10px 10px' }}
+            hideBtn={auth}
           />
         )}
       </div>
