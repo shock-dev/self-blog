@@ -12,6 +12,11 @@
   margin-bottom: 10px;
 }
 
+.footer {
+  display: flex;
+  margin-top: 20px;
+}
+
 .inputTitle {
   display: block;
   width: 100%;
@@ -24,9 +29,9 @@
 }
 
 .textarea {
-  font-size: 22px;
-  line-height: 26px;
-  color: rgba(0, 0, 0, 0.7);
+  font-size: 16px;
+  line-height: 1.1;
+  color: rgba(0, 0, 0, 0.9);
   padding: 20px;
   display: block;
   width: 100%;
