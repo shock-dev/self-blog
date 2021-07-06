@@ -24,13 +24,36 @@
   margin-right: 10px;
 }
 
-.postImage {
+.postImageWrapper {
   display: flex;
   margin-bottom: 20px;
   height: 230px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.postImage {
   width: 100%;
   object-fit: cover;
-  border-radius: 4px;
+}
+
+.postImageWrapper:hover .overlay {
+  opacity: 1;
+}
+
+.overlay {
+  transition: opacity .3s;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(#000, .3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .inputTitle {

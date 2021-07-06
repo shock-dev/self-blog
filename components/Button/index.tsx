@@ -2,25 +2,28 @@ import React, { CSSProperties, useState } from 'react';
 import styles from './Button.module.scss';
 
 enum Palette {
-  blue = '#657EFF',
-  green = '#83FFA6'
+  blue = '#5f8de7',
+  green = '#83FFA6',
+  red = '#ff5a5a'
 }
 
 enum Hovers {
   blue = '#4e69fa',
-  green = '#64ef8b'
+  green = '#64ef8b',
+  red = '#e74444'
 }
 
 interface ButtonProps {
   type?: 'button' | 'submit' | 'reset'
   children: React.ReactNode
   onClick?: () => any
-  color?: 'blue' | 'green'
+  color?: 'blue' | 'green' | 'red'
   full?: boolean
   outline?: boolean
   around?: boolean
   loading?: boolean
   disabled?: boolean
+  withoutHover?: boolean
   customStyles?: CSSProperties
 }
 
@@ -34,6 +37,7 @@ const Button = ({
   around = false,
   loading = false,
   disabled = false,
+  withoutHover = false,
   customStyles
 }: ButtonProps) => {
   const [BgColor, setBgColor] = useState<string>(outline ? 'transparent' : Palette[color]);
@@ -50,7 +54,7 @@ const Button = ({
   };
 
   const mouseOverHandler = () => {
-    if (disabled) {
+    if (disabled || withoutHover) {
       return;
     }
 
@@ -64,7 +68,7 @@ const Button = ({
   };
 
   const mouseLeaveHandler = () => {
-    if (disabled) {
+    if (disabled || withoutHover) {
       return;
     }
 

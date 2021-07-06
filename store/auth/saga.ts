@@ -19,6 +19,7 @@ function* fetchLogin(action): SagaIterator {
     });
 
     yield call(router.push, '/');
+    yield call(router.reload);
   } catch (e) {
     const { data } = e.response.data;
 
@@ -61,6 +62,7 @@ function* fetchRegister(action): SagaIterator {
     });
 
     yield call(router.push, '/');
+    yield call(router.reload);
   } catch (e) {
     const { message } = e.response.data;
 

@@ -55,7 +55,10 @@ const CreatePostForm = () => {
 
       formData.append('title', data.title);
       formData.append('description', data.description);
-      formData.append('intro', postImageUrl.file);
+
+      if (postImageUrl.file && postImageUrl.url) {
+        formData.append('intro', postImageUrl.file);
+      }
 
       try {
         setLoading(true);
@@ -91,11 +94,21 @@ const CreatePostForm = () => {
       onSubmit={handleSubmit}
     >
       {!!postImageUrl.url && (
-        <img
-          src={postImageUrl.url}
-          className={styles.postImage}
-          alt=""
-        />
+        <div className={styles.postImageWrapper}>
+          <img
+            src={postImageUrl.url}
+            className={styles.postImage}
+            alt=""
+          />
+          <div className={styles.overlay}>
+            <Button
+              color="red"
+              onClick={() => setPostImageUrl({ url: null, file: null })}
+            >
+              Удалить картинку
+            </Button>
+          </div>
+        </div>
       )}
       {!data && (
         <Reminder text="написать пост" styles={{ margin: '0 0 20px' }} />
@@ -150,6 +163,7 @@ const CreatePostForm = () => {
               type="button"
               customStyles={{ margin: '0 0 0 10px' }}
               onClick={() => setIsPreview(false)}
+              withoutHover
               outline
             >
               Вернуться
@@ -159,6 +173,7 @@ const CreatePostForm = () => {
               type="button"
               customStyles={{ margin: '0 0 0 10px' }}
               onClick={() => setIsPreview(true)}
+              withoutHover
               outline
             >
               Предпросмотр
