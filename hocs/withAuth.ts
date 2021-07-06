@@ -9,7 +9,7 @@ const withAuthSS = (callback = undefined) => {
     const callbackResult = callback ? await callback(ctx) : undefined;
     const authToken = Cookies.get(ctx).authToken;
 
-    if (callbackResult.props?.protect && !authToken) {
+    if (callbackResult?.props?.protect && !authToken) {
       return {
         redirect: {
           permanent: false,
