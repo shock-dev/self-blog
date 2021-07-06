@@ -12,18 +12,31 @@ import Reminder from '../Reminder';
 import { useSelector } from 'react-redux';
 import { selectAuth } from '../../store/auth/selectors';
 import MarkdownOutput from '../MarkdownOutput';
+import Upload from '../Upload';
+import { checkFIleExt } from '../../utils/checkFIleExt';
 
 export interface CreatePostFormInputs {
   title: string
   description: string
+  intro?: File
+}
+
+interface PostImageProps {
+  url: null | string
+  file: File | null
 }
 
 const CreatePostForm = () => {
   const { data } = useSelector(selectAuth);
   const alert = useAlert();
   const router = useRouter();
+  const inputFileRef = React.useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
+  const [postImageUrl, setPostImageUrl] = useState<PostImageProps>({
+    url: null,
+    file: null
+  });
   const {
     handleSubmit,
     handleChange,
@@ -37,7 +50,13 @@ const CreatePostForm = () => {
       description: ''
     },
     validationSchema: createPostValidationSchema,
-    onSubmit: async (formData) => {
+    onSubmit: async (data) => {
+      const formData = new FormData();
+
+      formData.append('title', data.title);
+      formData.append('description', data.description);
+      formData.append('intro', postImageUrl.file);
+
       try {
         setLoading(true);
         const { data }: { data: IPost } = await PostsApi.create(formData);
@@ -50,6 +69,19 @@ const CreatePostForm = () => {
     }
   });
 
+  const handleChangeImage = async (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    const file = target.files[0];
+
+    if (file && checkFIleExt(file)) {
+      const imageUrl = URL.createObjectURL(file);
+      setPostImageUrl({
+        url: imageUrl,
+        file
+      });
+    }
+  };
+
   const titleError: boolean = touched.title && !!errors.title;
   const descriptionError: boolean = touched.description && !!errors.description;
 
@@ -58,6 +90,13 @@ const CreatePostForm = () => {
       className={styles.wrapper}
       onSubmit={handleSubmit}
     >
+      {!!postImageUrl.url && (
+        <img
+          src={postImageUrl.url}
+          className={styles.postImage}
+          alt=""
+        />
+      )}
       {!data && (
         <Reminder text="написать пост" styles={{ margin: '0 0 20px' }} />
       )}
@@ -102,28 +141,39 @@ const CreatePostForm = () => {
         </>
       )}
       <div className={styles.footer}>
-        <Button type="submit" loading={loading}>
-          Опубликовать
-        </Button>
-        {isPreview ? (
-          <Button
-            type="button"
-            customStyles={{ margin: '0 0 0 10px' }}
-            onClick={() => setIsPreview(false)}
-            outline
-          >
-            Вернуться
+        <div style={{ display: 'flex' }}>
+          <Button type="submit" loading={loading}>
+            Опубликовать
           </Button>
-        ) : (
-          <Button
-            type="button"
-            customStyles={{ margin: '0 0 0 10px' }}
-            onClick={() => setIsPreview(true)}
-            outline
-          >
-            Предпросмотр
-          </Button>
-        )}
+          {isPreview ? (
+            <Button
+              type="button"
+              customStyles={{ margin: '0 0 0 10px' }}
+              onClick={() => setIsPreview(false)}
+              outline
+            >
+              Вернуться
+            </Button>
+          ) : (
+            <Button
+              type="button"
+              customStyles={{ margin: '0 0 0 10px' }}
+              onClick={() => setIsPreview(true)}
+              outline
+            >
+              Предпросмотр
+            </Button>
+          )}
+        </div>
+        <div style={{ display: 'flex' }}>
+          <div className={styles.downloadImageText}>
+            Загрузить картинку
+          </div>
+          <Upload
+            onChange={handleChangeImage}
+            uploadRef={inputFileRef}
+          />
+        </div>
       </div>
     </form>
   );
