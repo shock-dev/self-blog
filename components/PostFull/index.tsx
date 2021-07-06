@@ -40,7 +40,9 @@ const PostFull = ({
           </div>
         </div>
       </div>
-      <MarkdownOutput title={title} />
+      <h2 className={styles.title}>
+        {title}
+      </h2>
       <ul className={styles.categories}>
         <li className={styles.category}>
           <Link href="/">
@@ -61,7 +63,7 @@ const PostFull = ({
         <img className={styles.img} src={imageUrl} alt={title} />
       )}
       <p className={styles.text}>
-        <MarkdownOutput description={description} />
+        <MarkdownOutput text={description} />
       </p>
     </article>
   );
