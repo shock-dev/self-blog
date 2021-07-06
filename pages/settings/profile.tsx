@@ -13,7 +13,9 @@ const profileSettings = () => {
 
 export const getServerSideProps = withAuthSS(() => {
   return {
-    protect: true
+    props: {
+      protect: true
+    }
   };
 });
 
