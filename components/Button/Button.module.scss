@@ -6,7 +6,7 @@
   font-size: 14px;
   line-height: 16px;
   font-weight: 400;
-  transition: background-color .2s, color .2s;
+  transition: background-color .1s, color .1s;
 
   &:not(:disabled):active {
     transform: translateY(1px);

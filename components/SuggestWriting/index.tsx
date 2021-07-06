@@ -35,6 +35,7 @@ const SuggestWriting = ({
               customStyles={{ marginTop: '7px' }}
               full
               outline={link.isOutline}
+              withoutHover={link.isOutline}
             >
               {link.text}
             </Button>
