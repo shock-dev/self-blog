@@ -14,7 +14,23 @@
 
 .footer {
   display: flex;
+  justify-content: space-between;
   margin-top: 20px;
+}
+
+.downloadImageText {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.postImage {
+  display: flex;
+  margin-bottom: 20px;
+  height: 230px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
 .inputTitle {
