@@ -114,10 +114,14 @@ const CreatePostForm = () => {
         <Reminder text="написать пост" styles={{ margin: '0 0 20px' }} />
       )}
       {isPreview ? (
-        <MarkdownOutput
-          title={values.title}
-          description={values.description}
-        />
+        <>
+          <h2 className={styles.title}>
+            {values.title}
+          </h2>
+          <MarkdownOutput
+            text={values.description}
+          />
+        </>
       ) : (
         <>
           <div className={styles.inputWrapper}>
