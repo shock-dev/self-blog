@@ -1,9 +1,9 @@
 .post {
   display: block;
   background-color: #fff;
-  padding: 30px;
   box-shadow: 0 1px 0 0 #e7e8ec, 0 0 0 1px #e7e8ec;
   border-radius: 4px;
+  overflow: hidden;
 
   h1 {
     border-bottom: none !important;
@@ -14,6 +14,16 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+}
+
+.image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.inner {
+  padding: 30px;
 }
 
 .userWrapper {

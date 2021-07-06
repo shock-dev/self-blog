@@ -1,5 +1,4 @@
 import axios from '../core/axios';
-import { CreatePostFormInputs } from '../components/CreatePostForm';
 
 class PostsApi {
   getAll = async () => {
@@ -12,7 +11,7 @@ class PostsApi {
     return data;
   }
 
-  create = async (payload: CreatePostFormInputs) => {
+  create = async (payload) => {
     const { data } = await axios.post(`/posts`, payload);
     return data;
   }
