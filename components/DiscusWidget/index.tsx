@@ -6,7 +6,7 @@ const DiscusWidget = () => {
   return (
     <div className={s.wrapper}>
       <h6 className={s.title}>
-        Обсуждения
+        Обсуждения <span>В разработке*</span>
       </h6>
       <ul className={s.list}>
         <li className={s.item}>

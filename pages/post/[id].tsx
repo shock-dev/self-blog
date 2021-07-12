@@ -47,7 +47,7 @@ const PostPage = ({
       {auth ? (
         <Comments.Form postId={post._id} />
       ) : (
-        <Reminder text="оставлять комментарии" />
+        <Reminder text="оставлять комментарии" styles={{ margin: '0 0 20px' }} />
       )}
     </MainLayout>
   );
