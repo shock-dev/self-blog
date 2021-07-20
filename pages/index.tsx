@@ -22,7 +22,6 @@ const Home = ({
           id={post._id}
           title={post.title}
           imageUrl={post?.imageUrl}
-          description={post.description}
           createdAt={post.createdAt}
           user={post.user}
           customStyles={{ margin: '0 0 20px' }}
