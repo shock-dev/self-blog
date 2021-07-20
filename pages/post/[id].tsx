@@ -6,9 +6,9 @@ import { IPost } from '../../types/post';
 import { setComments } from '../../store/comments/actions';
 import { useSelector } from 'react-redux';
 import { selectCommentsData } from '../../store/comments/selectors';
-import MainLayout from '../../layouts/MainLayout';
 import PostFull from '../../components/PostFull';
 import Reminder from '../../components/Reminder';
+import ContentLayout from '../../layouts/ContentLayout';
 
 interface PostProps {
   post: IPost
@@ -23,7 +23,7 @@ const PostPage = ({
   const pageTitle = post.title.replaceAll('`', '');
 
   return (
-    <MainLayout title={pageTitle}>
+    <ContentLayout title={pageTitle} auth={auth}>
       <PostFull
         key={post._id}
         title={post.title}
@@ -49,7 +49,7 @@ const PostPage = ({
       ) : (
         <Reminder text="оставлять комментарии" styles={{ margin: '0 0 20px' }} />
       )}
-    </MainLayout>
+    </ContentLayout>
   );
 };
 
