@@ -1,0 +1,36 @@
+.wrapper {
+  min-height: 210px;
+  display: flex;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: #f9faff;
+
+    .name {
+      color: #5f8de7;
+    }
+  }
+}
+
+.name {
+  font-weight: 600;
+  transition: color .1s;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding-right: 8px;
+}
+
+.time {
+  margin-left: auto;
+  color: #ccc;
+  font-weight: 300;
+  font-size: 12px;
+  white-space: nowrap;
+}

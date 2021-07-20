@@ -13,5 +13,5 @@ export interface IUser {
   posts: IPost[]
   followers: IUser[] & string
   following: IUser[] & string
-  createdAt: string
+  createdAt: Date
 }

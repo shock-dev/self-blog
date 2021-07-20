@@ -39,6 +39,11 @@ class UsersApi {
     const { data } = await axios.get(`/users/${id}/following`);
     return data;
   }
+
+  getLatest = async (limit: number = 5) => {
+    const { data } = await axios.get(`/users/latest?limit=${limit}`);
+    return data;
+  }
 }
 
 export default new UsersApi();

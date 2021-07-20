@@ -1,13 +1,19 @@
 import React from 'react';
 import CreatePostForm from '../components/CreatePostForm';
 import withAuthSS from '../hocs/withAuth';
-import MainLayout from '../layouts/MainLayout';
+import ContentLayout from '../layouts/ContentLayout';
 
-const NewPage = () => {
+interface NewPageProps {
+  auth: boolean
+}
+
+const NewPage = ({
+  auth
+}: NewPageProps) => {
   return (
-    <MainLayout title="Создание поста">
+    <ContentLayout title="Создание поста" auth={auth}>
       <CreatePostForm />
-    </MainLayout>
+    </ContentLayout>
   );
 };
 

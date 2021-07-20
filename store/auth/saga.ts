@@ -18,8 +18,7 @@ function* fetchLogin(action): SagaIterator {
       maxAge: 30 * 24 * 60 * 60 * 1000
     });
 
-    yield call(router.push, '/');
-    yield call(router.reload);
+    yield call(router.replace, '/');
   } catch (e) {
     const { data } = e.response.data;
 
@@ -61,8 +60,7 @@ function* fetchRegister(action): SagaIterator {
       maxAge: 30 * 24 * 60 * 60 * 1000
     });
 
-    yield call(router.push, '/');
-    yield call(router.reload);
+    yield call(router.replace, '/');
   } catch (e) {
     const { message } = e.response.data;
 
