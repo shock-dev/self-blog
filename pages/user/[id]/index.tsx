@@ -40,7 +40,6 @@ const UserPage = ({
           key={post._id}
           id={post._id}
           title={post.title}
-          description={post.description}
           createdAt={post.createdAt}
           user={user}
           customStyles={{ margin: '0 0 20px' }}
