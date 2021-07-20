@@ -8,7 +8,6 @@ import { getDifference } from '../../utils/reformDate';
 interface PostMiniProps {
   id: string
   title: string
-  description: string
   imageUrl?: string
   createdAt: Date
   user: IUser
@@ -63,6 +62,7 @@ const PostMini = ({
             </h2>
           </a>
         </Link>
+        <p>{}</p>
         <ul className={styles.categories}>
           <li className={styles.category}>
             <Link href="/">
