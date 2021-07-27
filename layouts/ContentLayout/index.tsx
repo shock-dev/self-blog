@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import cn from 'classnames';
 import Head from 'next/head';
 import Header from '../../components/Header';
@@ -7,9 +7,7 @@ import Widget from '../../components/Widget';
 import Link from 'next/link';
 import Button from '../../components/Button';
 import LastUsersList from '../../components/LastUsersList';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchLatestUsers } from '../../store/latestUsers/actions';
-import { selectLatestUserError, selectLatestUserItems, selectLatestUserLoading } from '../../store/latestUsers/selectors';
+import { IUser } from '../../types/user';
 
 const authLinks = [
   {
@@ -41,23 +39,15 @@ interface ContentLayoutProps {
   title: string
   children: React.ReactNode
   auth: boolean
+  lastUsers: IUser[]
 }
 
 export default function ContentLayout({
   title,
   children,
-  auth
+  auth,
+  lastUsers
 }: ContentLayoutProps) {
-  const dispatch = useDispatch();
-  const countOfLatestUsers = 5;
-  const latestUsers = useSelector(selectLatestUserItems);
-  const loading = useSelector(selectLatestUserLoading);
-  const error = useSelector(selectLatestUserError);
-
-  useEffect(() => {
-    dispatch(fetchLatestUsers(countOfLatestUsers));
-  }, []);
-
   return (
     <>
       <Head>
@@ -72,13 +62,9 @@ export default function ContentLayout({
           <aside className={styles.right}>
             <Widget
               title="Первооткрыватели"
-              text={`Последние ${countOfLatestUsers} пользователей, которые зарегистрировались`}
+              text={`Последние 5 пользователей, которые зарегистрировались`}
             >
-              <LastUsersList
-                users={latestUsers}
-                loading={loading}
-                error={error}
-              />
+              <LastUsersList users={lastUsers} />
             </Widget>
             {auth ? (
               <Widget

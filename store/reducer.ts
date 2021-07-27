@@ -3,12 +3,10 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { RootState } from './types';
 import user from './auth/reducer';
 import comments from './comments/reducer';
-import latestUsers from './latestUsers/reducer';
 
 const combinedReducer = combineReducers<RootState>({
   user,
-  comments,
-  latestUsers
+  comments
 });
 
 const reducer = (state, action) => {

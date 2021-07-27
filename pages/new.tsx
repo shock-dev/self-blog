@@ -2,16 +2,24 @@ import React from 'react';
 import CreatePostForm from '../components/CreatePostForm';
 import withAuthSS from '../hocs/withAuth';
 import ContentLayout from '../layouts/ContentLayout';
+import { IUser } from '../types/user';
+import UsersApi from '../api/users';
 
 interface NewPageProps {
-  auth: boolean
+  auth: boolean;
+  lastUsers: IUser[];
 }
 
 const NewPage = ({
-  auth
+  auth,
+  lastUsers
 }: NewPageProps) => {
   return (
-    <ContentLayout title="Создание поста" auth={auth}>
+    <ContentLayout
+      title="Создание поста"
+      auth={auth}
+      lastUsers={lastUsers}
+    >
       <CreatePostForm />
     </ContentLayout>
   );
@@ -19,4 +27,16 @@ const NewPage = ({
 
 export default NewPage;
 
-export const getServerSideProps = withAuthSS();
+export const getServerSideProps = withAuthSS(async () => {
+  try {
+    const { data: lastUsers } = await UsersApi.getLatest();
+
+    return {
+      props: { lastUsers }
+    };
+  } catch (e) {
+    return {
+      props: {}
+    };
+  }
+});
