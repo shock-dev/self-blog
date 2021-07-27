@@ -2,20 +2,28 @@ import React from 'react';
 import ContentLayout from '../layouts/ContentLayout';
 import withAuthSS from '../hocs/withAuth';
 import PostsApi from '../api/posts';
+import UsersApi from '../api/users';
 import PostMini from '../components/PostMini';
 import { IPost } from '../types/post';
+import { IUser } from '../types/user';
 
 interface HomeProps {
   posts: IPost[]
   auth: boolean
+  lastUsers: IUser[]
 }
 
 const Home = ({
   posts,
-  auth
+  auth,
+  lastUsers
 }: HomeProps) => {
   return (
-    <ContentLayout title="Главная" auth={auth}>
+    <ContentLayout
+      title="Главная"
+      auth={auth}
+      lastUsers={lastUsers}
+    >
       {posts.map((post) =>
         <PostMini
           key={post._id}
@@ -35,10 +43,14 @@ export default Home;
 
 export const getServerSideProps = withAuthSS(async () => {
   try {
-    const { data } = await PostsApi.getAll();
+    const { data: posts } = await PostsApi.getAll();
+    const { data: lastUsers } = await UsersApi.getLatest();
 
     return {
-      props: { posts: data }
+      props: {
+        posts,
+        lastUsers
+      }
     };
   } catch (e) {
     return {

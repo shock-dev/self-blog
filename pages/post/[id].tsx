@@ -1,29 +1,37 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import PostsApi from '../../api/posts';
+import UsersApi from '../../api/users';
 import withAuthSS from '../../hocs/withAuth';
 import Comments from '../../components/Comments';
 import { IPost } from '../../types/post';
 import { setComments } from '../../store/comments/actions';
-import { useSelector } from 'react-redux';
 import { selectCommentsData } from '../../store/comments/selectors';
 import PostFull from '../../components/PostFull';
 import Reminder from '../../components/Reminder';
 import ContentLayout from '../../layouts/ContentLayout';
+import { IUser } from '../../types/user';
 
 interface PostProps {
   post: IPost
   auth: boolean
+  lastUsers: IUser[]
 }
 
 const PostPage = ({
   post,
-  auth
+  auth,
+  lastUsers
 }: PostProps) => {
   const comments = useSelector(selectCommentsData);
   const pageTitle = post.title.replaceAll('`', '');
 
   return (
-    <ContentLayout title={pageTitle} auth={auth}>
+    <ContentLayout
+      title={pageTitle}
+      auth={auth}
+      lastUsers={lastUsers}
+    >
       <PostFull
         key={post._id}
         title={post.title}
@@ -55,15 +63,17 @@ const PostPage = ({
 
 export const getServerSideProps = withAuthSS(async ({ params, store }) => {
   try {
-    const { data }: { data: IPost } = await PostsApi.getOne(params.id);
+    const { data: post } = await PostsApi.getOne(params.id);
+    const { data: lastUsers } = await UsersApi.getLatest();
 
-    if (data.comments.length) {
-      store.dispatch(setComments(data.comments));
+    if (post.comments.length) {
+      store.dispatch(setComments(post.comments));
     }
 
     return {
       props: {
-        post: data
+        post,
+        lastUsers
       }
     };
   } catch (e) {
