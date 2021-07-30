@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { selectIsAuth } from '../../store/auth/selectors';
 import styles from './Header.module.scss';
 import UserPopup from '../UserPopup';
+import Search from '../Search';
 
 export default function Header() {
   const isAuth = useSelector(selectIsAuth);
@@ -17,6 +18,7 @@ export default function Header() {
               <img src="/images/logo.svg" alt="Logo" />
             </a>
           </Link>
+          <Search />
           {isAuth ? (
             <div className={styles.panel}>
               <Link href="/new">
