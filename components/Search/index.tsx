@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import Link from 'next/link';
 import SearchApi from '../../api/search';
 import { IUser } from '../../types/user';
@@ -7,6 +7,7 @@ import Avatar from '../Avatar';
 import Spinner from '../Spinner';
 import { use } from 'ast-types';
 import { IPost } from '../../types/post';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 const Search = () => {
   // todo: нужен debounce и заменить на redux
@@ -15,6 +16,7 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
+  const ref = useRef();
 
   const searchHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -27,6 +29,12 @@ const Search = () => {
       setLoading(false);
     }
   };
+
+  useOutsideClick(ref, () => {
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  });
 
   return (
     <div className={s.wrapper}>
@@ -43,7 +51,7 @@ const Search = () => {
         />
       </label>
       {isOpen && (
-        <div className={s.result}>
+        <div className={s.result} ref={ref}>
           {loading ? (
             <Spinner styles={{ margin: '0 auto' }} />
           ) : (
