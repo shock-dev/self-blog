@@ -8,33 +8,44 @@ import Spinner from '../Spinner';
 import { use } from 'ast-types';
 import { IPost } from '../../types/post';
 import useOutsideClick from '../../hooks/useOutsideClick';
+import useDebounce from '../../hooks/useDebounce';
 
 const Search = () => {
-  // todo: нужен debounce и заменить на redux
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
+  const debouncedSearch = useDebounce(searchHandler, 500);
   const ref = useRef();
 
-  const searchHandler = async (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-    if (e.target.value.length > 0) {
-      setIsOpen(true);
-      setLoading(true);
-      const { posts, users } = await SearchApi.getUsersAndPosts(e.target.value);
-      setUsers(users);
-      setPosts(posts);
-      setLoading(false);
-    }
-  };
+  async function searchHandler(q) {
+    setLoading(true);
+    const { posts, users } = await SearchApi.getUsersAndPosts(q);
+    setUsers(users);
+    setPosts(posts);
+    setLoading(false);
+  }
 
   useOutsideClick(ref, () => {
     if (isOpen) {
       setIsOpen(false);
     }
   });
+
+  const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSearch(value);
+    if (value.length > 0) {
+      setIsOpen(true);
+      debouncedSearch(value);
+    } else {
+      setIsOpen(false);
+      setLoading(false);
+      setUsers([]);
+      setPosts([]);
+    }
+  };
 
   return (
     <div className={s.wrapper}>
@@ -47,7 +58,7 @@ const Search = () => {
           type="text"
           placeholder="Поиск..."
           value={search}
-          onChange={(e) => searchHandler(e)}
+          onChange={onChange}
         />
       </label>
       {isOpen && (
