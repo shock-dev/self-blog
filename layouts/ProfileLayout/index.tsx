@@ -7,8 +7,6 @@ import Avatar from '../../components/Avatar';
 import Link from 'next/link';
 import Button from '../../components/Button';
 import { useAlert } from 'react-alert';
-import { useSelector } from 'react-redux';
-import { selectAuth } from '../../store/auth/selectors';
 import UsersApi from '../../api/users';
 import { IUser } from '../../types/user';
 
@@ -16,17 +14,16 @@ interface ProfileLayoutProps {
   title: string
   children: React.ReactNode
   user: IUser
-  auth: boolean
+  me: IUser
 }
 
 export default function ProfileLayout({
   title,
   children,
   user,
-  auth
+  me
 }: ProfileLayoutProps) {
   const alert = useAlert();
-  const me = useSelector(selectAuth).data;
   const [followersCount, setFollowersCount] = useState(user.followers.length);
   const [isFollower, setIsFollower] = useState(user.followers.includes(me?._id));
   const [loading, setLoading] = useState(false);
@@ -57,14 +54,14 @@ export default function ProfileLayout({
     }
   };
 
-  const isMe: boolean = me?._id === user._id;
+  const isMe = me?._id === user._id;
 
   return (
     <>
       <Head>
         <title>{title}</title>
       </Head>
-      <Header />
+      <Header me={me} />
       <div className={cn('container', styles.page)}>
         <div className={styles.wrapper}>
           <div className={styles.user}>
@@ -97,7 +94,7 @@ export default function ProfileLayout({
                 <a>{user.following.length} Подписок</a>
               </Link>
             </div>
-            {auth && (
+            {me && (
               !isMe ? (
                 isFollower ? (
                   <Button

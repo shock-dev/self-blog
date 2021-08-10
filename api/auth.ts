@@ -1,6 +1,5 @@
 import axios from '../core/axios';
 import { LoginFormInputs } from '../pages/login';
-import { RegisterFormInputs } from '../pages/register';
 
 class AuthApi {
   login = async (payload: LoginFormInputs) => {
@@ -8,7 +7,7 @@ class AuthApi {
     return data;
   }
 
-  register = async (payload: RegisterFormInputs) => {
+  register = async (payload) => {
     const { data } = await axios.post(`/auth/register`, payload);
     return data;
   }

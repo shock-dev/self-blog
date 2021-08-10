@@ -1,5 +1,7 @@
 import React, { FormEvent } from 'react';
 import styles from './Form.module.scss';
+import Field from './Field';
+import Footer from './Footer';
 
 interface FormProps {
   title: string
@@ -7,11 +9,11 @@ interface FormProps {
   children: React.ReactNode
 }
 
-export default function Form({
+const Form = ({
   title,
   onSubmit,
   children
-}: FormProps) {
+}: FormProps) => {
   return (
     <form
       onSubmit={(e) => onSubmit(e)}
@@ -25,4 +27,9 @@ export default function Form({
       </div>
     </form>
   );
-}
+};
+
+Form.Field = Field;
+Form.Footer = Footer;
+
+export default Form;

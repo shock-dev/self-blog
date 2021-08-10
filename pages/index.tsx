@@ -9,19 +9,19 @@ import { IUser } from '../types/user';
 
 interface HomeProps {
   posts: IPost[]
-  auth: boolean
   lastUsers: IUser[]
+  me: IUser
 }
 
 const Home = ({
   posts,
-  auth,
+  me,
   lastUsers
 }: HomeProps) => {
   return (
     <ContentLayout
       title="Главная"
-      auth={auth}
+      me={me}
       lastUsers={lastUsers}
     >
       {posts.map((post) =>
@@ -42,19 +42,13 @@ const Home = ({
 export default Home;
 
 export const getServerSideProps = withAuthSS(async () => {
-  try {
-    const { data: posts } = await PostsApi.getAll();
-    const { data: lastUsers } = await UsersApi.getLatest();
+  const { data: posts } = await PostsApi.getAll();
+  const { data: lastUsers } = await UsersApi.getLatest();
 
-    return {
-      props: {
-        posts,
-        lastUsers
-      }
-    };
-  } catch (e) {
-    return {
-      props: { posts: [] }
-    };
-  }
+  return {
+    props: {
+      posts,
+      lastUsers
+    }
+  };
 });

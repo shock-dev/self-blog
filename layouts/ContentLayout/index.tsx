@@ -38,22 +38,22 @@ const writeLinks = [
 interface ContentLayoutProps {
   title: string
   children: React.ReactNode
-  auth: boolean
   lastUsers: IUser[]
+  me: IUser
 }
 
-export default function ContentLayout({
+const ContentLayout = ({
   title,
   children,
-  auth,
-  lastUsers
-}: ContentLayoutProps) {
+  lastUsers,
+  me
+}: ContentLayoutProps) => {
   return (
     <>
       <Head>
         <title>{title}</title>
       </Head>
-      <Header />
+      <Header me={me} />
       <div className={cn('container', styles.page)}>
         <div className={styles.wrapper}>
           <main className={styles.main}>
@@ -66,7 +66,7 @@ export default function ContentLayout({
             >
               <LastUsersList users={lastUsers} />
             </Widget>
-            {auth ? (
+            {me ? (
               <Widget
                 title="Пишите"
                 text="Вы можете поделиться опытом, создавая пост или запустить тему для обсуждения"
@@ -116,4 +116,6 @@ export default function ContentLayout({
       </div>
     </>
   );
-}
+};
+
+export default ContentLayout;

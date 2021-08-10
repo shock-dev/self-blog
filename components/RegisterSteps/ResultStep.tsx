@@ -5,7 +5,7 @@ import { RegisterContext } from '../../pages/register';
 import Preview from '../Form/Preview';
 
 const ResultStep = () => {
-  const { onBackStep, registerHandler, userData } = useContext(RegisterContext);
+  const { onBackStep, registerHandler, loading, userData } = useContext(RegisterContext);
 
   return (
     <Form
@@ -16,6 +16,7 @@ const ResultStep = () => {
       <Button
         color="green"
         type="submit"
+        loading={loading}
         around
         full
       >

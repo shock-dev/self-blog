@@ -1,11 +1,10 @@
-import React, { createContext, Dispatch, FormEvent, SetStateAction, useEffect, useState } from 'react';
-import AuthLayout from '../layouts/AuthLayout';
-import withNotAuthSS from '../hocs/withNotAuth';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearFields, registerRequest } from '../store/auth/actions';
-import { selectAuthError, selectIsAuth } from '../store/auth/selectors';
-import { useAlert } from 'react-alert';
+import React, { createContext, Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/router';
+import { setCookie } from 'nookies';
+import { useAlert } from 'react-alert';
+import AuthLayout from '../layouts/AuthLayout';
+import protectFromAuthorizedUsers from '../hocs/protectFromAuthorizedUsers';
+import AuthApi from '../api/auth';
 import InfoStep from '../components/RegisterSteps/InfoStep';
 import AdditionalStep from '../components/RegisterSteps/AdditionalStep';
 import ResultStep from '../components/RegisterSteps/ResultStep';
@@ -21,6 +20,8 @@ interface RegisterContextProps {
   onBackStep: () => void;
   step: number,
   userData: RegisterFormInputs
+  loading: boolean
+  setLoading: Dispatch<SetStateAction<boolean>>
   setUserData: Dispatch<SetStateAction<RegisterFormInputs>>
   registerHandler: (e: FormEvent<HTMLFormElement>) => any
 }
@@ -52,14 +53,12 @@ export type RegisterFormInputs =
   & InfoStepFormInputs
   & AdditionInfoStepFormInputs
 
-export default function Register() {
-  const dispatch = useDispatch();
-  const [step, setStep] = React.useState(0);
+const Register = () => {
+  const alert = useAlert();
+  const [step, setStep] = useState(0);
+  const [loading, setLoading] = useState(false);
   const CurrentStep = RegisterSteps[step];
   const router = useRouter();
-  const alert = useAlert();
-  const isAuth = useSelector(selectIsAuth);
-  const error = useSelector(selectAuthError);
   const [userData, setUserData] = useState<RegisterFormInputs>({
     email: '',
     username: '',
@@ -79,25 +78,40 @@ export default function Register() {
     setStep((prev) => prev - 1);
   };
 
-  const registerHandler = (e: FormEvent<HTMLFormElement>) => {
+  const registerHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(registerRequest(userData, router));
-  };
 
-  useEffect(() => {
-    if (error !== null) {
-      alert.error(error);
-    }
+    const { gender, birthday } = userData;
 
-    return () => {
-      if (!isAuth) {
-        dispatch(clearFields());
-      }
+    const payload = {
+      ...userData,
+      gender: gender.value,
+      birthday: new Date(birthday.year, birthday.month, birthday.day).toISOString()
     };
-  }, [error]);
+    try {
+      setLoading(true);
+      // Getting token
+      const { data } = await AuthApi.register(payload);
+      setCookie(null, 'authToken', data, {
+        maxAge: 30 * 24 * 60 * 60 * 1000
+      });
+      await router.replace('/');
+    } catch (e) {
+      const { data } = e.response.data;
+      if (!data) {
+        alert.error('Что-то пошло не так, попробуйте снова');
+      } else {
+        alert.error(data);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const ContextValue = {
     step,
+    loading,
+    setLoading,
     onNextStep,
     onBackStep,
     userData,
@@ -112,6 +126,8 @@ export default function Register() {
       </RegisterContext.Provider>
     </AuthLayout>
   );
-}
+};
 
-export const getServerSideProps = withNotAuthSS();
+export const getServerSideProps = protectFromAuthorizedUsers();
+
+export default Register;

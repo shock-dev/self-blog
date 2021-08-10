@@ -6,21 +6,22 @@ import { IUser } from '../types/user';
 import UsersApi from '../api/users';
 
 interface NewPageProps {
-  auth: boolean;
-  lastUsers: IUser[];
+  auth: boolean
+  lastUsers: IUser[]
+  me: IUser
 }
 
 const NewPage = ({
-  auth,
+  me,
   lastUsers
 }: NewPageProps) => {
   return (
     <ContentLayout
       title="Создание поста"
-      auth={auth}
+      me={me}
       lastUsers={lastUsers}
     >
-      <CreatePostForm />
+      <CreatePostForm me={me} />
     </ContentLayout>
   );
 };
@@ -28,15 +29,9 @@ const NewPage = ({
 export default NewPage;
 
 export const getServerSideProps = withAuthSS(async () => {
-  try {
-    const { data: lastUsers } = await UsersApi.getLatest();
+  const { data: lastUsers } = await UsersApi.getLatest();
 
-    return {
-      props: { lastUsers }
-    };
-  } catch (e) {
-    return {
-      props: {}
-    };
-  }
+  return {
+    props: { lastUsers }
+  };
 });

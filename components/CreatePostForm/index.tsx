@@ -9,11 +9,10 @@ import cn from 'classnames';
 import { useRouter } from 'next/router';
 import { IPost } from '../../types/post';
 import Reminder from '../Reminder';
-import { useSelector } from 'react-redux';
-import { selectAuth } from '../../store/auth/selectors';
 import MarkdownOutput from '../MarkdownOutput';
 import Upload from '../Upload';
 import { checkFIleExt } from '../../utils/checkFIleExt';
+import { IUser } from '../../types/user';
 
 export interface CreatePostFormInputs {
   title: string
@@ -26,8 +25,13 @@ interface PostImageProps {
   file: File | null
 }
 
-const CreatePostForm = () => {
-  const { data } = useSelector(selectAuth);
+interface CreatePostFormProps {
+  me: IUser
+}
+
+const CreatePostForm = ({
+  me
+}: CreatePostFormProps) => {
   const alert = useAlert();
   const router = useRouter();
   const inputFileRef = React.useRef<HTMLInputElement>(null);
@@ -110,7 +114,7 @@ const CreatePostForm = () => {
           </div>
         </div>
       )}
-      {!data && (
+      {!me && (
         <Reminder text="написать пост" styles={{ margin: '0 0 20px' }} />
       )}
       {isPreview ? (

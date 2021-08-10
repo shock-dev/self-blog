@@ -1,43 +1,45 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './Profile.module.scss';
 import Input from '../Input';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectAuth, selectAuthError, selectIsLoading } from '../../../store/auth/selectors';
 import Button from '../../Button';
 import Avatar from '../../Avatar';
 import Upload from '../../Upload';
-import { setError, setUserInfo, updateUserRequest } from '../../../store/auth/actions';
 import { useAlert } from 'react-alert';
 import { checkFIleExt } from '../../../utils/checkFIleExt';
-import UserApi from '../../../api/users';
 import { useFormik } from 'formik';
 import { UpdateUserValidation } from '../../../validation/auth/update';
 import { compareObjs } from '../../../utils/compareObjs';
+import { IUser } from '../../../types/user';
+import UsersApi from '../../../api/users';
 
 interface AvatarProps {
-  url: string
-  file: File | null
+  url: string;
+  file: File | null;
 }
 
 export interface UpdateFormInputs {
-  email: string
-  username: string
-  bio: string
+  email: string;
+  username: string;
+  bio: string;
 }
 
-const Profile = () => {
-  const dispatch = useDispatch();
+interface ProfileProps {
+  me: IUser;
+}
+
+const Profile = ({
+  me
+}: ProfileProps) => {
   const alert = useAlert();
-  const user = useSelector(selectAuth).data;
-  const isLoading = useSelector(selectIsLoading);
-  const error = useSelector(selectAuthError);
+  const [user, setUser] = useState(me);
   const [avatarUrl, setAvatarUrl] = useState<AvatarProps>({
     url: user.avatarUrl,
     file: null
   });
   const [avatarChanged, setAvatarChanged] = useState(false);
   const [avatarLoading, setAvatarLoading] = useState(false);
-  const inputFileRef = React.useRef<HTMLInputElement>(null);
+  const [infoLoading, setInfoLoading] = useState(false);
+  const inputFileRef = useRef(null);
   const defaultUserData = {
     email: user.email,
     username: user.username,
@@ -57,9 +59,17 @@ const Profile = () => {
       bio: user.bio
     },
     validationSchema: UpdateUserValidation,
-    onSubmit: (data) => {
-      if (!compareObjs(defaultUserData, data)) {
-        dispatch(updateUserRequest(data));
+    onSubmit: async (formData) => {
+      if (!compareObjs(defaultUserData, formData)) {
+        try {
+          setInfoLoading(true);
+          const { data } = await UsersApi.update(formData);
+          setUser(data);
+        } catch (e) {
+          alert.error('Что-то пошло не так. Попробуйте снова');
+        } finally {
+          setInfoLoading(false);
+        }
       }
     }
   });
@@ -67,12 +77,9 @@ const Profile = () => {
   const uploadAvatar = async (file: File): Promise<void> => {
     try {
       const formData = new FormData();
-
       formData.append('avatar', file);
-
-      const { data } = await UserApi.uploadAvatar(formData);
-
-      dispatch(setUserInfo(data));
+      const { data } = await UsersApi.uploadAvatar(formData);
+      setUser(data);
       setAvatarLoading(false);
     } catch (e) {
       alert.error('Что-то пошло не так');
@@ -91,7 +98,7 @@ const Profile = () => {
       });
       setAvatarChanged(true);
     } else {
-      dispatch(setError('Выберете другой тип файла. Поддерживаются только jpeg, jpg, png'));
+      alert.error('Выберете другой тип файла. Поддерживаются только jpeg, jpg, png');
     }
   };
 
@@ -109,12 +116,6 @@ const Profile = () => {
       inputFileRef.current.addEventListener('change', handleChangeImage);
     }
   }, []);
-
-  useEffect(() => {
-    if (error !== null) {
-      alert.error(error);
-    }
-  }, [error]);
 
   return (
     <div>
@@ -153,7 +154,7 @@ const Profile = () => {
           <Button
             type="submit"
             color="green"
-            loading={isLoading}
+            loading={infoLoading}
             disabled={compareObjs(defaultUserData, values) || !!Object.keys(errors).length}
           >
             Применить

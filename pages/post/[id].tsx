@@ -1,35 +1,39 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import PostsApi from '../../api/posts';
 import UsersApi from '../../api/users';
 import withAuthSS from '../../hocs/withAuth';
 import Comments from '../../components/Comments';
 import { IPost } from '../../types/post';
-import { setComments } from '../../store/comments/actions';
-import { selectCommentsData } from '../../store/comments/selectors';
 import PostFull from '../../components/PostFull';
 import Reminder from '../../components/Reminder';
 import ContentLayout from '../../layouts/ContentLayout';
 import { IUser } from '../../types/user';
+import { IComment } from '../../types/comment';
 
 interface PostProps {
   post: IPost
-  auth: boolean
+  me: IUser
   lastUsers: IUser[]
+  comments: IComment[]
 }
 
 const PostPage = ({
   post,
-  auth,
-  lastUsers
+  me,
+  lastUsers,
+  comments: allComments
 }: PostProps) => {
-  const comments = useSelector(selectCommentsData);
+  const [comments, setComments] = useState(allComments);
   const pageTitle = post.title.replaceAll('`', '');
+
+  const addCommentHandler = (comment: IComment) => {
+    setComments((prev) => [...prev, comment]);
+  };
 
   return (
     <ContentLayout
       title={pageTitle}
-      auth={auth}
+      me={me}
       lastUsers={lastUsers}
     >
       <PostFull
@@ -52,8 +56,11 @@ const PostPage = ({
           )}
         </Comments>
       )}
-      {auth ? (
-        <Comments.Form postId={post._id} />
+      {me ? (
+        <Comments.Form
+          postId={post._id}
+          onAdd={addCommentHandler}
+        />
       ) : (
         <Reminder text="оставлять комментарии" styles={{ margin: '0 0 20px' }} />
       )}
@@ -61,28 +68,17 @@ const PostPage = ({
   );
 };
 
-export const getServerSideProps = withAuthSS(async ({ params, store }) => {
-  try {
-    const { data: post } = await PostsApi.getOne(params.id);
-    const { data: lastUsers } = await UsersApi.getLatest();
+export const getServerSideProps = withAuthSS(async ({ params }) => {
+  const { data: post } = await PostsApi.getOne(params.id);
+  const { data: lastUsers } = await UsersApi.getLatest();
 
-    if (post.comments.length) {
-      store.dispatch(setComments(post.comments));
+  return {
+    props: {
+      comments: post.comments,
+      lastUsers,
+      post
     }
-
-    return {
-      props: {
-        post,
-        lastUsers
-      }
-    };
-  } catch (e) {
-    return {
-      props: {
-        post: {}
-      }
-    };
-  }
+  };
 });
 
 export default PostPage;
