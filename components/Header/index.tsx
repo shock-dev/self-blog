@@ -6,11 +6,11 @@ import Search from '../Search';
 import { IUser } from '../../types/user';
 
 interface HeaderProps {
-  me: IUser
+  me?: IUser
 }
 
 const Header = ({
-  me
+  me = null
 }: HeaderProps) => {
   return (
     <header className={styles.header}>
