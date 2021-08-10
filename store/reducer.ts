@@ -2,12 +2,8 @@ import { combineReducers } from 'redux';
 import { HYDRATE } from 'next-redux-wrapper';
 import { RootState } from './types';
 import user from './auth/reducer';
-import comments from './comments/reducer';
 
-const combinedReducer = combineReducers<RootState>({
-  user,
-  comments
-});
+const combinedReducer = combineReducers<RootState>({ user });
 
 const reducer = (state, action) => {
   if (action.type === HYDRATE) {
