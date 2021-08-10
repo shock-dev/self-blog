@@ -12,14 +12,14 @@ import { IComment } from '../../types/comment';
 
 interface PostProps {
   post: IPost
-  auth: boolean
+  me: IUser
   lastUsers: IUser[]
   comments: IComment[]
 }
 
 const PostPage = ({
   post,
-  auth,
+  me,
   lastUsers,
   comments: allComments
 }: PostProps) => {
@@ -33,7 +33,7 @@ const PostPage = ({
   return (
     <ContentLayout
       title={pageTitle}
-      auth={auth}
+      me={me}
       lastUsers={lastUsers}
     >
       <PostFull
@@ -56,7 +56,7 @@ const PostPage = ({
           )}
         </Comments>
       )}
-      {auth ? (
+      {me ? (
         <Comments.Form
           postId={post._id}
           onAdd={addCommentHandler}

@@ -1,16 +1,20 @@
-import React, { MutableRefObject, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
+import cn from 'classnames';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import styles from './UserPopup.module.scss';
-import { selectAuth } from '../../store/auth/selectors';
 import Avatar from '../Avatar';
-import cn from 'classnames';
+import { IUser } from '../../types/user';
 
-const UserPopup = () => {
-  const user = useSelector(selectAuth).data;
+interface UserPopupProps {
+  user: IUser
+}
+
+const UserPopup = ({
+  user
+}: UserPopupProps) => {
   const [visible, setVisible] = useState(false);
-  const ref = useRef() as MutableRefObject<HTMLUListElement>;
+  const ref = useRef();
 
   const toggleVisible = (): void => {
     setVisible(!visible);

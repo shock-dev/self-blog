@@ -4,22 +4,25 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Header from '../../components/Header';
 import styles from './SettingsLayout.module.scss';
+import { IUser } from '../../types/user';
 
 interface SettingsLayoutProps {
   title: string
   children: React.ReactNode
+  me: IUser
 }
 
-export default function SettingsLayout({
+const SettingsLayout = ({
   title,
-  children
-}: SettingsLayoutProps) {
+  children,
+  me
+}: SettingsLayoutProps) => {
   return (
     <>
       <Head>
         <title>{title}</title>
       </Head>
-      <Header />
+      <Header me={me} />
       <div className={cn('container', styles.page)}>
         <div className={styles.wrapper}>
           <aside className={styles.aside}>
@@ -50,4 +53,6 @@ export default function SettingsLayout({
       </div>
     </>
   );
-}
+};
+
+export default SettingsLayout;

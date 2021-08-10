@@ -3,24 +3,20 @@ import Link from 'next/link';
 import { IUser } from '../../types/user';
 import styles from './FollowerBox.module.scss';
 import Follower from '../Follower';
-import { useSelector } from 'react-redux';
-import { selectAuth } from '../../store/auth/selectors';
 
 interface FollowerBoxProps {
   title: string
   list: IUser[]
   user: IUser
-  auth: boolean
+  me: IUser
 }
 
 const FollowerBox = ({
   title,
   list,
   user,
-  auth
+  me
 }: FollowerBoxProps) => {
-  const me = useSelector(selectAuth).data;
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -45,7 +41,7 @@ const FollowerBox = ({
             isMe={me?._id === user._id}
             isFollow={me?.following.includes(user._id)}
             customStyles={{ margin: '10px 10px' }}
-            hideBtn={auth}
+            hideBtn={!!me}
           />
         )}
       </div>

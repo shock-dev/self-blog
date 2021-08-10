@@ -6,21 +6,22 @@ import { IUser } from '../types/user';
 import UsersApi from '../api/users';
 
 interface NewPageProps {
-  auth: boolean;
-  lastUsers: IUser[];
+  auth: boolean
+  lastUsers: IUser[]
+  me: IUser
 }
 
 const NewPage = ({
-  auth,
+  me,
   lastUsers
 }: NewPageProps) => {
   return (
     <ContentLayout
       title="Создание поста"
-      auth={auth}
+      me={me}
       lastUsers={lastUsers}
     >
-      <CreatePostForm />
+      <CreatePostForm me={me} />
     </ContentLayout>
   );
 };

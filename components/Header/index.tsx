@@ -1,14 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
-import { useSelector } from 'react-redux';
-import { selectIsAuth } from '../../store/auth/selectors';
 import styles from './Header.module.scss';
 import UserPopup from '../UserPopup';
 import Search from '../Search';
+import { IUser } from '../../types/user';
 
-export default function Header() {
-  const isAuth = useSelector(selectIsAuth);
+interface HeaderProps {
+  me: IUser
+}
 
+const Header = ({
+  me
+}: HeaderProps) => {
   return (
     <header className={styles.header}>
       <div className="container">
@@ -19,7 +22,7 @@ export default function Header() {
             </a>
           </Link>
           <Search />
-          {isAuth ? (
+          {me ? (
             <div className={styles.panel}>
               <Link href="/new">
                 <a className={styles.write}>
@@ -28,7 +31,7 @@ export default function Header() {
                   </svg>
                 </a>
               </Link>
-              <UserPopup />
+              <UserPopup user={me} />
             </div>
           ) : (
             <div>
@@ -48,4 +51,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

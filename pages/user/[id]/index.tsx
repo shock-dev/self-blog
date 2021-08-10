@@ -5,28 +5,25 @@ import PostsApi from '../../../api/posts';
 import { IUser } from '../../../types/user';
 import UserInfo from '../../../components/UserInfo';
 import ProfileLayout from '../../../layouts/ProfileLayout';
-import { useSelector } from 'react-redux';
-import { selectAuth } from '../../../store/auth/selectors';
 import { IPost } from '../../../types/post';
 import PostMini from '../../../components/PostMini';
 
 interface UserPageProps {
   user: IUser
+  me: IUser
   posts: IPost[]
-  auth: boolean
 }
 
 const UserPage = ({
   user,
   posts,
-  auth
+  me
 }: UserPageProps) => {
-  const me = useSelector(selectAuth).data;
   const isMe = me?._id === user?._id;
   const pageTitle = isMe ? 'Ваш профиль' : `${user.username} (${user.name} ${user.surname})`;
 
   return (
-    <ProfileLayout title={pageTitle} user={user} auth={auth}>
+    <ProfileLayout title={pageTitle} user={user} me={me}>
       <UserInfo
         email={user.email}
         bio={user.bio}

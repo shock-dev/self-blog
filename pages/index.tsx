@@ -9,19 +9,19 @@ import { IUser } from '../types/user';
 
 interface HomeProps {
   posts: IPost[]
-  auth: boolean
   lastUsers: IUser[]
+  me: IUser
 }
 
 const Home = ({
   posts,
-  auth,
+  me,
   lastUsers
 }: HomeProps) => {
   return (
     <ContentLayout
       title="Главная"
-      auth={auth}
+      me={me}
       lastUsers={lastUsers}
     >
       {posts.map((post) =>

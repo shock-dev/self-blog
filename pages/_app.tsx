@@ -5,18 +5,23 @@ import { Provider as AlertProvider } from 'react-alert';
 import { AlertTemplate, options } from '../components/Alert';
 import '../styles/index.scss';
 
-function App({ Component, pageProps }: AppProps) {
-  return (
-    <AlertProvider template={AlertTemplate} {...options}>
-      <NextNprogress
-        color="#29D"
-        startPosition={0.3}
-        stopDelayMs={200}
-        height={3}
-      />
-      <Component {...pageProps} />
-    </AlertProvider>
-  );
-}
+/*
+Todo:
+  - Настроить Eslint правильно
+  - Темная тема
+  - Улучшить компоненты
+ */
+
+const App = ({ Component, pageProps }: AppProps) => (
+  <AlertProvider template={AlertTemplate} {...options}>
+    <NextNprogress
+      color="#29D"
+      startPosition={0.3}
+      stopDelayMs={200}
+      height={3}
+    />
+    <Component {...pageProps} />
+  </AlertProvider>
+);
 
 export default App;

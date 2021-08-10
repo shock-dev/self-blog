@@ -8,7 +8,7 @@ import validationSchema from '../validation/auth/login';
 import AuthLayout from '../layouts/AuthLayout';
 import Form from '../components/Form';
 import Button from '../components/Button';
-import withNotAuthSS from '../hocs/withNotAuth';
+import protectFromAuthorizedUsers from '../hocs/protectFromAuthorizedUsers';
 
 export interface LoginFormInputs {
   email: string
@@ -98,6 +98,6 @@ const Login = () => {
   );
 };
 
-export const getServerSideProps = withNotAuthSS();
+export const getServerSideProps = protectFromAuthorizedUsers();
 
 export default Login;

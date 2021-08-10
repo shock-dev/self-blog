@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { setCookie } from 'nookies';
 import { useAlert } from 'react-alert';
 import AuthLayout from '../layouts/AuthLayout';
-import withNotAuthSS from '../hocs/withNotAuth';
+import protectFromAuthorizedUsers from '../hocs/protectFromAuthorizedUsers';
 import AuthApi from '../api/auth';
 import InfoStep from '../components/RegisterSteps/InfoStep';
 import AdditionalStep from '../components/RegisterSteps/AdditionalStep';
@@ -128,6 +128,6 @@ const Register = () => {
   );
 };
 
-export const getServerSideProps = withNotAuthSS();
+export const getServerSideProps = protectFromAuthorizedUsers();
 
 export default Register;
