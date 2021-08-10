@@ -1,10 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import withAuthSS from '../../../hocs/withAuth';
 import UsersApi from '../../../api/users';
 import { IUser } from '../../../types/user';
 import ProfileLayout from '../../../layouts/ProfileLayout';
 import FollowerBox from '../../../components/FollowerBox';
-import { useSelector } from 'react-redux';
 import { selectAuth } from '../../../store/auth/selectors';
 
 interface FollowingPageProps {
@@ -37,19 +37,13 @@ const FollowingPage = ({
 export default FollowingPage;
 
 export const getServerSideProps = withAuthSS(async ({ params }) => {
-  try {
-    const { data: user } = await UsersApi.one(params.id);
-    const { data: following } = await UsersApi.getFollowing(params.id);
-    return {
-      props: {
-        user,
-        following
-      }
-    };
-  } catch (e) {
-    return {
-      props: {}
-    };
-  }
+  const { data: user } = await UsersApi.one(params.id);
+  const { data: following } = await UsersApi.getFollowing(params.id);
+  return {
+    props: {
+      user,
+      following
+    }
+  };
 });
 

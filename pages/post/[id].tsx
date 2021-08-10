@@ -69,24 +69,16 @@ const PostPage = ({
 };
 
 export const getServerSideProps = withAuthSS(async ({ params }) => {
-  try {
-    const { data: post } = await PostsApi.getOne(params.id);
-    const { data: lastUsers } = await UsersApi.getLatest();
+  const { data: post } = await PostsApi.getOne(params.id);
+  const { data: lastUsers } = await UsersApi.getLatest();
 
-    return {
-      props: {
-        comments: post.comments,
-        lastUsers,
-        post
-      }
-    };
-  } catch (e) {
-    return {
-      props: {
-        post: {}
-      }
-    };
-  }
+  return {
+    props: {
+      comments: post.comments,
+      lastUsers,
+      post
+    }
+  };
 });
 
 export default PostPage;

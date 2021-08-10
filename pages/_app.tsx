@@ -2,7 +2,6 @@ import React from 'react';
 import NextNprogress from 'nextjs-progressbar';
 import type { AppProps } from 'next/app';
 import { Provider as AlertProvider } from 'react-alert';
-import { wrapper } from '../store';
 import { AlertTemplate, options } from '../components/Alert';
 import '../styles/index.scss';
 
@@ -20,4 +19,4 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-export default wrapper.withRedux(App);
+export default App;

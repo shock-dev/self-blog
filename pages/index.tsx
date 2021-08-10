@@ -42,19 +42,13 @@ const Home = ({
 export default Home;
 
 export const getServerSideProps = withAuthSS(async () => {
-  try {
-    const { data: posts } = await PostsApi.getAll();
-    const { data: lastUsers } = await UsersApi.getLatest();
+  const { data: posts } = await PostsApi.getAll();
+  const { data: lastUsers } = await UsersApi.getLatest();
 
-    return {
-      props: {
-        posts,
-        lastUsers
-      }
-    };
-  } catch (e) {
-    return {
-      props: { posts: [] }
-    };
-  }
+  return {
+    props: {
+      posts,
+      lastUsers
+    }
+  };
 });

@@ -28,15 +28,9 @@ const NewPage = ({
 export default NewPage;
 
 export const getServerSideProps = withAuthSS(async () => {
-  try {
-    const { data: lastUsers } = await UsersApi.getLatest();
+  const { data: lastUsers } = await UsersApi.getLatest();
 
-    return {
-      props: { lastUsers }
-    };
-  } catch (e) {
-    return {
-      props: {}
-    };
-  }
+  return {
+    props: { lastUsers }
+  };
 });

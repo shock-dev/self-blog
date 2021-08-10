@@ -37,19 +37,13 @@ const FollowersPage = ({
 export default FollowersPage;
 
 export const getServerSideProps = withAuthSS(async ({ params }) => {
-  try {
-    const { data: user } = await UsersApi.one(params.id);
-    const { data: followers } = await UsersApi.getFollowers(params.id);
-    return {
-      props: {
-        user,
-        followers
-      }
-    };
-  } catch (e) {
-    return {
-      props: {}
-    };
-  }
+  const { data: user } = await UsersApi.one(params.id);
+  const { data: followers } = await UsersApi.getFollowers(params.id);
+  return {
+    props: {
+      user,
+      followers
+    }
+  };
 });
 

@@ -52,18 +52,12 @@ const UserPage = ({
 export default UserPage;
 
 export const getServerSideProps = withAuthSS(async ({ params }) => {
-  try {
-    const { data: user } = await UsersApi.one(params.id);
-    const { data: posts } = await PostsApi.getByUserId(params.id);
-    return {
-      props: {
-        user,
-        posts
-      }
-    };
-  } catch (e) {
-    return {
-      props: {}
-    };
-  }
+  const { data: user } = await UsersApi.one(params.id);
+  const { data: posts } = await PostsApi.getByUserId(params.id);
+  return {
+    props: {
+      user,
+      posts
+    }
+  };
 });

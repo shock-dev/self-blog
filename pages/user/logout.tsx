@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import styles from '../../styles/pages/Logout.module.scss';
 import withAuthSS from '../../hocs/withAuth';
-import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
-import { logoutRequest } from '../../store/auth/actions';
+import { destroyCookie } from 'nookies';
 
 const Logout = () => {
-  const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
-    dispatch(logoutRequest(router));
+    (async () => {
+      destroyCookie(null, 'authToken');
+      await router.replace('/');
+    })();
   }, []);
 
   return (
