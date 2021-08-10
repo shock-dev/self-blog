@@ -1,11 +1,9 @@
 import Cookies from 'nookies';
-import { SagaStore, wrapper } from '../store';
-import { fetchUserInfo } from '../store/auth/actions';
+import AuthApi from '../api/auth';
 import { GetServerSidePropsContext } from 'next';
-import { END } from 'redux-saga';
 
 const withAuthSS = (callback = undefined) => {
-  return wrapper.getServerSideProps(async (ctx: GetServerSidePropsContext & { store: SagaStore }) => {
+  return async (ctx: GetServerSidePropsContext) => {
     const callbackResult = callback ? await callback(ctx) : undefined;
     const authToken = Cookies.get(ctx).authToken;
 
@@ -18,31 +16,21 @@ const withAuthSS = (callback = undefined) => {
       };
     }
 
-    try {
-      if (authToken) {
-        ctx.store.dispatch(fetchUserInfo(authToken));
-        ctx.store.dispatch(END);
+    let me = null;
 
-        await ctx.store.sagaTask.toPromise();
-      }
-
-      return {
-        ...callbackResult,
-        props: {
-          ...callbackResult?.props,
-          auth: !!ctx.store.getState().user.data
-        }
-      };
-    } catch (e) {
-      return {
-        ...callbackResult,
-        props: {
-          ...callbackResult?.props,
-          auth: !!ctx.store.getState().user.data
-        }
-      };
+    if (authToken) {
+      const { data } = await AuthApi.getMe(authToken);
+      me = data;
     }
-  });
+
+    return {
+      ...callbackResult,
+      props: {
+        ...callbackResult?.props,
+        me
+      }
+    };
+  };
 };
 
 export default withAuthSS;
