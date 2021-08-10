@@ -1,8 +1,7 @@
 import axios from '../core/axios';
-import { IAddComment } from '../components/Comments/Form';
 
 class CommentsApi {
-  create = async ({ postId, text }: IAddComment) => {
+  create = async ({ postId, text }) => {
     const { data } = await axios.post(`/posts/${postId}/comment`, { text });
     return data;
   }

@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Form.module.scss';
 import { useFormik } from 'formik';
+import CommentsApi from '../../../api/comments';
 import validationSchema from '../../../validation/post/comment';
 import { IComment } from '../../../types/comment';
-import { useDispatch } from 'react-redux';
-import { requestAddComment } from '../../../store/comments/actions';
 import { IPost } from '../../../types/post';
 import Button from '../../Button';
 
 interface FormProps {
   postId: IPost['_id']
+  onAdd: (comment: IComment) => void
 }
 
 interface CommentFormInputs {
   text: IComment['text']
 }
 
-export interface IAddComment extends FormProps, CommentFormInputs {}
-
-const Form = ({ postId }: FormProps) => {
-  const dispatch = useDispatch();
+const Form = ({
+  postId,
+  onAdd
+}: FormProps) => {
+  const [loading, setLoading] = useState(false);
   const {
     handleSubmit,
     handleChange,
@@ -32,13 +33,13 @@ const Form = ({ postId }: FormProps) => {
       text: ''
     },
     validationSchema,
-    onSubmit: (data, { resetForm }) => {
-      const payload: IAddComment = {
-        text: data.text,
-        postId
-      };
-      dispatch(requestAddComment(payload));
+    onSubmit: async ({ text }, { resetForm }) => {
+      setLoading(true);
+      const payload = { text, postId };
+      const { data } = await CommentsApi.create(payload);
+      onAdd(data);
       resetForm();
+      setLoading(false);
     }
   });
 
@@ -71,6 +72,7 @@ const Form = ({ postId }: FormProps) => {
             color="blue"
             disabled={!values.text.length}
             customStyles={{ marginTop: '10px' }}
+            loading={loading}
           >
             Отправить
           </Button>
