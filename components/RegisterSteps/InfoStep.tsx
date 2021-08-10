@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-import Field from '../Form/Field';
 import Button from '../Button';
-import Footer from '../Form/Footer';
 import Form from '../Form';
 import { useFormik } from 'formik';
 import { InfoStepValidation } from '../../validation/auth/register';
@@ -38,7 +36,7 @@ const infoStep = () => {
       title="📝 Регистрация"
       onSubmit={handleSubmit}
     >
-      <Field
+      <Form.Field
         title="Email"
         placeholder="Введите email адрес"
         icon="email"
@@ -49,7 +47,7 @@ const infoStep = () => {
         error={touched.email && !!errors.email}
         message={errors.email}
       />
-      <Field
+      <Form.Field
         title="Username"
         placeholder="Введите username"
         icon="user"
@@ -60,7 +58,7 @@ const infoStep = () => {
         error={touched.username && !!errors.username}
         message={errors.username}
       />
-      <Field
+      <Form.Field
         title="Пароль"
         type="password"
         placeholder="Введите password"
@@ -72,7 +70,7 @@ const infoStep = () => {
         error={touched.password && !!errors.password}
         message={errors.password}
       />
-      <Field
+      <Form.Field
         title="Подтверждение пароля"
         type="password"
         placeholder="Подтвердите ваш пароль"
@@ -92,7 +90,7 @@ const infoStep = () => {
       >
         Следующий шаг
       </Button>
-      <Footer
+      <Form.Footer
         text="Уже зарегистрированы?"
         to={{ url: '/login', title: 'Войти' }}
       />

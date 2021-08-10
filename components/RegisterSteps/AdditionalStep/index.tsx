@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { useFormik } from 'formik';
-import Field from '../../Form/Field';
 import Button from '../../Button';
 import Form from '../../Form';
 import { RegisterContext } from '../../../pages/register';
@@ -72,7 +71,7 @@ const AdditionalStep = () => {
       title="👔 Дополнительно"
       onSubmit={handleSubmit}
     >
-      <Field
+      <Form.Field
         title="Имя"
         placeholder="Введите имя"
         icon="name"
@@ -83,7 +82,7 @@ const AdditionalStep = () => {
         error={touched.name && !!errors.name}
         message={errors.name}
       />
-      <Field
+      <Form.Field
         title="Фамилия"
         placeholder="Введите фамилию"
         icon="surname"

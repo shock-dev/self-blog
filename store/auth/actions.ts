@@ -1,11 +1,8 @@
 import { action } from 'typesafe-actions';
 import { AuthActionType } from './types';
-import { LoginFormInputs } from '../../pages/login';
 import { IUser } from '../../types/user';
 import { RegisterFormInputs } from '../../pages/register';
 import { UpdateFormInputs } from '../../components/Settings/Profile';
-
-export const fetchLogin = (data: LoginFormInputs, router) => action(AuthActionType.FETCH_LOGIN, { data, router });
 
 export const fetchUserInfo = (token: string) => action(AuthActionType.FETCH_USER_INFO, token);
 

@@ -1,34 +1,10 @@
-import { setCookie, destroyCookie } from 'nookies';
 import { call, put, takeLatest } from 'redux-saga/effects';
+import { setCookie, destroyCookie } from 'nookies';
 import { SagaIterator } from 'redux-saga';
 import { AuthActionType } from './types';
 import AuthApi from '../../api/auth';
 import UsersApi from '../../api/users';
-import {
-  setError,
-  setUserInfo
-} from './actions';
-
-function* fetchLogin(action): SagaIterator {
-  try {
-    const { data, router } = action.payload;
-    const { data: token } = yield call(AuthApi.login, data);
-
-    yield call(setCookie, null, 'authToken', token, {
-      maxAge: 30 * 24 * 60 * 60 * 1000
-    });
-
-    yield call(router.replace, '/');
-  } catch (e) {
-    const { data } = e.response.data;
-
-    if (data) {
-      yield put(setError(data));
-    } else {
-      yield put(setError('Something went wrong, try again'));
-    }
-  }
-}
+import { setError, setUserInfo } from './actions';
 
 function* fetchUserInfo(action) {
   try {
@@ -104,7 +80,6 @@ function* fetchUpdateUser(action): SagaIterator {
 }
 
 function* authSaga() {
-  yield takeLatest(AuthActionType.FETCH_LOGIN, fetchLogin);
   yield takeLatest(AuthActionType.FETCH_USER_INFO, fetchUserInfo);
   yield takeLatest(AuthActionType.REGISTER_REQUEST, fetchRegister);
   yield takeLatest(AuthActionType.LOGOUT_REQUEST, fetchLogout);

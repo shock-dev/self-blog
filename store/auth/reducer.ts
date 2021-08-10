@@ -10,12 +10,6 @@ const initialState: AuthState = {
 
 const user = produce((draft: Draft<AuthState>, action) => {
   switch (action.type) {
-    case AuthActionType.FETCH_LOGIN:
-      draft.isAuth = false;
-      draft.isLoading = true;
-      draft.error = null;
-      break;
-
     case AuthActionType.LOGOUT_SUCCESS:
       draft.isLoading = false;
       draft.error = null;

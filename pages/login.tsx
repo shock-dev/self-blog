@@ -1,30 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
+import { useRouter } from 'next/router';
+import { setCookie } from 'nookies';
+import { useAlert } from 'react-alert';
+import AuthApi from '../api/auth';
 import validationSchema from '../validation/auth/login';
 import AuthLayout from '../layouts/AuthLayout';
 import Form from '../components/Form';
-import Field from '../components/Form/Field';
 import Button from '../components/Button';
-import Footer from '../components/Form/Footer';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearFields, fetchLogin } from '../store/auth/actions';
 import withNotAuthSS from '../hocs/withNotAuth';
-import { useRouter } from 'next/router';
-import { selectAuthError, selectIsAuth, selectIsLoading } from '../store/auth/selectors';
-import { useAlert } from 'react-alert';
 
 export interface LoginFormInputs {
   email: string
   password: string
 }
 
-export default function Login() {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const isAuth = useSelector(selectIsAuth);
-  const error = useSelector(selectAuthError);
-  const isLoading = useSelector(selectIsLoading);
+const Login = () => {
   const alert = useAlert();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const {
     handleSubmit,
     handleChange,
@@ -38,22 +32,24 @@ export default function Login() {
       password: ''
     },
     validationSchema,
-    onSubmit: (data) => {
-      dispatch(fetchLogin(data, router));
+    onSubmit: async (formData) => {
+      try {
+        setLoading(true);
+        const { data } = await AuthApi.login(formData);
+        setCookie(null, 'authToken', data);
+        await router.replace('/');
+      } catch (e) {
+        const { data } = e.response.data;
+        if (!data) {
+          alert.error('Что-то пошло не так, попробуйте снова');
+        } else {
+          alert.error(data);
+        }
+      } finally {
+        setLoading(false);
+      }
     }
   });
-
-  useEffect(() => {
-    if (error !== null) {
-      alert.error(error);
-    }
-
-    return () => {
-      if (!isAuth) {
-        dispatch(clearFields());
-      }
-    };
-  }, [error]);
 
   return (
     <AuthLayout title="Вход">
@@ -61,7 +57,7 @@ export default function Login() {
         title="🚪 Вход"
         onSubmit={handleSubmit}
       >
-        <Field
+        <Form.Field
           title="Email"
           placeholder="Введите email"
           icon="email"
@@ -72,7 +68,7 @@ export default function Login() {
           error={touched.email && !!errors.email}
           message={errors.email}
         />
-        <Field
+        <Form.Field
           title="Пароль"
           type="password"
           placeholder="Введите пароль"
@@ -87,19 +83,21 @@ export default function Login() {
         <Button
           type="submit"
           color="green"
-          loading={isLoading}
+          loading={loading}
           around
           full
         >
           Войти
         </Button>
-        <Footer
+        <Form.Footer
           text="Или вы можете зарегистрироваться"
           to={{ url: '/register', title: 'Регистрация' }}
         />
       </Form>
     </AuthLayout>
   );
-}
+};
 
 export const getServerSideProps = withNotAuthSS();
+
+export default Login;
