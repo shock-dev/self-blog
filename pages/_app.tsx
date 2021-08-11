@@ -1,4 +1,3 @@
-import React from 'react';
 import NextNprogress from 'nextjs-progressbar';
 import type { AppProps } from 'next/app';
 import { Provider as AlertProvider } from 'react-alert';
@@ -7,7 +6,6 @@ import '../styles/index.scss';
 
 /*
 Todo:
-  - Настроить Eslint правильно
   - Темная тема
   - Улучшить компоненты
  */
