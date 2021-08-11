@@ -1,10 +1,10 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import styles from './Comments.module.scss';
 import Comment from './Comment';
 import Form from './Form';
 
 interface CommentsProps {
-  children?: React.ReactNode
+  children?: ReactNode
   count: number
 }
 

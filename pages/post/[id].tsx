@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PostsApi from '../../api/posts';
 import UsersApi from '../../api/users';
 import withAuthSS from '../../hocs/withAuth';

@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import cn from 'classnames';
 import Head from 'next/head';
 import Header from '../../components/Header';
@@ -6,7 +6,7 @@ import styles from './AuthLayout.module.scss';
 
 interface AuthLayoutProps {
   title: string
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export default function AuthLayout({

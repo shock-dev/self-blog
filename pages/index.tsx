@@ -1,4 +1,3 @@
-import React from 'react';
 import ContentLayout from '../layouts/ContentLayout';
 import withAuthSS from '../hocs/withAuth';
 import PostsApi from '../api/posts';

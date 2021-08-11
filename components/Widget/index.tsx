@@ -1,10 +1,10 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import s from './index.module.scss';
 
 interface WidgetProps {
   title: string
   text?: string
-  children?: React.ReactNode
+  children?: ReactNode
 }
 
 const Widget = ({

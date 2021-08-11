@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import useOutsideClick from '../../hooks/useOutsideClick';

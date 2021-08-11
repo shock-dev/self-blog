@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import cn from 'classnames';
 import Head from 'next/head';
 import Header from '../../components/Header';
@@ -12,7 +12,7 @@ import { IUser } from '../../types/user';
 
 interface ProfileLayoutProps {
   title: string
-  children: React.ReactNode
+  children: ReactNode
   user: IUser
   me: IUser
 }

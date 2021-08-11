@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import { IUser } from '../../types/user';
 import styles from './FollowerBox.module.scss';

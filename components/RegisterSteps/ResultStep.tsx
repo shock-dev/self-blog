@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Form from '../Form';
 import Button from '../Button';
 import { RegisterContext } from '../../pages/register';

@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import { RefObject } from 'react';
 import styles from './Upload.module.scss';
 
 interface UploadProps {

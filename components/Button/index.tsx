@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from 'react';
+import { CSSProperties, ReactNode, useState } from 'react';
 import styles from './Button.module.scss';
 
 enum Palette {
@@ -15,7 +15,7 @@ enum Hovers {
 
 interface ButtonProps {
   type?: 'button' | 'submit' | 'reset'
-  children: React.ReactNode
+  children: ReactNode
   onClick?: () => any
   color?: 'blue' | 'green' | 'red'
   full?: boolean

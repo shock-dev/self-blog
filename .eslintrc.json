@@ -1,4 +1,9 @@
 {
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "env": {
         "browser": true,
         "es2021": true,
@@ -31,6 +36,7 @@
         "require-jsdoc": "off",
         "no-invalid-this": "off",
         "linebreak-style": "off",
-        "react/display-name": "off"
+        "react/display-name": "off",
+        "react/react-in-jsx-scope": "off"
     }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import cn from 'classnames';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -8,7 +8,7 @@ import { IUser } from '../../types/user';
 
 interface SettingsLayoutProps {
   title: string
-  children: React.ReactNode
+  children: ReactNode
   me: IUser
 }
 

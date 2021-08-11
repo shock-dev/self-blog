@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from './CreatePostForm.module.scss';
 import Button from '../Button';
 import { useFormik } from 'formik';
@@ -34,7 +34,7 @@ const CreatePostForm = ({
 }: CreatePostFormProps) => {
   const alert = useAlert();
   const router = useRouter();
-  const inputFileRef = React.useRef<HTMLInputElement>(null);
+  const inputFileRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
   const [postImageUrl, setPostImageUrl] = useState<PostImageProps>({
