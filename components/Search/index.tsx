@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import Link from 'next/link';
 import SearchApi from '../../api/search';
 import { IUser } from '../../types/user';

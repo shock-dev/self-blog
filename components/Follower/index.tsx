@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import Link from 'next/link';
 import cn from 'classnames';
 import { useAlert } from 'react-alert';

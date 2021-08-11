@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import cn from 'classnames';
 import styles from './Field.module.scss';
 

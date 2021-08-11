@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styles from './Form.module.scss';
 import { useFormik } from 'formik';
 import CommentsApi from '../../../api/comments';

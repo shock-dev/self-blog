@@ -1,4 +1,3 @@
-import React from 'react';
 import { RegisterFormInputs } from '../../../pages/register';
 import styles from './Preview.module.scss';
 

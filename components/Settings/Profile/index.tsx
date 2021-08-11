@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './Profile.module.scss';
 import Input from '../Input';
 import Button from '../../Button';

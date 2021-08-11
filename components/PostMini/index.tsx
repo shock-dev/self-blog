@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import { CSSProperties } from 'react';
 import Link from 'next/link';
 import styles from './PostMini.module.scss';
 import { IUser } from '../../types/user';

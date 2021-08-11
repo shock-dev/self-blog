@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, FormEvent, SetStateAction, useState } from 'react';
+import { createContext, Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/router';
 import { setCookie } from 'nookies';
 import { useAlert } from 'react-alert';

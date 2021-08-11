@@ -1,4 +1,3 @@
-import React from 'react';
 import withAuthSS from '../../../hocs/withAuth';
 import UsersApi from '../../../api/users';
 import PostsApi from '../../../api/posts';

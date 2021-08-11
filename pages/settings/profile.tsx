@@ -1,4 +1,3 @@
-import React from 'react';
 import SettingsLayout from '../../layouts/SettingsLayout';
 import Profile from '../../components/Settings/Profile';
 import withAuthSS from '../../hocs/withAuth';

@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import styles from './PostFull.module.scss';
 import { IUser } from '../../types/user';

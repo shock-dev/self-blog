@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import { FormEvent, ReactNode } from 'react';
 import styles from './Form.module.scss';
 import Field from './Field';
 import Footer from './Footer';
@@ -6,7 +6,7 @@ import Footer from './Footer';
 interface FormProps {
   title: string
   onSubmit: (e: FormEvent<HTMLFormElement>) => any
-  children: React.ReactNode
+  children: ReactNode
 }
 
 const Form = ({

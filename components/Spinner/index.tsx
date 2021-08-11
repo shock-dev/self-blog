@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import { CSSProperties } from 'react';
 import s from './index.module.scss';
 
 interface SpinnerProps {

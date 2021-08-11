@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactNode } from 'react';
 import cn from 'classnames';
 import Head from 'next/head';
 import Header from '../../components/Header';
@@ -37,7 +37,7 @@ const writeLinks = [
 
 interface ContentLayoutProps {
   title: string
-  children: React.ReactNode
+  children: ReactNode
   lastUsers: IUser[]
   me: IUser
 }

@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './UserInfo.module.scss';
 
 interface UserInfoProps {
