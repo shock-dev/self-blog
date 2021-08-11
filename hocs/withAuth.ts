@@ -5,9 +5,9 @@ import { GetServerSidePropsContext } from 'next';
 const withAuthSS = (callback = undefined) => {
   return async (ctx: GetServerSidePropsContext) => {
     const callbackResult = callback ? await callback(ctx) : undefined;
-    const authToken = Cookies.get(ctx).authToken;
+    const token = Cookies.get(ctx).authToken;
 
-    if (callbackResult?.props?.protect && !authToken) {
+    if (callbackResult?.props?.protect && !token) {
       return {
         redirect: {
           permanent: false,
@@ -18,8 +18,8 @@ const withAuthSS = (callback = undefined) => {
 
     let me = null;
 
-    if (authToken) {
-      const { data } = await AuthApi.getMe(authToken);
+    if (token) {
+      const { data } = await AuthApi.getMe(token);
       me = data;
     }
 

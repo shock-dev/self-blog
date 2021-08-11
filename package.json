@@ -15,7 +15,6 @@
     "date-fns": "^2.22.1",
     "formik": "^2.2.6",
     "github-markdown-css": "^4.0.0",
-    "js-cookie": "^2.2.1",
     "next": "10.2.0",
     "nextjs-progressbar": "^0.0.9",
     "nookies": "^2.5.2",
@@ -29,7 +28,6 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "@types/js-cookie": "^2.2.6",
     "@types/react": "^17.0.5",
     "@types/react-alert": "^5.2.0",
     "@types/react-select": "^4.0.15",
