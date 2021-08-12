@@ -1,0 +1,14 @@
+.list {
+  display: flex;
+  align-items: center;
+}
+
+.item:not(:last-child) {
+  margin-right: 10px;
+}
+
+.link {
+  display: flex;
+  width: 28px;
+  height: 28px;
+}
