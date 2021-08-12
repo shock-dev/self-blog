@@ -3,6 +3,7 @@ import styles from './Header.module.scss';
 import UserPopup from '../UserPopup';
 import Search from '../Search';
 import { IUser } from '../../types/user';
+import Logo from '../Logo';
 
 interface HeaderProps {
   me?: IUser
@@ -15,11 +16,7 @@ const Header = ({
     <header className={styles.header}>
       <div className="container">
         <div className={styles.inner}>
-          <Link href="/">
-            <a>
-              <img src="/images/logo.svg" alt="Logo" />
-            </a>
-          </Link>
+          <Logo />
           <Search />
           {me ? (
             <div className={styles.panel}>

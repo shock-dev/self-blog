@@ -1,13 +1,12 @@
 import { ReactNode } from 'react';
-import cn from 'classnames';
 import Head from 'next/head';
-import Header from '../../components/Header';
 import styles from './ContentLayout.module.scss';
 import Widget from '../../components/Widget';
 import Link from 'next/link';
 import Button from '../../components/Button';
 import LastUsersList from '../../components/LastUsersList';
 import { IUser } from '../../types/user';
+import Wrapper from '../Wrapper';
 
 const authLinks = [
   {
@@ -53,8 +52,7 @@ const ContentLayout = ({
       <Head>
         <title>{title}</title>
       </Head>
-      <Header me={me} />
-      <div className={cn('container', styles.page)}>
+      <Wrapper me={me}>
         <div className={styles.wrapper}>
           <main className={styles.main}>
             {children}
@@ -113,7 +111,7 @@ const ContentLayout = ({
             )}
           </aside>
         </div>
-      </div>
+      </Wrapper>
     </>
   );
 };

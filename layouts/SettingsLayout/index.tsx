@@ -1,10 +1,9 @@
 import { ReactNode } from 'react';
-import cn from 'classnames';
 import Head from 'next/head';
 import Link from 'next/link';
-import Header from '../../components/Header';
 import styles from './SettingsLayout.module.scss';
 import { IUser } from '../../types/user';
+import Wrapper from '../Wrapper';
 
 interface SettingsLayoutProps {
   title: string
@@ -22,8 +21,7 @@ const SettingsLayout = ({
       <Head>
         <title>{title}</title>
       </Head>
-      <Header me={me} />
-      <div className={cn('container', styles.page)}>
+      <Wrapper me={me}>
         <div className={styles.wrapper}>
           <aside className={styles.aside}>
             <div className={styles.asideTop}>
@@ -50,7 +48,7 @@ const SettingsLayout = ({
             {children}
           </main>
         </div>
-      </div>
+      </Wrapper>
     </>
   );
 };
