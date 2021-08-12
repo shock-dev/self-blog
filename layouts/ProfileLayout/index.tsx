@@ -1,7 +1,5 @@
 import { ReactNode, useState } from 'react';
-import cn from 'classnames';
 import Head from 'next/head';
-import Header from '../../components/Header';
 import styles from './ProfileLayout.module.scss';
 import Avatar from '../../components/Avatar';
 import Link from 'next/link';
@@ -9,6 +7,7 @@ import Button from '../../components/Button';
 import { useAlert } from 'react-alert';
 import UsersApi from '../../api/users';
 import { IUser } from '../../types/user';
+import Wrapper from '../Wrapper';
 
 interface ProfileLayoutProps {
   title: string
@@ -61,8 +60,7 @@ export default function ProfileLayout({
       <Head>
         <title>{title}</title>
       </Head>
-      <Header me={me} />
-      <div className={cn('container', styles.page)}>
+      <Wrapper me={me}>
         <div className={styles.wrapper}>
           <div className={styles.user}>
             <Avatar
@@ -135,7 +133,7 @@ export default function ProfileLayout({
             {children}
           </div>
         </div>
-      </div>
+      </Wrapper>
     </>
   );
 }
