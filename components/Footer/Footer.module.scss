@@ -1,0 +1,31 @@
+.wrapper {
+  margin-top: auto;
+}
+
+.footer {
+  margin-top: 20px;
+  background-color: #fff;
+  border-top: 1px solid #e7e8ec;
+  padding: 20px;
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 70px;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+}
+
+.author {
+  font-weight: 500;
+  color: #7b7b7b;
+}
