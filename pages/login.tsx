@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/router';
-import { setCookie } from 'nookies';
 import { useAlert } from 'react-alert';
 import AuthApi from '../api/auth';
 import validationSchema from '../validation/auth/login';
@@ -9,6 +8,7 @@ import AuthLayout from '../layouts/AuthLayout';
 import Form from '../components/Form';
 import Button from '../components/Button';
 import protectFromAuthorizedUsers from '../hocs/protectFromAuthorizedUsers';
+import setAuthCookie from '../utils/setAuthCookie';
 
 export interface LoginFormInputs {
   email: string
@@ -36,7 +36,7 @@ const Login = () => {
       try {
         setLoading(true);
         const { data } = await AuthApi.login(formData);
-        setCookie(null, 'authToken', data);
+        setAuthCookie(data);
         await router.replace('/');
       } catch (e) {
         const { data } = e.response.data;

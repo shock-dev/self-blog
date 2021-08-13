@@ -1,6 +1,5 @@
 import { createContext, Dispatch, FormEvent, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/router';
-import { setCookie } from 'nookies';
 import { useAlert } from 'react-alert';
 import AuthLayout from '../layouts/AuthLayout';
 import protectFromAuthorizedUsers from '../hocs/protectFromAuthorizedUsers';
@@ -8,6 +7,7 @@ import AuthApi from '../api/auth';
 import InfoStep from '../components/RegisterSteps/InfoStep';
 import AdditionalStep from '../components/RegisterSteps/AdditionalStep';
 import ResultStep from '../components/RegisterSteps/ResultStep';
+import setAuthCookie from '../utils/setAuthCookie';
 
 const RegisterSteps = {
   0: InfoStep,
@@ -92,9 +92,7 @@ const Register = () => {
       setLoading(true);
       // Getting token
       const { data } = await AuthApi.register(payload);
-      setCookie(null, 'authToken', data, {
-        maxAge: 30 * 24 * 60 * 60 * 1000
-      });
+      setAuthCookie(data);
       await router.replace('/');
     } catch (e) {
       const { data } = e.response.data;
