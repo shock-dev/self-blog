@@ -2,7 +2,6 @@ import Link from 'next/link';
 import s from './index.module.scss';
 import Avatar from '../Avatar';
 import { IUser } from '../../types/user';
-import { getDifference } from '../../utils/reformDate';
 
 interface LastUsersListProps {
   users: IUser[]
@@ -27,9 +26,6 @@ const LastUsersList = ({
                   additionalStyles={{ marginRight: '10px' }}
                 />
                 <p className={s.name}>{user.name} {user.surname}</p>
-                <time className={s.time}>
-                  {getDifference(user.createdAt)}
-                </time>
               </a>
             </Link>
           </li>
