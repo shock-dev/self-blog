@@ -12,7 +12,7 @@ const LastUsersList = ({
 }: LastUsersListProps) => {
   return (
     <div className={s.wrapper}>
-      <ul>
+      <ul className={s.list}>
         {users.map((user) =>
           <li key={user._id}>
             <Link href={`/user/${user._id}`}>
