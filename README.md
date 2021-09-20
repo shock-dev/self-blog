@@ -47,9 +47,9 @@ Start the server
 - [Immer](https://immerjs.github.io/immer)
 - [SCSS](https://sass-lang.com)
 - [Axios](https://axios-http.com)
-- [Date-fns](https://date-fns.org/) for working with date
-- [Typesafe-actions](https://github.com/piotrwitek/typesafe-actions) for type redux actions
-- [Formik](https://formik.org/docs/overview) for working with forms easily
+- [Date-fns](https://date-fns.org/)
+- [Typesafe-actions](https://github.com/piotrwitek/typesafe-actions)
+- [Formik](https://formik.org/docs/overview)
 
 ## License
 
